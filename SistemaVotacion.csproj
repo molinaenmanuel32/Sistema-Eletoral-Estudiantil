@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>SistemaVotacion</AssemblyName>
+    <RootNamespace>SistemaVotacion</RootNamespace>
+
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- ORM / Data Access -->
+    <PackageReference Include="Dapper" Version="2.1.35" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.2" />
+
+    <!-- Hashing seguro -->
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+
+    <!-- Config -->
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
