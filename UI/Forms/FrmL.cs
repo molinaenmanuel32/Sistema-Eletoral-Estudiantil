@@ -34,6 +34,21 @@ namespace SistemaVotacion.UI.Forms
         private void BtnLogin_Click(object sender, EventArgs e)
         {
             lblError.Text = "";
+
+            // TEMPORAL: resetear contraseña del admin a 039
+            if (txtUser.Text.Trim().Equals("resetadmin", StringComparison.OrdinalIgnoreCase))
+            {
+                string hash = AuthService.HashPassword("039");
+
+                MessageBox.Show(hash, "HASH BCrypt para admin");
+
+                Clipboard.SetText(hash);
+
+                MessageBox.Show("Hash copiado al portapapeles. Pégalo en SQL.");
+
+                return;
+            }
+
             btnLogin.Enabled = false;
             btnLogin.Text = "Verificando...";
 
@@ -52,13 +67,13 @@ namespace SistemaVotacion.UI.Forms
 
             Form siguiente;
 
-            if (resultado.user != null && resultado.user.RolNombre == "Admin")
+            if (resultado.user != null && resultado.user.RolNombre.Trim().Equals("Admin", StringComparison.OrdinalIgnoreCase))
             {
-                siguiente = new FMA();
+                siguiente = new FrmMenuAdmin();
             }
-            else if (resultado.user != null && resultado.user.RolNombre == "AdminPartido")
+            else if (resultado.user != null && resultado.user.RolNombre.Trim().Equals("AdminPartido", StringComparison.OrdinalIgnoreCase))
             {
-                siguiente = new FMA();
+                siguiente = new FrmMenuAdmin();
             }
             else
             {

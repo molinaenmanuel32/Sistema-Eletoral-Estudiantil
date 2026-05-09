@@ -1,0 +1,330 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|c:\\users\\elp48\\onedrive\\escritorio\\sistemaestudiantil\\sistema-eletoral-estudiantil\\ui\\forms\\usuarios.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|solutionrelative:ui\\forms\\usuarios.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|c:\\users\\elp48\\onedrive\\escritorio\\sistemaestudiantil\\sistema-eletoral-estudiantil\\ui\\forms\\usuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|solutionrelative:ui\\forms\\usuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\ui\\forms\\usuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|solutionrelative:ui\\forms\\usuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|c:\\users\\elp48\\onedrive\\escritorio\\sistemaestudiantil\\sistema-eletoral-estudiantil\\ui\\forms\\frmmenuadmin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|solutionrelative:ui\\forms\\frmmenuadmin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\ui\\forms\\frmmenuadmin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|solutionrelative:ui\\forms\\frmmenuadmin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|c:\\users\\elp48\\onedrive\\escritorio\\sistemaestudiantil\\sistema-eletoral-estudiantil\\ui\\controls\\ucotros.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|solutionrelative:ui\\controls\\ucotros.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\ui\\forms\\frmdashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|solutionrelative:ui\\forms\\frmdashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|c:\\users\\elp48\\onedrive\\escritorio\\sistemaestudiantil\\sistema-eletoral-estudiantil\\ui\\forms\\frmdashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|solutionrelative:ui\\forms\\frmdashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|c:\\users\\elp48\\onedrive\\escritorio\\sistemaestudiantil\\sistema-eletoral-estudiantil\\ui\\forms\\frmdashboard.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|solutionrelative:ui\\forms\\frmdashboard.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|c:\\users\\elp48\\onedrive\\escritorio\\sistemaestudiantil\\sistema-eletoral-estudiantil\\ui\\forms\\frmmenuadmin.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|solutionrelative:ui\\forms\\frmmenuadmin.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\ui\\forms\\frmvotacion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|solutionrelative:ui\\forms\\frmvotacion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\ui\\forms\\frml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|solutionrelative:ui\\forms\\frml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|c:\\users\\elp48\\onedrive\\escritorio\\sistemaestudiantil\\sistema-eletoral-estudiantil\\ui\\forms\\frml.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|solutionrelative:ui\\forms\\frml.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|c:\\users\\elp48\\onedrive\\escritorio\\sistemaestudiantil\\sistema-eletoral-estudiantil\\ui\\forms\\frml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|solutionrelative:ui\\forms\\frml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|c:\\users\\elp48\\onedrive\\escritorio\\sistemaestudiantil\\sistema-eletoral-estudiantil\\ui\\forms\\frmvotacion.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|solutionrelative:ui\\forms\\frmvotacion.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|c:\\users\\elp48\\onedrive\\escritorio\\sistemaestudiantil\\sistema-eletoral-estudiantil\\ui\\controls\\ucplanchas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|solutionrelative:ui\\controls\\ucplanchas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|c:\\users\\elp48\\onedrive\\escritorio\\sistemaestudiantil\\sistema-eletoral-estudiantil\\ui\\controls\\roundedpanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|solutionrelative:ui\\controls\\roundedpanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|c:\\users\\elp48\\onedrive\\escritorio\\sistemaestudiantil\\sistema-eletoral-estudiantil\\dal\\dbconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|solutionrelative:dal\\dbconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|c:\\users\\elp48\\onedrive\\escritorio\\sistemaestudiantil\\sistema-eletoral-estudiantil\\dal\\usuariorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|solutionrelative:dal\\usuariorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Usuarios.cs",
+              "DocumentMoniker": "C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\UI\\Forms\\Usuarios.cs",
+              "RelativeDocumentMoniker": "UI\\Forms\\Usuarios.cs",
+              "ToolTip": "C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\UI\\Forms\\Usuarios.cs",
+              "RelativeToolTip": "UI\\Forms\\Usuarios.cs",
+              "ViewState": "AgIAANAAAAAAAAAAAAAQwKUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-09T01:08:00.816Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Usuarios.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\UI\\Forms\\Usuarios.Designer.cs",
+              "RelativeDocumentMoniker": "UI\\Forms\\Usuarios.Designer.cs",
+              "ToolTip": "C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\UI\\Forms\\Usuarios.Designer.cs",
+              "RelativeToolTip": "UI\\Forms\\Usuarios.Designer.cs",
+              "ViewState": "AgIAAEoAAAAAAAAAAAAQwFkAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-09T01:07:19.648Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Usuarios.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\UI\\Forms\\Usuarios.cs",
+              "RelativeDocumentMoniker": "UI\\Forms\\Usuarios.cs",
+              "ToolTip": "C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\UI\\Forms\\Usuarios.cs [Dise\u00F1o]",
+              "RelativeToolTip": "UI\\Forms\\Usuarios.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-09T01:04:09.187Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "FrmMenuAdmin.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\UI\\Forms\\FrmMenuAdmin.cs",
+              "RelativeDocumentMoniker": "UI\\Forms\\FrmMenuAdmin.cs",
+              "ToolTip": "C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\UI\\Forms\\FrmMenuAdmin.cs [Dise\u00F1o]",
+              "RelativeToolTip": "UI\\Forms\\FrmMenuAdmin.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T13:38:20.531Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "FrmMenuAdmin.cs",
+              "DocumentMoniker": "C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\UI\\Forms\\FrmMenuAdmin.cs",
+              "RelativeDocumentMoniker": "UI\\Forms\\FrmMenuAdmin.cs",
+              "ToolTip": "C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\UI\\Forms\\FrmMenuAdmin.cs",
+              "RelativeToolTip": "UI\\Forms\\FrmMenuAdmin.cs",
+              "ViewState": "AgIAAHUAAAAAAAAAAAAuwJoAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T13:44:13.729Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "FrmDashboard.cs",
+              "DocumentMoniker": "C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\UI\\Forms\\FrmDashboard.cs",
+              "RelativeDocumentMoniker": "UI\\Forms\\FrmDashboard.cs",
+              "ToolTip": "C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\UI\\Forms\\FrmDashboard.cs",
+              "RelativeToolTip": "UI\\Forms\\FrmDashboard.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwBoAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-09T00:56:11.999Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "FrmDashboard.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\UI\\Forms\\FrmDashboard.Designer.cs",
+              "RelativeDocumentMoniker": "UI\\Forms\\FrmDashboard.Designer.cs",
+              "ToolTip": "C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\UI\\Forms\\FrmDashboard.Designer.cs",
+              "RelativeToolTip": "UI\\Forms\\FrmDashboard.Designer.cs",
+              "ViewState": "AgIAACYAAAAAAAAAAAAUwDcAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-09T00:52:32.976Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "UcOtros.cs",
+              "DocumentMoniker": "C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\UI\\Controls\\UcOtros.cs",
+              "RelativeDocumentMoniker": "UI\\Controls\\UcOtros.cs",
+              "ToolTip": "C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\UI\\Controls\\UcOtros.cs",
+              "RelativeToolTip": "UI\\Controls\\UcOtros.cs",
+              "ViewState": "AgIAAG4BAAAAAAAAAAD4v3cBAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T00:09:35.825Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "FrmDashboard.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\UI\\Forms\\FrmDashboard.cs",
+              "RelativeDocumentMoniker": "UI\\Forms\\FrmDashboard.cs",
+              "ToolTip": "C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\UI\\Forms\\FrmDashboard.cs [Dise\u00F1o]",
+              "RelativeToolTip": "UI\\Forms\\FrmDashboard.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-09T00:49:18.705Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "FrmVotacion.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\UI\\Forms\\FrmVotacion.cs",
+              "RelativeDocumentMoniker": "UI\\Forms\\FrmVotacion.cs",
+              "ToolTip": "C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\UI\\Forms\\FrmVotacion.cs [Dise\u00F1o]",
+              "RelativeToolTip": "UI\\Forms\\FrmVotacion.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T11:40:28.526Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "FrmMenuAdmin.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\UI\\Forms\\FrmMenuAdmin.Designer.cs",
+              "RelativeDocumentMoniker": "UI\\Forms\\FrmMenuAdmin.Designer.cs",
+              "ToolTip": "C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\UI\\Forms\\FrmMenuAdmin.Designer.cs",
+              "RelativeToolTip": "UI\\Forms\\FrmMenuAdmin.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T00:06:43.257Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "FrmL.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\UI\\Forms\\FrmL.cs",
+              "RelativeDocumentMoniker": "UI\\Forms\\FrmL.cs",
+              "ToolTip": "C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\UI\\Forms\\FrmL.cs [Dise\u00F1o]",
+              "RelativeToolTip": "UI\\Forms\\FrmL.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T01:19:04.527Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "FrmL.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\UI\\Forms\\FrmL.Designer.cs",
+              "RelativeDocumentMoniker": "UI\\Forms\\FrmL.Designer.cs",
+              "ToolTip": "C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\UI\\Forms\\FrmL.Designer.cs",
+              "RelativeToolTip": "UI\\Forms\\FrmL.Designer.cs",
+              "ViewState": "AgIAAO4AAAAAAAAAAADwvzcBAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T01:00:11.145Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "FrmL.cs",
+              "DocumentMoniker": "C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\UI\\Forms\\FrmL.cs",
+              "RelativeDocumentMoniker": "UI\\Forms\\FrmL.cs",
+              "ToolTip": "C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\UI\\Forms\\FrmL.cs",
+              "RelativeToolTip": "UI\\Forms\\FrmL.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T01:02:19.945Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "FrmVotacion.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\UI\\Forms\\FrmVotacion.Designer.cs",
+              "RelativeDocumentMoniker": "UI\\Forms\\FrmVotacion.Designer.cs",
+              "ToolTip": "C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\UI\\Forms\\FrmVotacion.Designer.cs",
+              "RelativeToolTip": "UI\\Forms\\FrmVotacion.Designer.cs",
+              "ViewState": "AgIAAKgAAAAAAAAAAAAkwLgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T00:42:38.851Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "RoundedPanel.cs",
+              "DocumentMoniker": "C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\UI\\Controls\\RoundedPanel.cs",
+              "RelativeDocumentMoniker": "UI\\Controls\\RoundedPanel.cs",
+              "ToolTip": "C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\UI\\Controls\\RoundedPanel.cs",
+              "RelativeToolTip": "UI\\Controls\\RoundedPanel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T00:08:39.932Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "UcPlanchas.cs",
+              "DocumentMoniker": "C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\UI\\Controls\\UcPlanchas.cs",
+              "RelativeDocumentMoniker": "UI\\Controls\\UcPlanchas.cs",
+              "ToolTip": "C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\UI\\Controls\\UcPlanchas.cs",
+              "RelativeToolTip": "UI\\Controls\\UcPlanchas.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAtwEwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T00:21:59.91Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "UsuarioRepository.cs",
+              "DocumentMoniker": "C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\DAL\\UsuarioRepository.cs",
+              "RelativeDocumentMoniker": "DAL\\UsuarioRepository.cs",
+              "ToolTip": "C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\DAL\\UsuarioRepository.cs",
+              "RelativeToolTip": "DAL\\UsuarioRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T17:32:11.132Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "DbConnection.cs",
+              "DocumentMoniker": "C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\DAL\\DbConnection.cs",
+              "RelativeDocumentMoniker": "DAL\\DbConnection.cs",
+              "ToolTip": "C:\\Users\\elp48\\OneDrive\\Escritorio\\SistemaEstudiantil\\Sistema-Eletoral-Estudiantil\\DAL\\DbConnection.cs",
+              "RelativeToolTip": "DAL\\DbConnection.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T17:43:46.404Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

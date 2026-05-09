@@ -56,36 +56,36 @@ namespace SistemaVotacion.UI.Forms
                 var btn = new Button
                 {
                     Text = $"  {item.icon}  {item.text}",
-                    Height = 42,
-                    Width = 200,
+                    Height = 48,
+                    Width = 215,
                     FlatStyle = FlatStyle.Flat,
-                    BackColor = Tema.FondoPanel,
-                    ForeColor = Tema.Texto,
+                    BackColor = Color.FromArgb(0, 36, 105),
+                    ForeColor = Color.White,
                     TextAlign = ContentAlignment.MiddleLeft,
-                    Font = new Font("Segoe UI", 10f),
-                    Cursor = Cursors.Hand
+                    Font = new Font("Segoe UI", 10.5f, FontStyle.Bold),
+                    Cursor = Cursors.Hand,
+                    Margin = new Padding(0, 0, 0, 8),
+                    UseVisualStyleBackColor = false
                 };
 
                 btn.FlatAppearance.BorderSize = 0;
 
-                // Hover
                 btn.MouseEnter += (s, e) =>
                 {
-                    if (btn.BackColor != Tema.Primario)
-                        btn.BackColor = Tema.FondoCard;
+                    if (btn.BackColor != Color.FromArgb(0, 95, 220))
+                        btn.BackColor = Color.FromArgb(0, 55, 150);
                 };
 
                 btn.MouseLeave += (s, e) =>
                 {
-                    if (btn.BackColor != Tema.Primario)
-                        btn.BackColor = Tema.FondoPanel;
+                    if (btn.BackColor != Color.FromArgb(0, 95, 220))
+                        btn.BackColor = Color.FromArgb(0, 36, 105);
                 };
 
-                // Click
                 btn.Click += (s, e) =>
                 {
                     DesmarcarBotones();
-                    btn.BackColor = Tema.Primario;
+                    btn.BackColor = Color.FromArgb(0, 95, 220);
                     item.action();
                 };
 
@@ -97,7 +97,7 @@ namespace SistemaVotacion.UI.Forms
         {
             foreach (Control c in pnlMenu.Controls)
                 if (c is Button b)
-                    b.BackColor = Tema.FondoPanel;
+                    b.BackColor = Color.FromArgb(0, 36, 105);
         }
 
         private void CambiarContenido(Control ctrl, string titulo)
@@ -109,10 +109,71 @@ namespace SistemaVotacion.UI.Forms
         }
 
         // Navegación
-        private void CargarDashboard() => CambiarContenido(new Controls.UcDashboard(), "Dashboard");
-        private void CargarVotacion() => CambiarContenido(new Controls.UcVotacionAdmin(), "Votación");
-        private void CargarPlanchas() => CambiarContenido(new Controls.UcPlanchas(), "Planchas");
-        private void CargarUsuarios() => CambiarContenido(new Controls.UcUsuarios(), "Usuarios");
+        private void CargarDashboard()
+        {
+            lblTitle.Text = "Dashboard";
+
+            pnlContent.Controls.Clear();
+
+            FrmDashboard frm = new FrmDashboard();
+            frm.TopLevel = false;
+            frm.FormBorderStyle = FormBorderStyle.None;
+            frm.Dock = DockStyle.Fill;
+
+            pnlContent.Controls.Add(frm);
+
+            frm.Show();
+        }
+
+        private void CargarVotacion()
+        {
+            lblTitle.Text = "Votación";
+
+            pnlContent.Controls.Clear();
+
+            VotacionAdmin frm = new VotacionAdmin
+            {
+                TopLevel = false,
+                FormBorderStyle = FormBorderStyle.None,
+                Dock = DockStyle.Fill
+            };
+
+            pnlContent.Controls.Add(frm);
+            frm.Show();
+        }
+
+        private void CargarPlanchas()
+        {
+            lblTitle.Text = "Planchas";
+
+            pnlContent.Controls.Clear();
+
+            Planchas frm = new Planchas
+            {
+                TopLevel = false,
+                FormBorderStyle = FormBorderStyle.None,
+                Dock = DockStyle.Fill
+            };
+
+            pnlContent.Controls.Add(frm);
+            frm.Show();
+        }
+        private void CargarUsuarios()
+        {
+            lblTitle.Text = "Usuarios";
+
+            pnlContent.Controls.Clear();
+
+            Usuarios frm = new Usuarios
+            {
+                TopLevel = false,
+                FormBorderStyle = FormBorderStyle.None,
+                Dock = DockStyle.Fill
+            };
+
+            pnlContent.Controls.Add(frm);
+            frm.Show();
+        }
         private void CargarPadron() => CambiarContenido(new Controls.UcPadron(), "Padrón Electoral");
         private void CargarReportes() => CambiarContenido(new Controls.UcReportes(), "Reportes");
         private void CargarAuditoria() => CambiarContenido(new Controls.UcAuditoria(), "Auditoría");
@@ -122,7 +183,10 @@ namespace SistemaVotacion.UI.Forms
             if (!Helpers.Confirmar("¿Deseas cerrar la sesión?", "Cerrar Sesión")) return;
 
             _auth.Logout();
-            new FrmL().Show(); // ← CORREGIDO
+
+            FrmL login = new FrmL();
+            login.Show();
+
             this.Close();
         }
 

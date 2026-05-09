@@ -240,3 +240,26 @@ GO
 
 PRINT '✅ Base de datos SistemaVotacion creada correctamente.';
 GO
+
+UPDATE Usuarios
+SET PasswordHash = '123'
+WHERE Username = 'admin';
+
+use SistemaVotacion
+
+UPDATE Usuarios
+SET PasswordHash = '$2a$12$wuoC9Xo7hs5H/SQMSOt0TuaGqo1yWwxh86NQ4ZIHYdmZkGGME4iNu',
+    Activo = 1
+WHERE Username = 'admin';
+
+SELECT Username, PasswordHash, Activo
+FROM Usuarios
+WHERE Username = 'admin';
+
+SELECT 
+    Username,
+    PasswordHash,
+    LEN(PasswordHash) AS LargoHash,
+    Activo
+FROM Usuarios
+WHERE Username = 'admin';
