@@ -263,3 +263,35 @@ SELECT
     Activo
 FROM Usuarios
 WHERE Username = 'admin';
+
+
+
+---- Actualizar matrículas de usuarios según su rol
+
+
+
+USE SistemaVotacion;
+GO
+
+;WITH UsuariosOrdenados AS
+(
+    SELECT
+        u.UsuarioId,
+        r.Nombre AS RolNombre,
+        ROW_NUMBER() OVER (
+            PARTITION BY r.Nombre
+            ORDER BY u.UsuarioId
+        ) AS Numero
+    FROM Usuarios u
+    INNER JOIN Roles r ON r.RolId = u.RolId
+)
+UPDATE u
+SET Matricula =
+    CASE 
+        WHEN x.RolNombre = 'Admin' THEN 'ADM-' + RIGHT('0000' + CAST(x.Numero AS VARCHAR(4)), 4)
+        WHEN x.RolNombre = 'AdminPartido' THEN 'ADP-' + RIGHT('0000' + CAST(x.Numero AS VARCHAR(4)), 4)
+        WHEN x.RolNombre = 'Votante' THEN 'VOT-' + RIGHT('0000' + CAST(x.Numero AS VARCHAR(4)), 4)
+    END
+FROM Usuarios u
+INNER JOIN UsuariosOrdenados x ON x.UsuarioId = u.UsuarioId;
+GO

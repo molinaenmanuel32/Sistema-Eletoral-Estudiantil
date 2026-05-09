@@ -11,7 +11,19 @@
     <Compile Update="UI\Controls\UcPlanchas.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="UI\Forms\Auditoria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Forms\EditarPlancha.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Forms\FrmAgregarMiembro.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI\Forms\FrmDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Forms\FrmEditarUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\Forms\FrmL.cs">
@@ -23,7 +35,13 @@
     <Compile Update="UI\Forms\FrmVotacion.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI\Forms\PadronElectoral.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI\Forms\Planchas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Forms\Reportes.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\Forms\Usuarios.cs">

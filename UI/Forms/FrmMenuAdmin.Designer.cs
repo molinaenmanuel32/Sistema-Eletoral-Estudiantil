@@ -15,15 +15,17 @@ namespace SistemaVotacion.UI.Forms
         private Panel pnlBrand;
         private Panel pnlUserBox;
         private Panel pnlLine;
+
         private Label lblBrand;
         private Label lblTitle;
         private Label lblUser;
         private Label lblSubTitle;
+
         private Button btnLogout;
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && components != null)
                 components.Dispose();
 
             base.Dispose(disposing);
@@ -52,9 +54,9 @@ namespace SistemaVotacion.UI.Forms
             pnlUserBox.SuspendLayout();
             pnlHeader.SuspendLayout();
             pnlMain.SuspendLayout();
+
             SuspendLayout();
 
-            // FORM
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Text = "Sistema de Votaciones - Panel Administrativo";
@@ -63,13 +65,11 @@ namespace SistemaVotacion.UI.Forms
             StartPosition = FormStartPosition.CenterScreen;
             BackColor = Color.FromArgb(245, 247, 252);
 
-            // SIDEBAR
             pnlSidebar.Dock = DockStyle.Left;
             pnlSidebar.Width = 250;
             pnlSidebar.BackColor = Color.FromArgb(0, 36, 105);
             pnlSidebar.Padding = new Padding(0);
 
-            // BRAND
             pnlBrand.Dock = DockStyle.Top;
             pnlBrand.Height = 120;
             pnlBrand.BackColor = Color.FromArgb(0, 55, 150);
@@ -83,7 +83,6 @@ namespace SistemaVotacion.UI.Forms
 
             pnlBrand.Controls.Add(lblBrand);
 
-            // USER BOX
             pnlUserBox.Dock = DockStyle.Top;
             pnlUserBox.Height = 95;
             pnlUserBox.BackColor = Color.FromArgb(0, 42, 115);
@@ -95,25 +94,21 @@ namespace SistemaVotacion.UI.Forms
             lblUser.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold);
             lblUser.BackColor = Color.Transparent;
             lblUser.Padding = new Padding(5);
-
-            // Opcional, se ve más bonito con este texto base.
-            // Luego tu FrmMenuAdmin.cs lo reemplaza por el usuario real.
             lblUser.Text = "👤 Usuario\nAdministrador";
 
             pnlUserBox.Controls.Add(lblUser);
 
-            // LINEA ROJA
             pnlLine.Dock = DockStyle.Top;
             pnlLine.Height = 5;
             pnlLine.BackColor = Color.FromArgb(230, 40, 45);
-            // MENU
+
             pnlMenu.Dock = DockStyle.Fill;
             pnlMenu.FlowDirection = FlowDirection.TopDown;
             pnlMenu.WrapContents = false;
             pnlMenu.BackColor = Color.FromArgb(0, 36, 105);
             pnlMenu.Padding = new Padding(16, 20, 16, 10);
             pnlMenu.AutoScroll = true;
-            // LOGOUT
+
             btnLogout.Text = "🚪  Cerrar Sesión";
             btnLogout.Dock = DockStyle.Bottom;
             btnLogout.Height = 62;
@@ -129,20 +124,18 @@ namespace SistemaVotacion.UI.Forms
             btnLogout.MouseEnter += BtnLogout_MouseEnter;
             btnLogout.MouseLeave += BtnLogout_MouseLeave;
 
-            // SIDEBAR CONTROLS
             pnlSidebar.Controls.Add(pnlMenu);
             pnlSidebar.Controls.Add(btnLogout);
             pnlSidebar.Controls.Add(pnlLine);
             pnlSidebar.Controls.Add(pnlUserBox);
             pnlSidebar.Controls.Add(pnlBrand);
 
-            // HEADER
             pnlHeader.Dock = DockStyle.Top;
             pnlHeader.Height = 90;
             pnlHeader.BackColor = Color.White;
             pnlHeader.Padding = new Padding(28, 12, 28, 10);
 
-            lblTitle.Text = "Dashboard";
+            lblTitle.Text = "Inicio";
             lblTitle.AutoSize = false;
             lblTitle.Location = new Point(28, 15);
             lblTitle.Size = new Size(700, 38);
@@ -161,19 +154,16 @@ namespace SistemaVotacion.UI.Forms
             pnlHeader.Controls.Add(lblTitle);
             pnlHeader.Controls.Add(lblSubTitle);
 
-            // CONTENT
             pnlContent.Dock = DockStyle.Fill;
             pnlContent.BackColor = Color.FromArgb(245, 247, 252);
             pnlContent.AutoScroll = true;
             pnlContent.Padding = new Padding(25);
 
-            // MAIN
             pnlMain.Dock = DockStyle.Fill;
             pnlMain.BackColor = Color.FromArgb(245, 247, 252);
             pnlMain.Controls.Add(pnlContent);
             pnlMain.Controls.Add(pnlHeader);
 
-            // ADD
             Controls.Add(pnlMain);
             Controls.Add(pnlSidebar);
 
@@ -182,6 +172,7 @@ namespace SistemaVotacion.UI.Forms
             pnlUserBox.ResumeLayout(false);
             pnlBrand.ResumeLayout(false);
             pnlSidebar.ResumeLayout(false);
+
             ResumeLayout(false);
         }
     }
