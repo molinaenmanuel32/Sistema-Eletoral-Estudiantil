@@ -168,7 +168,7 @@ public class PlanchaService
     public IEnumerable<Plancha> GetAll() => _repo.GetAll();
     public Plancha? GetById(int id)       => _repo.GetById(id);
     public IEnumerable<MiembroPlancha> GetMiembros(int id) => _repo.GetMiembros(id);
-
+    public string? LogoPath { get; set; }
     public (bool ok, string msg, int id) Crear(Plancha p)
     {
         Sesion.Requiere("Admin", "AdminPartido");
@@ -178,6 +178,11 @@ public class PlanchaService
         int newId = _repo.Insert(p);
         _audit.Registrar(Sesion.UsuarioActual!.UsuarioId, "PLANCHA_CREADA", p.Nombre);
         return (true, "Plancha creada.", newId);
+    }
+
+    public bool Eliminar(int planchaId)
+    {
+        return _repo.Delete(planchaId);
     }
 
     public (bool ok, string msg) Actualizar(Plancha p)

@@ -35,15 +35,12 @@ namespace SistemaVotacion.UI.Forms
         {
             lblError.Text = "";
 
-            // TEMPORAL: resetear contraseña del admin a 039
             if (txtUser.Text.Trim().Equals("resetadmin", StringComparison.OrdinalIgnoreCase))
             {
                 string hash = AuthService.HashPassword("039");
 
                 MessageBox.Show(hash, "HASH BCrypt para admin");
-
                 Clipboard.SetText(hash);
-
                 MessageBox.Show("Hash copiado al portapapeles. Pégalo en SQL.");
 
                 return;
@@ -57,7 +54,7 @@ namespace SistemaVotacion.UI.Forms
             btnLogin.Enabled = true;
             btnLogin.Text = "Iniciar Sesión";
 
-            if (!resultado.ok)
+            if (!resultado.ok || resultado.user == null)
             {
                 lblError.Text = resultado.msg;
                 txtPass.Clear();
@@ -67,13 +64,19 @@ namespace SistemaVotacion.UI.Forms
 
             Form siguiente;
 
-            if (resultado.user != null && resultado.user.RolNombre.Trim().Equals("Admin", StringComparison.OrdinalIgnoreCase))
+            string rol = resultado.user.RolNombre.Trim();
+            MessageBox.Show("Rol detectado: " + rol);
+
+            if (rol.Equals("Admin", StringComparison.OrdinalIgnoreCase))
             {
                 siguiente = new FrmMenuAdmin();
             }
-            else if (resultado.user != null && resultado.user.RolNombre.Trim().Equals("AdminPartido", StringComparison.OrdinalIgnoreCase))
+            else if (rol.Equals("AdminPartido", StringComparison.OrdinalIgnoreCase))
             {
-                siguiente = new FrmMenuAdmin();
+                siguiente = new FrmMenuAdminPartido(
+                    resultado.user.Nombre,
+                    resultado.user.UsuarioId
+                );
             }
             else
             {

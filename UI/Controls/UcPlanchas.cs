@@ -27,7 +27,21 @@ public class UcPlanchas : UserControl
         BuildUI();
         CargarPlanchas();
     }
+    private Image? CargarImagenLogo(string? ruta)
+    {
+        try
+        {
+            if (string.IsNullOrWhiteSpace(ruta) || !File.Exists(ruta))
+                return null;
 
+            using var imgTemp = Image.FromFile(ruta);
+            return new Bitmap(imgTemp, new Size(45, 45));
+        }
+        catch
+        {
+            return null;
+        }
+    }
     private void BuildUI()
     {
         var pnlTop = new Panel

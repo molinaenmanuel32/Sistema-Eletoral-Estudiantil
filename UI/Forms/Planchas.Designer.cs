@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
+using SistemaVotacion.Utils;
 
 namespace SistemaVotacion.UI.Forms
 {
@@ -22,11 +23,13 @@ namespace SistemaVotacion.UI.Forms
 
         private Button btnNueva;
         private Button btnEditar;
+        private Button btnEliminar;
         private Button btnAddMiembro;
         private Button btnQuitarMiembro;
 
         private DataGridView dgvPlanchas;
         private DataGridView dgvMiembros;
+
 
         protected override void Dispose(bool disposing)
         {
@@ -55,6 +58,7 @@ namespace SistemaVotacion.UI.Forms
 
             btnNueva = new Button();
             btnEditar = new Button();
+            btnEliminar = new Button();
             btnAddMiembro = new Button();
             btnQuitarMiembro = new Button();
 
@@ -104,6 +108,7 @@ namespace SistemaVotacion.UI.Forms
             pnlTop.Height = 90;
             pnlTop.BackColor = Color.FromArgb(245, 247, 252);
 
+            // NUEVA
             btnNueva.Text = "+ Nueva Plancha";
             btnNueva.Size = new Size(180, 42);
             btnNueva.Location = new Point(0, 20);
@@ -115,6 +120,9 @@ namespace SistemaVotacion.UI.Forms
             btnNueva.Cursor = Cursors.Hand;
             btnNueva.Click += btnNueva_Click;
 
+            Tema.EstilizarBoton(btnNueva);
+
+            // EDITAR
             btnEditar.Text = "Editar";
             btnEditar.Size = new Size(120, 42);
             btnEditar.Location = new Point(195, 20);
@@ -126,8 +134,28 @@ namespace SistemaVotacion.UI.Forms
             btnEditar.Cursor = Cursors.Hand;
             btnEditar.Click += btnEditar_Click;
 
+            Tema.EstilizarBoton(btnEditar);
+
+            // ELIMINAR
+            btnEliminar = new Button();
+
+            btnEliminar.Text = "Eliminar";
+            btnEliminar.Size = new Size(140, 42);
+            btnEliminar.Location = new Point(330, 20);
+            btnEliminar.BackColor = Color.FromArgb(220, 38, 38);
+            btnEliminar.ForeColor = Color.White;
+            btnEliminar.FlatStyle = FlatStyle.Flat;
+            btnEliminar.FlatAppearance.BorderSize = 0;
+            btnEliminar.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+            btnEliminar.Cursor = Cursors.Hand;
+            btnEliminar.Click += BtnEliminar_Click;
+
+            Tema.EstilizarBoton(btnEliminar);
+
+            // AGREGAR AL PANEL
             pnlTop.Controls.Add(btnNueva);
             pnlTop.Controls.Add(btnEditar);
+            pnlTop.Controls.Add(btnEliminar);
 
             // MAIN
             pnlMain.Dock = DockStyle.Fill;

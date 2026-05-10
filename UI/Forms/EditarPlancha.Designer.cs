@@ -9,7 +9,10 @@ namespace SistemaVotacion.UI.Forms
 
         private Panel pnlHeader;
         private Panel pnlBody;
-
+        private Label lblLogo;
+        private Label lblLogoTexto;
+        private PictureBox picLogo;
+        private Button btnSeleccionarLogo;
         private Label lblTitulo;
         private Label lblSubtitulo;
 
@@ -38,7 +41,10 @@ namespace SistemaVotacion.UI.Forms
         {
             pnlHeader = new Panel();
             pnlBody = new Panel();
-
+            lblLogo = new Label();
+            lblLogoTexto = new Label();
+            picLogo = new PictureBox();
+            btnSeleccionarLogo = new Button();
             lblTitulo = new Label();
             lblSubtitulo = new Label();
 
@@ -58,7 +64,7 @@ namespace SistemaVotacion.UI.Forms
             SuspendLayout();
 
             BackColor = Color.FromArgb(243, 245, 250);
-            ClientSize = new Size(620, 720);
+            ClientSize = new Size(620, 820);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             StartPosition = FormStartPosition.CenterParent;
             MaximizeBox = false;
@@ -134,10 +140,41 @@ namespace SistemaVotacion.UI.Forms
             txtColor.Size = new Size(250, 30);
             txtColor.Font = new Font("Segoe UI", 10F);
 
+            // Logo
+            lblLogo.Text = "Logo de la plancha";
+            lblLogo.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+            lblLogo.ForeColor = Color.FromArgb(0, 45, 110);
+            lblLogo.AutoSize = true;
+            lblLogo.Location = new Point(35, 465);
+
+            picLogo.Location = new Point(35, 495);
+            picLogo.Size = new Size(90, 90);
+            picLogo.BackColor = Color.White;
+            picLogo.BorderStyle = BorderStyle.FixedSingle;
+            picLogo.SizeMode = PictureBoxSizeMode.Zoom;
+
+            btnSeleccionarLogo.Text = "Seleccionar Logo";
+            btnSeleccionarLogo.Size = new Size(170, 38);
+            btnSeleccionarLogo.Location = new Point(145, 500);
+            btnSeleccionarLogo.FlatStyle = FlatStyle.Flat;
+            btnSeleccionarLogo.FlatAppearance.BorderSize = 0;
+            btnSeleccionarLogo.BackColor = Color.FromArgb(37, 99, 235);
+            btnSeleccionarLogo.ForeColor = Color.White;
+            btnSeleccionarLogo.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold);
+            btnSeleccionarLogo.Cursor = Cursors.Hand;
+            btnSeleccionarLogo.Click += btnSeleccionarLogo_Click;
+
+            lblLogoTexto.Text = "Sin logo seleccionado";
+            lblLogoTexto.Font = new Font("Segoe UI", 9F);
+            lblLogoTexto.ForeColor = Color.FromArgb(80, 85, 100);
+            lblLogoTexto.AutoSize = false;
+            lblLogoTexto.Location = new Point(145, 545);
+            lblLogoTexto.Size = new Size(390, 35);
+
             // Guardar
             btnGuardar.Text = "Guardar";
             btnGuardar.Size = new Size(140, 42);
-            btnGuardar.Location = new Point(270, 560);
+            btnGuardar.Location = new Point(270, 650);
             btnGuardar.FlatStyle = FlatStyle.Flat;
             btnGuardar.FlatAppearance.BorderSize = 0;
             btnGuardar.BackColor = Color.FromArgb(37, 99, 235);
@@ -149,7 +186,7 @@ namespace SistemaVotacion.UI.Forms
             // Cancelar
             btnCancelar.Text = "Cancelar";
             btnCancelar.Size = new Size(140, 42);
-            btnCancelar.Location = new Point(425, 560);
+            btnCancelar.Location = new Point(425, 650);
             btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.FlatAppearance.BorderSize = 0;
             btnCancelar.BackColor = Color.FromArgb(220, 38, 38);
@@ -164,6 +201,7 @@ namespace SistemaVotacion.UI.Forms
                 lblDescripcion, txtDescripcion,
                 lblMision, txtMision,
                 lblColor, txtColor,
+                lblLogo, picLogo, btnSeleccionarLogo, lblLogoTexto,
                 btnGuardar, btnCancelar
             });
 

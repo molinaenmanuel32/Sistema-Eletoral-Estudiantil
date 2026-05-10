@@ -295,3 +295,101 @@ SET Matricula =
 FROM Usuarios u
 INNER JOIN UsuariosOrdenados x ON x.UsuarioId = u.UsuarioId;
 GO
+
+SELECT 
+    p.Nombre AS Plancha,
+    p.LogoPath,
+    COUNT(v.VotoId) AS TotalVotos
+FROM Planchas p
+LEFT JOIN Votos v ON v.PlanchaId = p.PlanchaId
+GROUP BY p.Nombre, p.LogoPath
+
+SELECT PlanchaId, Nombre, LogoPath
+FROM Planchas;
+
+UPDATE Planchas
+SET LogoPath = 'C:\Users\elp48\Downloads\Elison.jpeg'
+WHERE Nombre = 'Elison';
+
+
+ALTER PROCEDURE sp_EstadisticasVotacion
+    @VotacionId INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @TotalPadron INT;
+    DECLARE @TotalVotos INT;
+    DECLARE @VotosNulos INT;
+    DECLARE @VotosValidos INT;
+    DECLARE @SinVotar INT;
+
+    SELECT @TotalPadron = COUNT(*)
+    FROM Padrones
+    WHERE VotacionId = @VotacionId;
+
+    SELECT @TotalVotos = COUNT(*)
+    FROM Votos
+    WHERE VotacionId = @VotacionId
+      AND EsNulo = 0;
+
+    SELECT @VotosNulos = COUNT(*)
+    FROM Votos
+    WHERE VotacionId = @VotacionId
+      AND EsNulo = 1;
+
+    SET @VotosValidos = @TotalVotos;
+    SET @SinVotar = @TotalPadron - (@TotalVotos + @VotosNulos);
+
+    SELECT
+        @TotalPadron AS TotalPadron,
+        @TotalVotos AS TotalVotos,
+        @VotosNulos AS VotosNulos,
+        @VotosValidos AS VotosValidos,
+        @SinVotar AS SinVotar,
+        CASE 
+            WHEN @TotalPadron = 0 THEN 0
+            ELSE CAST(((@TotalVotos + @VotosNulos) * 100.0 / @TotalPadron) AS DECIMAL(10,2))
+        END AS PorcentajeParticipacion;
+
+    SELECT
+        p.PlanchaId,
+        p.Nombre AS Plancha,
+        p.Color,
+        p.LogoPath,
+        COUNT(v.VotoId) AS TotalVotos,
+        CASE 
+            WHEN @TotalVotos = 0 THEN 0
+            ELSE CAST((COUNT(v.VotoId) * 100.0 / @TotalVotos) AS DECIMAL(10,2))
+        END AS Porcentaje
+    FROM Planchas p
+    LEFT JOIN Votos v 
+        ON v.PlanchaId = p.PlanchaId
+       AND v.VotacionId = @VotacionId
+       AND v.EsNulo = 0
+    GROUP BY p.PlanchaId, p.Nombre, p.Color, p.LogoPath
+    ORDER BY COUNT(v.VotoId) DESC;
+END;
+GO
+
+SELECT 
+    u.UsuarioId,
+    u.Nombre,
+    u.Username,
+    r.Nombre AS RolNombre,
+    u.PlanchaId
+FROM Usuarios u
+INNER JOIN Roles r ON r.RolId = u.RolId;
+
+use SistemaVotacion
+
+SELECT TABLE_NAME
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_TYPE = 'BASE TABLE';
+
+ALTER TABLE Usuarios
+ADD PlanchaId INT NULL;
+
+ALTER TABLE MiembrosPlanchas
+ADD Nombre VARCHAR(100) NULL,
+    Matricula VARCHAR(50) NULL;

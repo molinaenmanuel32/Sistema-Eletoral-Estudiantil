@@ -29,6 +29,7 @@ public class Usuario
     public string   RolNombre      { get; set; } = string.Empty;   // JOIN
     public bool     Activo         { get; set; } = true;
     public DateTime FechaRegistro  { get; set; }
+    public int PlanchaId { get; set; }
 }
 
 // ─────────────────────────────────────────────
@@ -36,26 +37,26 @@ public class Usuario
 // ─────────────────────────────────────────────
 public class Plancha
 {
-    public int      PlanchaId         { get; set; }
-    public string   Nombre            { get; set; } = string.Empty;
-    public string?  Descripcion       { get; set; }
-    public string?  Mision            { get; set; }
-    public string?  LogoPath          { get; set; }
-    public string   Color             { get; set; } = "#007BFF";
-    public int      AdminUserId       { get; set; }
-    public string   AdminNombre       { get; set; } = string.Empty;  // JOIN
-    public bool     Activa            { get; set; } = true;
-    public DateTime FechaCreacion     { get; set; }
-    public DateTime? FechaModificacion { get; set; }
+    public int PlanchaId { get; set; }
 
-    // Estadísticas (llenadas en runtime)
-    public int     TotalVotos  { get; set; }
-    public decimal Porcentaje  { get; set; }
+    public string Nombre { get; set; } = "";
 
-    // Miembros cargados por separado
-    public List<MiembroPlancha> Miembros { get; set; } = [];
+    public string? Descripcion { get; set; }
+
+    public string? Mision { get; set; }
+
+    public string? LogoPath { get; set; }
+
+    public string? Color { get; set; }
+
+    public int AdminUserId { get; set; }
+
+    public bool Activa { get; set; }
+
+    public string? AdminNombre { get; set; }
+
+    public List<MiembroPlancha> Miembros { get; set; } = new();
 }
-
 // ─────────────────────────────────────────────
 // MIEMBRO DE PLANCHA
 // ─────────────────────────────────────────────
@@ -90,6 +91,7 @@ public class Votacion
     public TimeSpan TiempoRestante => FechaFin - DateTime.Now;
 }
 
+
 // ─────────────────────────────────────────────
 // PADRÓN
 // ─────────────────────────────────────────────
@@ -122,22 +124,29 @@ public class Voto
 // ─────────────────────────────────────────────
 public class EstadisticasVotacion
 {
-    public int     TotalPadron           { get; set; }
-    public int     TotalVotos            { get; set; }
-    public int     VotosNulos            { get; set; }
-    public int     VotosValidos          { get; set; }
-    public int     SinVotar              { get; set; }
+    public int TotalPadron { get; set; }
+    public int TotalVotos { get; set; }
+    public int VotosNulos { get; set; }
+    public int VotosValidos { get; set; }
+    public int SinVotar { get; set; }
     public decimal PorcentajeParticipacion { get; set; }
+
     public List<EstadisticaPlancha> PorPlancha { get; set; } = [];
 }
 
 public class EstadisticaPlancha
 {
-    public int     PlanchaId   { get; set; }
-    public string  Plancha     { get; set; } = string.Empty;
-    public string  Color       { get; set; } = "#007BFF";
-    public int     TotalVotos  { get; set; }
-    public decimal Porcentaje  { get; set; }
+    public int PlanchaId { get; set; }
+
+    public string Plancha { get; set; } = string.Empty;
+
+    public string Color { get; set; } = "#007BFF";
+
+    public int TotalVotos { get; set; }
+
+    public decimal Porcentaje { get; set; }
+
+    public string? LogoPath { get; set; }
 }
 
 // ─────────────────────────────────────────────

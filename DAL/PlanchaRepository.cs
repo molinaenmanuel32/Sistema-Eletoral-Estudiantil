@@ -17,6 +17,7 @@ public class PlanchaRepository
         return con.Query<Plancha>(sql);
     }
 
+
     public Plancha? GetById(int id)
     {
         using var con = DbConnection.GetConnection();
@@ -99,4 +100,19 @@ public class PlanchaRepository
             "SELECT COUNT(1) FROM MiembrosPlanchas WHERE UsuarioId = @uid",
             new { uid = usuarioId }) > 0;
     }
+
+    public bool Delete(int planchaId)
+    {
+        using var con = DbConnection.GetConnection();
+
+        con.Execute(
+            "DELETE FROM MiembrosPlanchas WHERE PlanchaId = @id",
+            new { id = planchaId });
+
+        return con.Execute(
+            "DELETE FROM Planchas WHERE PlanchaId = @id",
+            new { id = planchaId }) > 0;
+    }
 }
+
+

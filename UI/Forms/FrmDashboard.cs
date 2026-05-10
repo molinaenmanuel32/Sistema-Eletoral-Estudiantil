@@ -5,6 +5,7 @@ using System;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using System.IO;
 
 namespace SistemaVotacion.UI.Forms
 {
@@ -115,27 +116,69 @@ namespace SistemaVotacion.UI.Forms
 
             foreach (var ep in stats.PorPlancha)
             {
-                var lbl = new Label
+                var card = new Panel
                 {
-                    Text = $"{ep.Plancha}  •  {ep.TotalVotos} votos  •  {ep.Porcentaje:F1}%",
-                    Font = new Font("Segoe UI Semibold", 11f, FontStyle.Bold),
-                    ForeColor = Texto,
+                    BackColor = Color.White,
                     Location = new Point(25, y),
-                    Size = new Size(pnlBarras.Width - 70, 28)
+                    Size = new Size(pnlBarras.Width - 60, 95)
                 };
 
-                var pb = new ProgressBar
+                var logo = new PictureBox
                 {
-                    Location = new Point(25, y + 35),
-                    Size = new Size(pnlBarras.Width - 70, 24),
-                    Value = (int)Math.Min(ep.Porcentaje, 100),
-                    Style = ProgressBarStyle.Continuous
+                    Location = new Point(15, 15),
+                    Size = new Size(60, 60),
+                    SizeMode = PictureBoxSizeMode.Zoom,
+                    BackColor = Color.FromArgb(245, 247, 252)
                 };
 
-                pnlBarras.Controls.Add(lbl);
-                pnlBarras.Controls.Add(pb);
+                if (!string.IsNullOrWhiteSpace(ep.LogoPath) && File.Exists(ep.LogoPath))
+                {
+                    using var imgTemp = Image.FromFile(ep.LogoPath);
+                    logo.Image = new Bitmap(imgTemp);
+                }
 
-                y += 78;
+                var lblNombre = new Label
+                {
+                    Text = ep.Plancha,
+                    Font = new Font("Segoe UI Semibold", 12f, FontStyle.Bold),
+                    ForeColor = Texto,
+                    Location = new Point(90, 12),
+                    Size = new Size(350, 25)
+                };
+
+                var lblInfo = new Label
+                {
+                    Text = $"{ep.TotalVotos} votos • {ep.Porcentaje:F1}%",
+                    Font = new Font("Segoe UI", 10f),
+                    ForeColor = TextoSuave,
+                    Location = new Point(90, 40),
+                    Size = new Size(260, 22)
+                };
+
+                var barraBg = new Panel
+                {
+                    Location = new Point(90, 68),
+                    Size = new Size(card.Width - 120, 10),
+                    BackColor = Color.FromArgb(225, 230, 240)
+                };
+
+                var barra = new Panel
+                {
+                    Height = 10,
+                    Width = (int)((card.Width - 120) * ((double)ep.Porcentaje / 100.0)),
+                    BackColor = AzulClaro
+                };
+
+                barraBg.Controls.Add(barra);
+
+                card.Controls.Add(logo);
+                card.Controls.Add(lblNombre);
+                card.Controls.Add(lblInfo);
+                card.Controls.Add(barraBg);
+
+                pnlBarras.Controls.Add(card);
+
+                y += 110;
             }
         }
 

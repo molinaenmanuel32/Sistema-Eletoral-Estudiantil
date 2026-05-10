@@ -17,6 +17,9 @@
     <Compile Update="UI\Forms\EditarPlancha.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI\Forms\MenuAdminPartido\FrmAdminPartido.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI\Forms\FrmAgregarMiembro.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -33,6 +36,15 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\Forms\FrmVotacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Forms\MenuAdminPartido\FrmDashboardPartido.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Forms\MenuAdminPartido\FrmEditarMiPlancha.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Forms\MenuAdminPartido\FrmReportesPartido.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\Forms\PadronElectoral.cs">

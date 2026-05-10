@@ -6,6 +6,7 @@ using SistemaVotacion.BLL;
 using SistemaVotacion.Models;
 using SistemaVotacion.UI.Controls;
 using SistemaVotacion.Utils;
+using System.IO;
 
 namespace SistemaVotacion.UI.Forms
 {
@@ -32,10 +33,44 @@ namespace SistemaVotacion.UI.Forms
             dgvPlanchas.Columns.Clear();
             dgvMiembros.Columns.Clear();
 
-            dgvPlanchas.Columns.Add(new DataGridViewTextBoxColumn { Name = "PlanchaId", HeaderText = "ID", Width = 60 });
-            dgvPlanchas.Columns.Add(new DataGridViewTextBoxColumn { Name = "Nombre", HeaderText = "Plancha", Width = 220 });
-            dgvPlanchas.Columns.Add(new DataGridViewTextBoxColumn { Name = "AdminNombre", HeaderText = "Admin", Width = 180 });
-            dgvPlanchas.Columns.Add(new DataGridViewCheckBoxColumn { Name = "Activa", HeaderText = "Activa", Width = 80 });
+            dgvPlanchas.AutoGenerateColumns = false;
+            dgvMiembros.AutoGenerateColumns = false;
+
+            dgvPlanchas.Columns.Add(new DataGridViewImageColumn
+            {
+                Name = "Logo",
+                HeaderText = "Logo",
+                Width = 70,
+                ImageLayout = DataGridViewImageCellLayout.Zoom
+            });
+
+            dgvPlanchas.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "PlanchaId",
+                HeaderText = "ID",
+                Width = 60
+            });
+
+            dgvPlanchas.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "Nombre",
+                HeaderText = "Plancha",
+                Width = 220
+            });
+
+            dgvPlanchas.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "AdminNombre",
+                HeaderText = "Admin",
+                Width = 180
+            });
+
+            dgvPlanchas.Columns.Add(new DataGridViewCheckBoxColumn
+            {
+                Name = "Activa",
+                HeaderText = "Activa",
+                Width = 80
+            });
 
             dgvMiembros.Columns.Add(new DataGridViewTextBoxColumn { Name = "MiembroId", HeaderText = "ID", Width = 50 });
             dgvMiembros.Columns.Add(new DataGridViewTextBoxColumn { Name = "Puesto", HeaderText = "Puesto", Width = 120 });
@@ -86,11 +121,12 @@ namespace SistemaVotacion.UI.Forms
             foreach (var p in _planchaSvc.GetAll())
             {
                 dgvPlanchas.Rows.Add(
-                    p.PlanchaId,
-                    p.Nombre,
-                    p.AdminNombre,
-                    p.Activa
-                );
+                     CargarImagenLogo(p.LogoPath),
+                     p.PlanchaId,
+                     p.Nombre,
+                     p.AdminNombre,
+                     p.Activa
+                 );
             }
 
             btnEditar.Enabled = false;
@@ -101,6 +137,22 @@ namespace SistemaVotacion.UI.Forms
             dgvMiembros.Rows.Clear();
         }
 
+        private Image? CargarImagenLogo(string? ruta)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(ruta) || !File.Exists(ruta))
+                    return null;
+
+                using var imgTemp = Image.FromFile(ruta);
+
+                return new Bitmap(imgTemp, new Size(45, 45));
+            }
+            catch
+            {
+                return null;
+            }
+        }
         private void CargarMiembros(int planchaId)
         {
             dgvMiembros.Rows.Clear();
@@ -160,6 +212,39 @@ namespace SistemaVotacion.UI.Forms
                 CargarPlanchas();
                 CargarMiembros(_planchaSeleccionada.PlanchaId);
             }
+        }
+
+        private void BtnEliminar_Click(object? sender, EventArgs e)
+        {
+            if (_planchaSeleccionada == null)
+            {
+                Helpers.MsgError("Seleccione una plancha.");
+                return;
+            }
+
+            var confirm = MessageBox.Show(
+                $"¿Desea eliminar la plancha '{_planchaSeleccionada.Nombre}'?",
+                "Confirmar eliminación",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (confirm != DialogResult.Yes)
+                return;
+
+            bool ok = _planchaSvc.Eliminar(_planchaSeleccionada.PlanchaId);
+
+            if (!ok)
+            {
+                Helpers.MsgError("No se pudo eliminar la plancha.");
+                return;
+            }
+
+            Helpers.MsgExito("Plancha eliminada correctamente.");
+
+            _planchaSeleccionada = null;
+
+            CargarPlanchas();
+            dgvMiembros.Rows.Clear();
         }
 
         private void btnAddMiembro_Click(object sender, EventArgs e)

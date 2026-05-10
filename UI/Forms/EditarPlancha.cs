@@ -2,6 +2,7 @@
 using SistemaVotacion.Models;
 using SistemaVotacion.Utils;
 using System;
+using System.IO;
 using System.Windows.Forms;
 
 namespace SistemaVotacion.UI.Forms
@@ -10,6 +11,7 @@ namespace SistemaVotacion.UI.Forms
     {
         private readonly Plancha? _plancha;
         private readonly PlanchaService _svc = new();
+        private string? _logoPath;
 
         public FrmEditarPlancha(Plancha? plancha)
         {
@@ -33,6 +35,52 @@ namespace SistemaVotacion.UI.Forms
             txtDescripcion.Text = _plancha.Descripcion ?? "";
             txtMision.Text = _plancha.Mision ?? "";
             txtColor.Text = _plancha.Color ?? "#007BFF";
+            _logoPath = _plancha.LogoPath;
+
+            CargarLogoPreview(_logoPath);
+        }
+
+        private void btnSeleccionarLogo_Click(object sender, EventArgs e)
+        {
+            using OpenFileDialog open = new OpenFileDialog();
+            open.Title = "Seleccionar logo";
+            open.Filter = "Imágenes|*.png;*.jpg;*.jpeg";
+
+            if (open.ShowDialog() == DialogResult.OK)
+            {
+                _logoPath = CopiarLogo(open.FileName);
+                CargarLogoPreview(_logoPath);
+            }
+        }
+
+        private string CopiarLogo(string origen)
+        {
+            string carpeta = Path.Combine(Application.StartupPath, "Assets", "LogosPlanchas");
+
+            if (!Directory.Exists(carpeta))
+                Directory.CreateDirectory(carpeta);
+
+            string extension = Path.GetExtension(origen);
+            string nombreArchivo = $"logo_plancha_{DateTime.Now:yyyyMMddHHmmssfff}{extension}";
+            string destino = Path.Combine(carpeta, nombreArchivo);
+
+            File.Copy(origen, destino, true);
+
+            return destino;
+        }
+
+        private void CargarLogoPreview(string? ruta)
+        {
+            if (string.IsNullOrWhiteSpace(ruta) || !File.Exists(ruta))
+            {
+                picLogo.Image = null;
+                lblLogoTexto.Text = "Sin logo seleccionado";
+                return;
+            }
+
+            using var imgTemp = System.Drawing.Image.FromFile(ruta);
+            picLogo.Image = new System.Drawing.Bitmap(imgTemp);
+            lblLogoTexto.Text = Path.GetFileName(ruta);
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -54,6 +102,7 @@ namespace SistemaVotacion.UI.Forms
                     Descripcion = txtDescripcion.Text.Trim(),
                     Mision = txtMision.Text.Trim(),
                     Color = txtColor.Text.Trim(),
+                    LogoPath = _logoPath,
                     AdminUserId = Sesion.UsuarioActual!.UsuarioId,
                     Activa = true
                 };
@@ -72,6 +121,7 @@ namespace SistemaVotacion.UI.Forms
                 _plancha.Descripcion = txtDescripcion.Text.Trim();
                 _plancha.Mision = txtMision.Text.Trim();
                 _plancha.Color = txtColor.Text.Trim();
+                _plancha.LogoPath = _logoPath;
 
                 var (ok, msg) = _svc.Actualizar(_plancha);
 
