@@ -163,21 +163,35 @@ public class UsuarioService
 public class PlanchaService
 {
     private readonly PlanchaRepository _repo = new();
-    private readonly AuditoriaRepository _audit = new();
 
-    public IEnumerable<Plancha> GetAll() => _repo.GetAll();
-    public Plancha? GetById(int id)       => _repo.GetById(id);
-    public IEnumerable<MiembroPlancha> GetMiembros(int id) => _repo.GetMiembros(id);
-    public string? LogoPath { get; set; }
-    public (bool ok, string msg, int id) Crear(Plancha p)
+    public IEnumerable<Plancha> GetAll()
     {
-        Sesion.Requiere("Admin", "AdminPartido");
-        if (Sesion.EsAdminPartido)
-            p.AdminUserId = Sesion.UsuarioActual!.UsuarioId;
+        return _repo.GetAll();
+    }
 
-        int newId = _repo.Insert(p);
-        _audit.Registrar(Sesion.UsuarioActual!.UsuarioId, "PLANCHA_CREADA", p.Nombre);
-        return (true, "Plancha creada.", newId);
+    public Plancha? GetById(int id)
+    {
+        return _repo.GetById(id);
+    }
+
+    public IEnumerable<MiembroPlancha> GetMiembros(int planchaId)
+    {
+        return _repo.GetMiembros(planchaId);
+    }
+
+    public MiembroPlancha? GetMiembroById(int miembroId)
+    {
+        return _repo.GetMiembroById(miembroId);
+    }
+
+    public int Crear(Plancha plancha)
+    {
+        return _repo.Insert(plancha);
+    }
+
+    public bool Actualizar(Plancha plancha)
+    {
+        return _repo.Update(plancha);
     }
 
     public bool Eliminar(int planchaId)
@@ -185,29 +199,52 @@ public class PlanchaService
         return _repo.Delete(planchaId);
     }
 
-    public (bool ok, string msg) Actualizar(Plancha p)
+    public (bool ok, string msg) AgregarMiembro(MiembroPlancha miembro)
     {
-        // AdminPartido solo puede editar SU plancha
-        if (Sesion.EsAdminPartido && p.AdminUserId != Sesion.UsuarioActual!.UsuarioId)
-            return (false, "Solo puede editar su propia plancha.");
+        if (string.IsNullOrWhiteSpace(miembro.Puesto))
+            return (false, "Debe seleccionar un cargo.");
 
-        _repo.Update(p);
-        _audit.Registrar(Sesion.UsuarioActual!.UsuarioId, "PLANCHA_ACTUALIZADA", $"Id:{p.PlanchaId}");
-        return (true, "Plancha actualizada.");
+        if (EsCargoUnico(miembro.Puesto))
+        {
+            if (_repo.ExistePuestoEnPlancha(miembro.PlanchaId, miembro.Puesto))
+                return (false, $"Ya existe un {miembro.Puesto} en esta plancha.");
+        }
+
+        bool ok = _repo.AddMiembro(miembro);
+
+        return ok
+            ? (true, "Miembro agregado correctamente.")
+            : (false, "Este usuario ya pertenece a una plancha.");
     }
 
-    public (bool ok, string msg) AgregarMiembro(MiembroPlancha m)
+    public (bool ok, string msg) EditarMiembro(MiembroPlancha miembro)
     {
-        if (_repo.UsuarioEnPlancha(m.UsuarioId))
-            return (false, "Este usuario ya pertenece a una plancha.");
+        if (string.IsNullOrWhiteSpace(miembro.Puesto))
+            return (false, "Debe seleccionar un cargo.");
 
-        bool ok = _repo.AddMiembro(m);
-        if (ok) _audit.Registrar(Sesion.UsuarioActual?.UsuarioId, "MIEMBRO_AGREGADO",
-                                  $"Plancha:{m.PlanchaId} Usuario:{m.UsuarioId}");
-        return ok ? (true, "Miembro agregado.") : (false, "No se pudo agregar el miembro.");
+        if (EsCargoUnico(miembro.Puesto))
+        {
+            if (_repo.ExistePuestoEnPlancha(miembro.PlanchaId, miembro.Puesto, miembro.MiembroId))
+                return (false, $"Ya existe un {miembro.Puesto} en esta plancha.");
+        }
+
+        bool ok = _repo.UpdateMiembro(miembro);
+
+        return ok
+            ? (true, "Miembro actualizado correctamente.")
+            : (false, "No se pudo actualizar el miembro.");
     }
 
-    public bool EliminarMiembro(int miembroId) => _repo.RemoveMiembro(miembroId);
+    public bool EliminarMiembro(int miembroId)
+    {
+        return _repo.RemoveMiembro(miembroId);
+    }
+
+    private bool EsCargoUnico(string puesto)
+    {
+        return puesto.Equals("Presidente", StringComparison.OrdinalIgnoreCase)
+            || puesto.Equals("Vicepresidente", StringComparison.OrdinalIgnoreCase);
+    }
 }
 
 // ════════════════════════════════════════════════════════════

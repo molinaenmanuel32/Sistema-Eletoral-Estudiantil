@@ -6,7 +6,7 @@ namespace SistemaVotacion.UI.Forms
 {
     public partial class Reportes : Form
     {
-        public Reportes()
+        public Reportes(int usuarioId)
         {
             InitializeComponent();
         }

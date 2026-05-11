@@ -1,9 +1,12 @@
-using SistemaVotacion.BLL;
-using SistemaVotacion.Models;
-using SistemaVotacion.Utils;
+using System;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using SistemaVotacion.BLL;
+using SistemaVotacion.Models;
+using SistemaVotacion.UI.Forms;
+using SistemaVotacion.Utils;
 
 namespace SistemaVotacion.UI.Controls;
 
@@ -11,10 +14,13 @@ public class UcPlanchas : UserControl
 {
     private DataGridView dgvPlanchas = null!;
     private DataGridView dgvMiembros = null!;
+
     private Button btnNueva = null!;
     private Button btnEditar = null!;
     private Button btnAddMiembro = null!;
+    private Button btnEditarMiembro = null!;
     private Button btnQuitarMiembro = null!;
+
     private Label lblPlancha = null!;
 
     private readonly PlanchaService _planchaSvc = new();
@@ -24,24 +30,11 @@ public class UcPlanchas : UserControl
     {
         BackColor = Tema.Fondo;
         Dock = DockStyle.Fill;
+
         BuildUI();
         CargarPlanchas();
     }
-    private Image? CargarImagenLogo(string? ruta)
-    {
-        try
-        {
-            if (string.IsNullOrWhiteSpace(ruta) || !File.Exists(ruta))
-                return null;
 
-            using var imgTemp = Image.FromFile(ruta);
-            return new Bitmap(imgTemp, new Size(45, 45));
-        }
-        catch
-        {
-            return null;
-        }
-    }
     private void BuildUI()
     {
         var pnlTop = new Panel
@@ -64,8 +57,8 @@ public class UcPlanchas : UserControl
 
         btnEditar = new Button
         {
-            Text = "Editar",
-            Width = 110,
+            Text = "Editar Plancha",
+            Width = 140,
             Height = 40,
             Location = new Point(190, 10),
             Enabled = false
@@ -82,14 +75,12 @@ public class UcPlanchas : UserControl
             Orientation = Orientation.Vertical,
             SplitterWidth = 4,
             BackColor = Tema.Fondo,
-            FixedPanel = FixedPanel.Panel2,
-            Panel1MinSize = 100,
-            Panel2MinSize = 100
+            FixedPanel = FixedPanel.Panel1,
+            Panel1MinSize = 350,
+            Panel2MinSize = 450,
+            SplitterDistance = 420
         };
 
-        split.SplitterDistance = 600;
-
-        // PANEL IZQUIERDO
         var pnlLeft = new Panel
         {
             Dock = DockStyle.Fill,
@@ -101,7 +92,7 @@ public class UcPlanchas : UserControl
         {
             Text = "Planchas Registradas",
             Dock = DockStyle.Top,
-            Height = 35,
+            Height = 40,
             Font = Tema.FuenteSubtitulo,
             ForeColor = Tema.Texto,
             TextAlign = ContentAlignment.MiddleLeft
@@ -112,23 +103,18 @@ public class UcPlanchas : UserControl
         dgvPlanchas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
         dgvPlanchas.Columns.AddRange(
-            ColText("PlanchaId", "ID", 60),
-            ColText("Nombre", "Plancha", 230),
-            ColText("AdminNombre", "Admin", 180),
-            ColCheck("Activa", "Activa", 80)
+            ColImage("Logo", "Logo", 60),
+            ColText("PlanchaId", "ID", 50),
+            ColText("Nombre", "Plancha", 180),
+            ColText("AdminNombre", "Admin", 150),
+            ColCheck("Activa", "Activa", 70)
         );
-
-        dgvPlanchas.Columns["PlanchaId"].FillWeight = 15;
-        dgvPlanchas.Columns["Nombre"].FillWeight = 45;
-        dgvPlanchas.Columns["AdminNombre"].FillWeight = 35;
-        dgvPlanchas.Columns["Activa"].FillWeight = 15;
 
         dgvPlanchas.SelectionChanged += DgvPlanchas_SelectionChanged;
 
         pnlLeft.Controls.Add(dgvPlanchas);
         pnlLeft.Controls.Add(lblLeft);
 
-        // PANEL DERECHO
         var pnlRight = new Panel
         {
             Dock = DockStyle.Fill,
@@ -140,8 +126,8 @@ public class UcPlanchas : UserControl
         {
             Text = "Seleccione una plancha",
             Dock = DockStyle.Top,
-            Height = 35,
-            Font = new Font("Segoe UI", 14f, FontStyle.Bold),
+            Height = 40,
+            Font = new Font("Segoe UI", 14F, FontStyle.Bold),
             ForeColor = Tema.Texto,
             TextAlign = ContentAlignment.MiddleLeft
         };
@@ -149,33 +135,45 @@ public class UcPlanchas : UserControl
         var pnlBotonesMiembros = new Panel
         {
             Dock = DockStyle.Top,
-            Height = 45,
+            Height = 50,
             BackColor = Tema.FondoCard
         };
 
         btnAddMiembro = new Button
         {
             Text = "+ Agregar",
-            Width = 150,
-            Height = 34,
-            Location = new Point(0, 5),
+            Width = 120,
+            Height = 36,
+            Location = new Point(0, 7),
             Enabled = false
         };
         Tema.EstilizarBoton(btnAddMiembro, Tema.Primario);
         btnAddMiembro.Click += BtnAddMiembro_Click;
 
+        btnEditarMiembro = new Button
+        {
+            Text = "Editar Miembro",
+            Width = 150,
+            Height = 36,
+            Location = new Point(130, 7),
+            Enabled = false
+        };
+        Tema.EstilizarBoton(btnEditarMiembro, Tema.Acento);
+        btnEditarMiembro.Click += BtnEditarMiembro_Click;
+
         btnQuitarMiembro = new Button
         {
             Text = "Quitar",
-            Width = 90,
-            Height = 34,
-            Location = new Point(160, 5),
+            Width = 100,
+            Height = 36,
+            Location = new Point(290, 7),
             Enabled = false
         };
         Tema.EstilizarBoton(btnQuitarMiembro, Tema.Peligro);
         btnQuitarMiembro.Click += BtnQuitarMiembro_Click;
 
         pnlBotonesMiembros.Controls.Add(btnAddMiembro);
+        pnlBotonesMiembros.Controls.Add(btnEditarMiembro);
         pnlBotonesMiembros.Controls.Add(btnQuitarMiembro);
 
         dgvMiembros = CrearGrid();
@@ -183,10 +181,11 @@ public class UcPlanchas : UserControl
         dgvMiembros.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
         dgvMiembros.Columns.AddRange(
+            ColImage("Foto", "Foto", 60),
             ColText("MiembroId", "ID", 50),
-            ColText("Puesto", "Puesto", 130),
+            ColText("Puesto", "Cargo", 130),
             ColText("NombreCompleto", "Nombre", 180),
-            ColText("Matricula", "Matrícula", 110),
+            ColText("Matricula", "Matrícula", 120),
             ColText("Descripcion", "Descripción", 180)
         );
 
@@ -208,6 +207,7 @@ public class UcPlanchas : UserControl
         foreach (var p in _planchaSvc.GetAll())
         {
             dgvPlanchas.Rows.Add(
+                CargarImagen(p.LogoPath),
                 p.PlanchaId,
                 p.Nombre,
                 p.AdminNombre,
@@ -217,7 +217,9 @@ public class UcPlanchas : UserControl
 
         btnEditar.Enabled = false;
         btnAddMiembro.Enabled = false;
+        btnEditarMiembro.Enabled = false;
         btnQuitarMiembro.Enabled = false;
+
         lblPlancha.Text = "Seleccione una plancha";
         dgvMiembros.Rows.Clear();
     }
@@ -229,12 +231,29 @@ public class UcPlanchas : UserControl
         foreach (var m in _planchaSvc.GetMiembros(planchaId))
         {
             dgvMiembros.Rows.Add(
+                CargarImagen(m.FotoPath),
                 m.MiembroId,
                 m.Puesto,
-                m.NombreCompleto,
+                !string.IsNullOrWhiteSpace(m.NombreCompleto) ? m.NombreCompleto : m.Nombre,
                 m.Matricula,
                 m.Descripcion
             );
+        }
+    }
+
+    private Image? CargarImagen(string? ruta)
+    {
+        try
+        {
+            if (string.IsNullOrWhiteSpace(ruta) || !File.Exists(ruta))
+                return null;
+
+            using var imgTemp = Image.FromFile(ruta);
+            return new Bitmap(imgTemp, new Size(45, 45));
+        }
+        catch
+        {
+            return null;
         }
     }
 
@@ -249,12 +268,13 @@ public class UcPlanchas : UserControl
 
         if (_planchaSeleccionada == null) return;
 
-        lblPlancha.Text = $"Miembros: {_planchaSeleccionada.Nombre}";
+        lblPlancha.Text = $"Miembros de {_planchaSeleccionada.Nombre}";
 
         CargarMiembros(id);
 
         btnEditar.Enabled = true;
         btnAddMiembro.Enabled = true;
+        btnEditarMiembro.Enabled = true;
         btnQuitarMiembro.Enabled = true;
     }
 
@@ -263,9 +283,7 @@ public class UcPlanchas : UserControl
         using var frm = new FrmEditarPlancha(null);
 
         if (frm.ShowDialog() == DialogResult.OK)
-        {
             CargarPlanchas();
-        }
     }
 
     private void BtnEditar_Click(object? sender, EventArgs e)
@@ -303,9 +321,37 @@ public class UcPlanchas : UserControl
         using var frm = new FrmAgregarMiembro(_planchaSeleccionada.PlanchaId);
 
         if (frm.ShowDialog() == DialogResult.OK)
-        {
             CargarMiembros(_planchaSeleccionada.PlanchaId);
+    }
+
+    private void BtnEditarMiembro_Click(object? sender, EventArgs e)
+    {
+        if (_planchaSeleccionada == null)
+        {
+            Helpers.MsgError("Seleccione una plancha.");
+            return;
         }
+
+        if (dgvMiembros.CurrentRow == null)
+        {
+            Helpers.MsgError("Seleccione un miembro.");
+            return;
+        }
+
+        int miembroId = Convert.ToInt32(dgvMiembros.CurrentRow.Cells["MiembroId"].Value);
+
+        var miembro = _planchaSvc.GetMiembroById(miembroId);
+
+        if (miembro == null)
+        {
+            Helpers.MsgError("No se encontró el miembro.");
+            return;
+        }
+
+        using var frm = new FrmAgregarMiembro(_planchaSeleccionada.PlanchaId, miembro);
+
+        if (frm.ShowDialog() == DialogResult.OK)
+            CargarMiembros(_planchaSeleccionada.PlanchaId);
     }
 
     private void BtnQuitarMiembro_Click(object? sender, EventArgs e)
@@ -318,7 +364,8 @@ public class UcPlanchas : UserControl
             return;
         }
 
-        if (!Helpers.Confirmar("¿Deseas quitar este miembro de la plancha?")) return;
+        if (!Helpers.Confirmar("¿Deseas quitar este miembro de la plancha?"))
+            return;
 
         int miembroId = Convert.ToInt32(dgvMiembros.CurrentRow.Cells["MiembroId"].Value);
 
@@ -343,13 +390,13 @@ public class UcPlanchas : UserControl
             RowHeadersVisible = false,
             Font = Tema.FuenteNormal,
             EnableHeadersVisualStyles = false,
-            ColumnHeadersHeight = 32,
-            RowTemplate = { Height = 30 }
+            ColumnHeadersHeight = 36,
+            RowTemplate = { Height = 55 }
         };
 
-        g.ColumnHeadersDefaultCellStyle.BackColor = Color.White;
-        g.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
-        g.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9f, FontStyle.Bold);
+        g.ColumnHeadersDefaultCellStyle.BackColor = Tema.Primario;
+        g.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+        g.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
 
         g.DefaultCellStyle.BackColor = Tema.FondoCard;
         g.DefaultCellStyle.ForeColor = Tema.Texto;
@@ -380,323 +427,15 @@ public class UcPlanchas : UserControl
             Width = w
         };
     }
-}
 
-public class FrmEditarPlancha : Form
-{
-    private TextBox txtNombre = null!;
-    private TextBox txtDescripcion = null!;
-    private TextBox txtMision = null!;
-    private TextBox txtColor = null!;
-    private Button btnGuardar = null!;
-    private Button btnCancelar = null!;
-
-    private readonly Plancha? _plancha;
-    private readonly PlanchaService _svc = new();
-
-    public FrmEditarPlancha(Plancha? plancha)
+    private static DataGridViewImageColumn ColImage(string name, string header, int w)
     {
-        _plancha = plancha;
-
-        Text = plancha == null ? "Nueva Plancha" : "Editar Plancha";
-        Size = new Size(520, 500);
-        StartPosition = FormStartPosition.CenterParent;
-        BackColor = Tema.FondoPanel;
-        FormBorderStyle = FormBorderStyle.FixedDialog;
-        MaximizeBox = false;
-        MinimizeBox = false;
-
-        BuildUI();
-
-        if (plancha != null)
+        return new DataGridViewImageColumn
         {
-            txtNombre.Text = plancha.Nombre;
-            txtDescripcion.Text = plancha.Descripcion ?? "";
-            txtMision.Text = plancha.Mision ?? "";
-            txtColor.Text = plancha.Color;
-        }
-        else
-        {
-            txtColor.Text = "#007BFF";
-        }
-    }
-
-    private void BuildUI()
-    {
-        var contenedor = new Panel
-        {
-            Dock = DockStyle.Fill,
-            Padding = new Padding(25),
-            BackColor = Tema.FondoPanel
+            Name = name,
+            HeaderText = header,
+            Width = w,
+            ImageLayout = DataGridViewImageCellLayout.Zoom
         };
-
-        int y = 10;
-
-        txtNombre = CrearTextBox(contenedor, "Nombre de la Plancha", y, 30);
-        y += 75;
-
-        txtDescripcion = CrearTextBox(contenedor, "Descripción", y, 80, true);
-        y += 125;
-
-        txtMision = CrearTextBox(contenedor, "Misión", y, 70, true);
-        y += 115;
-
-        txtColor = CrearTextBox(contenedor, "Color HEX", y, 30);
-        y += 60;
-
-        btnGuardar = new Button
-        {
-            Text = "Guardar",
-            Size = new Size(120, 40),
-            Location = new Point(220, y)
-        };
-        Tema.EstilizarBoton(btnGuardar, Tema.Exito);
-        btnGuardar.Click += BtnGuardar_Click;
-
-        btnCancelar = new Button
-        {
-            Text = "Cancelar",
-            Size = new Size(120, 40),
-            Location = new Point(350, y)
-        };
-        Tema.EstilizarBoton(btnCancelar, Tema.Peligro);
-        btnCancelar.Click += (s, e) => DialogResult = DialogResult.Cancel;
-
-        contenedor.Controls.Add(btnGuardar);
-        contenedor.Controls.Add(btnCancelar);
-
-        Controls.Add(contenedor);
-    }
-
-    private TextBox CrearTextBox(Panel parent, string label, int y, int height, bool multiline = false)
-    {
-        var lbl = new Label
-        {
-            Text = label,
-            Location = new Point(0, y),
-            Size = new Size(450, 20),
-            ForeColor = Tema.TextoSecundario,
-            Font = Tema.FuentePequeña
-        };
-
-        var txt = new TextBox
-        {
-            Location = new Point(0, y + 25),
-            Size = new Size(450, height),
-            Multiline = multiline,
-            BackColor = Tema.FondoCard,
-            ForeColor = Tema.Texto,
-            BorderStyle = BorderStyle.FixedSingle
-        };
-
-        parent.Controls.Add(lbl);
-        parent.Controls.Add(txt);
-
-        return txt;
-    }
-
-    private void BtnGuardar_Click(object? sender, EventArgs e)
-    {
-        if (string.IsNullOrWhiteSpace(txtNombre.Text))
-        {
-            Helpers.MsgError("El nombre de la plancha es obligatorio.");
-            return;
-        }
-
-        if (string.IsNullOrWhiteSpace(txtColor.Text))
-        {
-            txtColor.Text = "#007BFF";
-        }
-
-        if (_plancha == null)
-        {
-            var nueva = new Plancha
-            {
-                Nombre = txtNombre.Text.Trim(),
-                Descripcion = txtDescripcion.Text.Trim(),
-                Mision = txtMision.Text.Trim(),
-                Color = txtColor.Text.Trim(),
-                AdminUserId = Sesion.UsuarioActual!.UsuarioId,
-                Activa = true
-            };
-
-            var (ok, msg, _) = _svc.Crear(nueva);
-
-            if (!ok)
-            {
-                Helpers.MsgError(msg);
-                return;
-            }
-        }
-        else
-        {
-            _plancha.Nombre = txtNombre.Text.Trim();
-            _plancha.Descripcion = txtDescripcion.Text.Trim();
-            _plancha.Mision = txtMision.Text.Trim();
-            _plancha.Color = txtColor.Text.Trim();
-
-            var (ok, msg) = _svc.Actualizar(_plancha);
-
-            if (!ok)
-            {
-                Helpers.MsgError(msg);
-                return;
-            }
-        }
-
-        Helpers.MsgExito("Plancha guardada correctamente.");
-        DialogResult = DialogResult.OK;
-        Close();
-    }
-}
-
-public class FrmAgregarMiembro : Form
-{
-    private ComboBox cmbUsuario = null!;
-    private TextBox txtPuesto = null!;
-    private TextBox txtDescripcion = null!;
-    private NumericUpDown numOrden = null!;
-    private Button btnGuardar = null!;
-
-    private readonly int _planchaId;
-    private readonly PlanchaService _svc = new();
-    private readonly UsuarioService _usrSvc = new();
-
-    public FrmAgregarMiembro(int planchaId)
-    {
-        _planchaId = planchaId;
-
-        Text = "Agregar Miembro";
-        Size = new Size(460, 350);
-        StartPosition = FormStartPosition.CenterParent;
-        BackColor = Tema.FondoPanel;
-        FormBorderStyle = FormBorderStyle.FixedDialog;
-        MaximizeBox = false;
-        MinimizeBox = false;
-
-        BuildUI();
-    }
-
-    private void BuildUI()
-    {
-        var usuarios = _usrSvc.GetAll()
-            .Where(u => u.RolNombre != "Admin")
-            .ToList();
-
-        var lblU = CrearLabel("Usuario", 20);
-        cmbUsuario = new ComboBox
-        {
-            Location = new Point(20, 45),
-            Size = new Size(400, 30),
-            DropDownStyle = ComboBoxStyle.DropDownList,
-            BackColor = Tema.FondoCard,
-            ForeColor = Tema.Texto
-        };
-
-        cmbUsuario.DataSource = usuarios;
-        cmbUsuario.DisplayMember = "NombreCompleto";
-        cmbUsuario.ValueMember = "UsuarioId";
-
-        var lblP = CrearLabel("Puesto", 90);
-        txtPuesto = new TextBox
-        {
-            Location = new Point(20, 115),
-            Size = new Size(250, 28),
-            BackColor = Tema.FondoCard,
-            ForeColor = Tema.Texto
-        };
-
-        var lblO = new Label
-        {
-            Text = "Orden",
-            Location = new Point(290, 90),
-            Size = new Size(120, 20),
-            ForeColor = Tema.Texto
-        };
-
-        numOrden = new NumericUpDown
-        {
-            Location = new Point(290, 115),
-            Size = new Size(130, 28),
-            Minimum = 1,
-            Maximum = 99,
-            BackColor = Tema.FondoCard,
-            ForeColor = Tema.Texto
-        };
-
-        var lblD = CrearLabel("Descripción breve", 155);
-        txtDescripcion = new TextBox
-        {
-            Location = new Point(20, 180),
-            Size = new Size(400, 70),
-            Multiline = true,
-            BackColor = Tema.FondoCard,
-            ForeColor = Tema.Texto
-        };
-
-        btnGuardar = new Button
-        {
-            Text = "Agregar Miembro",
-            Location = new Point(260, 265),
-            Size = new Size(160, 38)
-        };
-        Tema.EstilizarBoton(btnGuardar, Tema.Exito);
-        btnGuardar.Click += BtnGuardar_Click;
-
-        Controls.AddRange(new Control[]
-        {
-            lblU, cmbUsuario,
-            lblP, txtPuesto,
-            lblO, numOrden,
-            lblD, txtDescripcion,
-            btnGuardar
-        });
-    }
-
-    private Label CrearLabel(string text, int y)
-    {
-        return new Label
-        {
-            Text = text,
-            Location = new Point(20, y),
-            Size = new Size(400, 20),
-            ForeColor = Tema.Texto
-        };
-    }
-
-    private void BtnGuardar_Click(object? sender, EventArgs e)
-    {
-        if (cmbUsuario.SelectedItem is not Usuario u)
-        {
-            Helpers.MsgError("Seleccione un usuario.");
-            return;
-        }
-
-        if (string.IsNullOrWhiteSpace(txtPuesto.Text))
-        {
-            Helpers.MsgError("Indique el puesto del miembro.");
-            return;
-        }
-
-        var miembro = new MiembroPlancha
-        {
-            PlanchaId = _planchaId,
-            UsuarioId = u.UsuarioId,
-            Puesto = txtPuesto.Text.Trim(),
-            Orden = (int)numOrden.Value,
-            Descripcion = txtDescripcion.Text.Trim()
-        };
-
-        var (ok, msg) = _svc.AgregarMiembro(miembro);
-
-        if (!ok)
-        {
-            Helpers.MsgError(msg);
-            return;
-        }
-
-        Helpers.MsgExito("Miembro agregado correctamente.");
-        DialogResult = DialogResult.OK;
-        Close();
     }
 }

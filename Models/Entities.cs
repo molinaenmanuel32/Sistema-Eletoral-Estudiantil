@@ -29,7 +29,7 @@ public class Usuario
     public string   RolNombre      { get; set; } = string.Empty;   // JOIN
     public bool     Activo         { get; set; } = true;
     public DateTime FechaRegistro  { get; set; }
-    public int PlanchaId { get; set; }
+    public int? PlanchaId { get; set; }
 }
 
 // ─────────────────────────────────────────────
@@ -62,14 +62,19 @@ public class Plancha
 // ─────────────────────────────────────────────
 public class MiembroPlancha
 {
-    public int     MiembroId   { get; set; }
-    public int     PlanchaId   { get; set; }
-    public int     UsuarioId   { get; set; }
-    public string  NombreCompleto { get; set; } = string.Empty;  // JOIN
-    public string  Matricula   { get; set; } = string.Empty;
-    public string  Puesto      { get; set; } = string.Empty;
-    public int     Orden       { get; set; }
+    public int MiembroId { get; set; }
+    public int PlanchaId { get; set; }
+    public int UsuarioId { get; set; }
+
+    public string Puesto { get; set; } = "";
+    public int Orden { get; set; }
     public string? Descripcion { get; set; }
+
+    public string? Nombre { get; set; }
+    public string? Matricula { get; set; }
+    public string? FotoPath { get; set; }
+
+    public string? NombreCompleto { get; set; }
 }
 
 // ─────────────────────────────────────────────

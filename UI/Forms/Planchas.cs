@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Drawing;
-using System.Linq;
+using System.IO;
 using System.Windows.Forms;
 using SistemaVotacion.BLL;
 using SistemaVotacion.Models;
-using SistemaVotacion.UI.Controls;
 using SistemaVotacion.Utils;
-using System.IO;
 
 namespace SistemaVotacion.UI.Forms
 {
@@ -62,21 +60,58 @@ namespace SistemaVotacion.UI.Forms
             {
                 Name = "AdminNombre",
                 HeaderText = "Admin",
-                Width = 180
+                Width = 160
             });
 
             dgvPlanchas.Columns.Add(new DataGridViewCheckBoxColumn
             {
                 Name = "Activa",
                 HeaderText = "Activa",
-                Width = 80
+                Width = 70
             });
 
-            dgvMiembros.Columns.Add(new DataGridViewTextBoxColumn { Name = "MiembroId", HeaderText = "ID", Width = 50 });
-            dgvMiembros.Columns.Add(new DataGridViewTextBoxColumn { Name = "Puesto", HeaderText = "Puesto", Width = 120 });
-            dgvMiembros.Columns.Add(new DataGridViewTextBoxColumn { Name = "NombreCompleto", HeaderText = "Nombre", Width = 180 });
-            dgvMiembros.Columns.Add(new DataGridViewTextBoxColumn { Name = "Matricula", HeaderText = "Matrícula", Width = 110 });
-            dgvMiembros.Columns.Add(new DataGridViewTextBoxColumn { Name = "Descripcion", HeaderText = "Descripción", Width = 180 });
+            dgvMiembros.Columns.Add(new DataGridViewImageColumn
+            {
+                Name = "Foto",
+                HeaderText = "Foto",
+                Width = 70,
+                ImageLayout = DataGridViewImageCellLayout.Zoom
+            });
+
+            dgvMiembros.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "MiembroId",
+                HeaderText = "ID",
+                Width = 50
+            });
+
+            dgvMiembros.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "Puesto",
+                HeaderText = "Cargo",
+                Width = 130
+            });
+
+            dgvMiembros.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "NombreCompleto",
+                HeaderText = "Nombre",
+                Width = 180
+            });
+
+            dgvMiembros.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "Matricula",
+                HeaderText = "Matrícula",
+                Width = 120
+            });
+
+            dgvMiembros.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "Descripcion",
+                HeaderText = "Descripción",
+                Width = 180
+            });
         }
 
         private void AplicarEstilos()
@@ -99,12 +134,12 @@ namespace SistemaVotacion.UI.Forms
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv.ColumnHeadersHeight = 42;
-            dgv.RowTemplate.Height = 36;
-            dgv.Font = new Font("Segoe UI", 10f);
+            dgv.RowTemplate.Height = 55;
+            dgv.Font = new Font("Segoe UI", 10F);
 
             dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(0, 55, 150);
             dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", 10f, FontStyle.Bold);
+            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
 
             dgv.DefaultCellStyle.BackColor = Color.White;
             dgv.DefaultCellStyle.ForeColor = Color.FromArgb(10, 35, 90);
@@ -121,23 +156,25 @@ namespace SistemaVotacion.UI.Forms
             foreach (var p in _planchaSvc.GetAll())
             {
                 dgvPlanchas.Rows.Add(
-                     CargarImagenLogo(p.LogoPath),
-                     p.PlanchaId,
-                     p.Nombre,
-                     p.AdminNombre,
-                     p.Activa
-                 );
+                    CargarImagen(p.LogoPath),
+                    p.PlanchaId,
+                    p.Nombre,
+                    p.AdminNombre,
+                    p.Activa
+                );
             }
 
             btnEditar.Enabled = false;
+            btnEliminar.Enabled = false;
             btnAddMiembro.Enabled = false;
+            btnEditarMiembro.Enabled = false;
             btnQuitarMiembro.Enabled = false;
 
             lblPlancha.Text = "Seleccione una plancha";
             dgvMiembros.Rows.Clear();
         }
 
-        private Image? CargarImagenLogo(string? ruta)
+        private Image? CargarImagen(string? ruta)
         {
             try
             {
@@ -145,7 +182,6 @@ namespace SistemaVotacion.UI.Forms
                     return null;
 
                 using var imgTemp = Image.FromFile(ruta);
-
                 return new Bitmap(imgTemp, new Size(45, 45));
             }
             catch
@@ -153,6 +189,7 @@ namespace SistemaVotacion.UI.Forms
                 return null;
             }
         }
+
         private void CargarMiembros(int planchaId)
         {
             dgvMiembros.Rows.Clear();
@@ -160,9 +197,10 @@ namespace SistemaVotacion.UI.Forms
             foreach (var m in _planchaSvc.GetMiembros(planchaId))
             {
                 dgvMiembros.Rows.Add(
+                    CargarImagen(m.FotoPath),
                     m.MiembroId,
                     m.Puesto,
-                    m.NombreCompleto,
+                    !string.IsNullOrWhiteSpace(m.NombreCompleto) ? m.NombreCompleto : m.Nombre,
                     m.Matricula,
                     m.Descripcion
                 );
@@ -185,7 +223,9 @@ namespace SistemaVotacion.UI.Forms
             CargarMiembros(id);
 
             btnEditar.Enabled = true;
+            btnEliminar.Enabled = true;
             btnAddMiembro.Enabled = true;
+            btnEditarMiembro.Enabled = true;
             btnQuitarMiembro.Enabled = true;
         }
 
@@ -222,13 +262,7 @@ namespace SistemaVotacion.UI.Forms
                 return;
             }
 
-            var confirm = MessageBox.Show(
-                $"¿Desea eliminar la plancha '{_planchaSeleccionada.Nombre}'?",
-                "Confirmar eliminación",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning);
-
-            if (confirm != DialogResult.Yes)
+            if (!Helpers.Confirmar($"¿Desea eliminar la plancha '{_planchaSeleccionada.Nombre}'?"))
                 return;
 
             bool ok = _planchaSvc.Eliminar(_planchaSeleccionada.PlanchaId);
@@ -242,7 +276,6 @@ namespace SistemaVotacion.UI.Forms
             Helpers.MsgExito("Plancha eliminada correctamente.");
 
             _planchaSeleccionada = null;
-
             CargarPlanchas();
             dgvMiembros.Rows.Clear();
         }
@@ -261,6 +294,36 @@ namespace SistemaVotacion.UI.Forms
                 CargarMiembros(_planchaSeleccionada.PlanchaId);
         }
 
+        private void btnEditarMiembro_Click(object sender, EventArgs e)
+        {
+            if (_planchaSeleccionada == null)
+            {
+                Helpers.MsgError("Seleccione una plancha.");
+                return;
+            }
+
+            if (dgvMiembros.CurrentRow == null)
+            {
+                Helpers.MsgError("Seleccione un miembro.");
+                return;
+            }
+
+            int miembroId = Convert.ToInt32(dgvMiembros.CurrentRow.Cells["MiembroId"].Value);
+
+            var miembro = _planchaSvc.GetMiembroById(miembroId);
+
+            if (miembro == null)
+            {
+                Helpers.MsgError("No se encontró el miembro.");
+                return;
+            }
+
+            using var frm = new FrmAgregarMiembro(_planchaSeleccionada.PlanchaId, miembro);
+
+            if (frm.ShowDialog() == DialogResult.OK)
+                CargarMiembros(_planchaSeleccionada.PlanchaId);
+        }
+
         private void btnQuitarMiembro_Click(object sender, EventArgs e)
         {
             if (_planchaSeleccionada == null) return;
@@ -271,7 +334,8 @@ namespace SistemaVotacion.UI.Forms
                 return;
             }
 
-            if (!Helpers.Confirmar("¿Deseas quitar este miembro de la plancha?")) return;
+            if (!Helpers.Confirmar("¿Deseas quitar este miembro de la plancha?"))
+                return;
 
             int miembroId = Convert.ToInt32(dgvMiembros.CurrentRow.Cells["MiembroId"].Value);
 

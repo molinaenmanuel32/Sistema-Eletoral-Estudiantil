@@ -1,15 +1,10 @@
 using Dapper;
 using SistemaVotacion.Models;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace SistemaVotacion.DAL;
 
 public class UsuarioRepository
 {
-    // ── Autenticación ───────────────────────────────────────────────────────
-    // BCrypt NO se compara directo en SQL porque genera hash diferente cada vez.
-    // Aquí solo buscamos el usuario activo por username.
     public Usuario? Login(string username)
     {
         using var con = DbConnection.GetConnection();
@@ -24,11 +19,9 @@ public class UsuarioRepository
 
         return con.QueryFirstOrDefault<Usuario>(
             sql,
-            new { Username = username.Trim() }
-        );
+            new { Username = username.Trim() });
     }
 
-    // ── CRUD ────────────────────────────────────────────────────────────────
     public IEnumerable<Usuario> GetAll()
     {
         using var con = DbConnection.GetConnection();
@@ -73,7 +66,8 @@ public class UsuarioRepository
                 Username, 
                 PasswordHash, 
                 RolId, 
-                Activo
+                Activo,
+                PlanchaId
             )
             OUTPUT INSERTED.UsuarioId
             VALUES 
@@ -87,7 +81,8 @@ public class UsuarioRepository
                 @Username, 
                 @PasswordHash, 
                 @RolId, 
-                @Activo
+                @Activo,
+                @PlanchaId
             )
             """;
 
@@ -109,7 +104,8 @@ public class UsuarioRepository
                 Email = @Email,
                 Username = @Username, 
                 RolId = @RolId, 
-                Activo = @Activo
+                Activo = @Activo,
+                PlanchaId = @PlanchaId
             WHERE UsuarioId = @UsuarioId
             """;
 
@@ -127,6 +123,32 @@ public class UsuarioRepository
             """;
 
         return con.Execute(sql, new { Hash = newHash, Id = id }) > 0;
+    }
+
+    public bool SetPlanchaId(int usuarioId, int? planchaId)
+    {
+        using var con = DbConnection.GetConnection();
+
+        const string sql = """
+            UPDATE Usuarios
+            SET PlanchaId = @PlanchaId
+            WHERE UsuarioId = @UsuarioId
+            """;
+
+        return con.Execute(sql, new { UsuarioId = usuarioId, PlanchaId = planchaId }) > 0;
+    }
+
+    public int GetRolIdPorNombre(string nombreRol)
+    {
+        using var con = DbConnection.GetConnection();
+
+        const string sql = """
+            SELECT RolId
+            FROM Roles
+            WHERE LOWER(LTRIM(RTRIM(Nombre))) = LOWER(LTRIM(RTRIM(@NombreRol)))
+            """;
+
+        return con.ExecuteScalar<int>(sql, new { NombreRol = nombreRol });
     }
 
     public bool Delete(int id)
@@ -162,8 +184,7 @@ public class UsuarioRepository
             {
                 Matricula = matricula.Trim(),
                 ExcludeId = excludeId
-            }
-        ) > 0;
+            }) > 0;
     }
 
     public bool ExisteUsername(string? username, int excludeId = 0)
@@ -186,8 +207,7 @@ public class UsuarioRepository
             {
                 Username = username.Trim(),
                 ExcludeId = excludeId
-            }
-        ) > 0;
+            }) > 0;
     }
 
     public IEnumerable<Usuario> GetVotantesDisponibles(int votacionId)

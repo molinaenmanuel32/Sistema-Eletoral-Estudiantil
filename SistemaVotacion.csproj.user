@@ -35,16 +35,13 @@
     <Compile Update="UI\Forms\FrmMenuAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="UI\Forms\FrmVotacion.cs">
+    <Compile Update="UI\Forms\MenuVotaciones\FrmVotacion.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\Forms\MenuAdminPartido\FrmDashboardPartido.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\Forms\MenuAdminPartido\FrmEditarMiPlancha.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="UI\Forms\MenuAdminPartido\FrmReportesPartido.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\Forms\PadronElectoral.cs">

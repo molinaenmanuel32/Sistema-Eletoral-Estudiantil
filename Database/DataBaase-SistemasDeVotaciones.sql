@@ -393,3 +393,93 @@ ADD PlanchaId INT NULL;
 ALTER TABLE MiembrosPlanchas
 ADD Nombre VARCHAR(100) NULL,
     Matricula VARCHAR(50) NULL;
+
+
+    use SistemaVotacion
+
+    -- Logos de planchas
+ALTER TABLE Planchas
+ADD LogoPath NVARCHAR(300) NULL;
+
+-- Fotos de candidatos por cargo
+ALTER TABLE Candidatos
+ADD FotoPath NVARCHAR(300) NULL;
+
+-- Cargo dentro de la plancha
+ALTER TABLE Candidatos
+ADD Cargo NVARCHAR(80) NULL;
+
+-- Relacionar usuario admin partido con plancha
+ALTER TABLE Usuarios
+ADD PlanchaId INT NULL;
+
+ALTER TABLE Usuarios
+ADD CONSTRAINT FK_Usuarios_Planchas
+FOREIGN KEY (PlanchaId) REFERENCES Planchas(PlanchaId);
+
+USE SistemaVotacion;
+
+SELECT 
+    TABLE_NAME,
+    COLUMN_NAME,
+    DATA_TYPE,
+    IS_NULLABLE
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME IN ('Planchas', 'Candidatos', 'Usuarios')
+ORDER BY TABLE_NAME, ORDINAL_POSITION;
+
+
+SELECT 
+    TABLE_NAME,
+    COLUMN_NAME,
+    DATA_TYPE,
+    IS_NULLABLE
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME = 'Candidatos'
+ORDER BY ORDINAL_POSITION;
+
+SELECT TABLE_NAME
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_TYPE = 'BASE TABLE'
+ORDER BY TABLE_NAME;
+
+SELECT 
+    TABLE_NAME,
+    COLUMN_NAME,
+    DATA_TYPE,
+    IS_NULLABLE
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME = 'MiembrosPlanchas'
+ORDER BY ORDINAL_POSITION;
+
+
+
+USE SistemaVotacion;
+GO
+
+IF COL_LENGTH('MiembrosPlanchas', 'FotoPath') IS NULL
+BEGIN
+    ALTER TABLE MiembrosPlanchas
+    ADD FotoPath NVARCHAR(300) NULL;
+END
+GO
+
+SELECT 
+    TABLE_NAME,
+    COLUMN_NAME,
+    DATA_TYPE,
+    IS_NULLABLE
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME = 'MiembrosPlanchas'
+ORDER BY ORDINAL_POSITION;
+
+USE SistemaVotacion;
+GO
+
+SELECT * 
+FROM MiembrosPlanchas
+WHERE PlanchaId = 3;
+
+DELETE FROM MiembrosPlanchas
+WHERE MiembroId = 7;
+

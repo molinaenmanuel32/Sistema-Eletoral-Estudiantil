@@ -41,11 +41,9 @@ namespace SistemaVotacion.UI.Forms
             lblBrand = new Label();
             pnlUserBox = new Panel();
             pnlLine = new Panel();
-
             pnlHeader = new Panel();
             lblTitle = new Label();
             lblSubTitle = new Label();
-
             pnlContent = new Panel();
             pnlMain = new Panel();
 
@@ -54,72 +52,71 @@ namespace SistemaVotacion.UI.Forms
             pnlUserBox.SuspendLayout();
             pnlHeader.SuspendLayout();
             pnlMain.SuspendLayout();
-
             SuspendLayout();
 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.None;
             Text = "Sistema de Votaciones - Panel Administrativo";
             Size = new Size(1280, 800);
             MinimumSize = new Size(1100, 700);
             StartPosition = FormStartPosition.CenterScreen;
             BackColor = Color.FromArgb(245, 247, 252);
 
+            // SIDEBAR
             pnlSidebar.Dock = DockStyle.Left;
-            pnlSidebar.Width = 250;
-            pnlSidebar.BackColor = Color.FromArgb(0, 36, 105);
-            pnlSidebar.Padding = new Padding(0);
+            pnlSidebar.Width = 260;
+            pnlSidebar.BackColor = Color.FromArgb(0, 32, 96);
 
+            // BRAND
             pnlBrand.Dock = DockStyle.Top;
-            pnlBrand.Height = 120;
+            pnlBrand.Height = 150;
             pnlBrand.BackColor = Color.FromArgb(0, 55, 150);
-            pnlBrand.Padding = new Padding(15, 10, 15, 10);
+            pnlBrand.Padding = new Padding(10);
 
-            lblBrand.Text = "🗳️\nVotaEscuela";
-            lblBrand.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
-            lblBrand.ForeColor = Color.White;
             lblBrand.Dock = DockStyle.Fill;
+            lblBrand.Text = "☑\nVotaEscuela\nSistema de Votaciones";
+            lblBrand.ForeColor = Color.White;
+            lblBrand.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             lblBrand.TextAlign = ContentAlignment.MiddleCenter;
 
             pnlBrand.Controls.Add(lblBrand);
 
+            // USER
             pnlUserBox.Dock = DockStyle.Top;
-            pnlUserBox.Height = 95;
+            pnlUserBox.Height = 100;
             pnlUserBox.BackColor = Color.FromArgb(0, 42, 115);
-            pnlUserBox.Padding = new Padding(15, 12, 15, 12);
 
             lblUser.Dock = DockStyle.Fill;
-            lblUser.TextAlign = ContentAlignment.MiddleCenter;
+            lblUser.Text = "👤 Usuario\nAdministrador";
             lblUser.ForeColor = Color.White;
             lblUser.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold);
-            lblUser.BackColor = Color.Transparent;
-            lblUser.Padding = new Padding(5);
-            lblUser.Text = "👤 Usuario\nAdministrador";
+            lblUser.TextAlign = ContentAlignment.MiddleCenter;
 
             pnlUserBox.Controls.Add(lblUser);
 
+            // RED LINE
             pnlLine.Dock = DockStyle.Top;
             pnlLine.Height = 5;
-            pnlLine.BackColor = Color.FromArgb(230, 40, 45);
+            pnlLine.BackColor = Color.FromArgb(235, 35, 45);
 
+            // MENU
             pnlMenu.Dock = DockStyle.Fill;
+            pnlMenu.BackColor = Color.FromArgb(0, 32, 96);
             pnlMenu.FlowDirection = FlowDirection.TopDown;
             pnlMenu.WrapContents = false;
-            pnlMenu.BackColor = Color.FromArgb(0, 36, 105);
-            pnlMenu.Padding = new Padding(16, 20, 16, 10);
+            pnlMenu.Padding = new Padding(15, 20, 15, 10);
             pnlMenu.AutoScroll = true;
 
-            btnLogout.Text = "🚪  Cerrar Sesión";
+            // LOGOUT
+            btnLogout.Text = "Cerrar Sesión";
             btnLogout.Dock = DockStyle.Bottom;
             btnLogout.Height = 62;
-            btnLogout.BackColor = Color.FromArgb(230, 40, 45);
+            btnLogout.BackColor = Color.FromArgb(235, 35, 45);
             btnLogout.ForeColor = Color.White;
             btnLogout.FlatStyle = FlatStyle.Flat;
             btnLogout.FlatAppearance.BorderSize = 0;
             btnLogout.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             btnLogout.Cursor = Cursors.Hand;
             btnLogout.UseVisualStyleBackColor = false;
-            btnLogout.TextAlign = ContentAlignment.MiddleCenter;
             btnLogout.Click += BtnLogout_Click;
             btnLogout.MouseEnter += BtnLogout_MouseEnter;
             btnLogout.MouseLeave += BtnLogout_MouseLeave;
@@ -130,37 +127,39 @@ namespace SistemaVotacion.UI.Forms
             pnlSidebar.Controls.Add(pnlUserBox);
             pnlSidebar.Controls.Add(pnlBrand);
 
+            // MAIN
+            pnlMain.Dock = DockStyle.Fill;
+            pnlMain.BackColor = Color.FromArgb(245, 247, 252);
+
+            // HEADER
             pnlHeader.Dock = DockStyle.Top;
-            pnlHeader.Height = 90;
+            pnlHeader.Height = 100;
             pnlHeader.BackColor = Color.White;
-            pnlHeader.Padding = new Padding(28, 12, 28, 10);
+            pnlHeader.Padding = new Padding(35, 15, 35, 10);
 
             lblTitle.Text = "Inicio";
-            lblTitle.AutoSize = false;
-            lblTitle.Location = new Point(28, 15);
-            lblTitle.Size = new Size(700, 38);
-            lblTitle.ForeColor = Color.FromArgb(0, 36, 105);
-            lblTitle.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
+            lblTitle.Location = new Point(35, 20);
+            lblTitle.Size = new Size(600, 38);
+            lblTitle.ForeColor = Color.FromArgb(0, 32, 96);
+            lblTitle.Font = new Font("Segoe UI", 22F, FontStyle.Bold);
             lblTitle.TextAlign = ContentAlignment.MiddleLeft;
 
             lblSubTitle.Text = "Panel administrativo del sistema de votaciones estudiantiles";
-            lblSubTitle.AutoSize = false;
-            lblSubTitle.Location = new Point(31, 55);
-            lblSubTitle.Size = new Size(800, 25);
-            lblSubTitle.ForeColor = Color.FromArgb(95, 105, 125);
-            lblSubTitle.Font = new Font("Segoe UI", 10F, FontStyle.Regular);
+            lblSubTitle.Location = new Point(38, 62);
+            lblSubTitle.Size = new Size(750, 28);
+            lblSubTitle.ForeColor = Color.FromArgb(92, 105, 130);
+            lblSubTitle.Font = new Font("Segoe UI", 10.5F);
             lblSubTitle.TextAlign = ContentAlignment.MiddleLeft;
 
             pnlHeader.Controls.Add(lblTitle);
             pnlHeader.Controls.Add(lblSubTitle);
 
+            // CONTENT
             pnlContent.Dock = DockStyle.Fill;
             pnlContent.BackColor = Color.FromArgb(245, 247, 252);
             pnlContent.AutoScroll = true;
             pnlContent.Padding = new Padding(25);
 
-            pnlMain.Dock = DockStyle.Fill;
-            pnlMain.BackColor = Color.FromArgb(245, 247, 252);
             pnlMain.Controls.Add(pnlContent);
             pnlMain.Controls.Add(pnlHeader);
 
@@ -172,7 +171,6 @@ namespace SistemaVotacion.UI.Forms
             pnlUserBox.ResumeLayout(false);
             pnlBrand.ResumeLayout(false);
             pnlSidebar.ResumeLayout(false);
-
             ResumeLayout(false);
         }
     }

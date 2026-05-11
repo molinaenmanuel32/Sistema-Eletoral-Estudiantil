@@ -27,24 +27,24 @@ namespace SistemaVotacion.UI.Forms
 
             lblUser.Text = user != null
                 ? $"👤 {user.NombreCompleto}\n{user.RolNombre}"
-                : "Usuario no identificado";
+                : "👤 Usuario\nAdministrador";
 
             var menuItems = new List<(string icon, string text, Action action)>
             {
-                ("🏠", "Inicio", new Action(CargarInicio)),
-                ("📊", "Dashboard", new Action(CargarDashboard)),
-                ("🗳️", "Votación", new Action(CargarVotacion)),
-                ("📋", "Planchas", new Action(CargarPlanchas)),
+                ("⌂", "Inicio", new Action(CargarInicio)),
+                ("▣", "Dashboard", new Action(CargarDashboard)),
+                ("✓", "Votación", new Action(CargarVotacion)),
+                ("▤", "Planchas", new Action(CargarPlanchas)),
                 ("👥", "Usuarios", new Action(CargarUsuarios)),
-                ("📜", "Padrón Electoral", new Action(CargarPadron)),
-                ("📈", "Reportes", new Action(CargarReportes)),
+                ("▦", "Padrón Electoral", new Action(CargarPadron)),
+                ("▧", "Reportes", new Action(CargarReportes)),
                 ("🔒", "Auditoría", new Action(CargarAuditoria)),
             };
 
             if (Sesion.EsAdminPartido)
             {
                 menuItems = menuItems
-                    .Where(x => new[] { "🏠", "📋", "📈" }.Contains(x.icon))
+                    .Where(x => new[] { "⌂", "▤", "▧" }.Contains(x.icon))
                     .ToList();
             }
 
@@ -54,14 +54,16 @@ namespace SistemaVotacion.UI.Forms
             {
                 var btn = new Button
                 {
-                    Text = $"  {item.icon}  {item.text}",
+                    Text = $"  {item.icon}   {item.text}",
                     Height = 48,
-                    Width = 215,
+                    Width = 225,
                     FlatStyle = FlatStyle.Flat,
-                    BackColor = Color.FromArgb(0, 36, 105),
+                    BackColor = item.text == "Inicio"
+                        ? Color.FromArgb(235, 35, 45)
+                        : Color.FromArgb(0, 32, 96),
                     ForeColor = Color.White,
                     TextAlign = ContentAlignment.MiddleLeft,
-                    Font = new Font("Segoe UI", 10.5f, FontStyle.Bold),
+                    Font = new Font("Segoe UI", 10.5F, FontStyle.Bold),
                     Cursor = Cursors.Hand,
                     Margin = new Padding(0, 0, 0, 8),
                     UseVisualStyleBackColor = false
@@ -71,20 +73,20 @@ namespace SistemaVotacion.UI.Forms
 
                 btn.MouseEnter += (s, e) =>
                 {
-                    if (btn.BackColor != Color.FromArgb(0, 95, 220))
+                    if (btn.BackColor != Color.FromArgb(235, 35, 45))
                         btn.BackColor = Color.FromArgb(0, 55, 150);
                 };
 
                 btn.MouseLeave += (s, e) =>
                 {
-                    if (btn.BackColor != Color.FromArgb(0, 95, 220))
-                        btn.BackColor = Color.FromArgb(0, 36, 105);
+                    if (btn.BackColor != Color.FromArgb(235, 35, 45))
+                        btn.BackColor = Color.FromArgb(0, 32, 96);
                 };
 
                 btn.Click += (s, e) =>
                 {
                     DesmarcarBotones();
-                    btn.BackColor = Color.FromArgb(0, 95, 220);
+                    btn.BackColor = Color.FromArgb(235, 35, 45);
                     item.action();
                 };
 
@@ -97,13 +99,14 @@ namespace SistemaVotacion.UI.Forms
             foreach (Control c in pnlMenu.Controls)
             {
                 if (c is Button b)
-                    b.BackColor = Color.FromArgb(0, 36, 105);
+                    b.BackColor = Color.FromArgb(0, 32, 96);
             }
         }
 
         private void CargarInicio()
         {
             lblTitle.Text = "Inicio";
+            lblSubTitle.Text = "Panel administrativo del sistema de votaciones estudiantiles";
 
             if (formularioActivo != null)
             {
@@ -121,35 +124,77 @@ namespace SistemaVotacion.UI.Forms
                 AutoScroll = true
             };
 
+            var hero = new Panel
+            {
+                Location = new Point(35, 25),
+                Size = new Size(900, 190),
+                BackColor = Color.FromArgb(232, 241, 255)
+            };
+
+            var lblIconoHero = new Label
+            {
+                Text = "✓",
+                Font = new Font("Segoe UI", 46F, FontStyle.Bold),
+                ForeColor = Color.FromArgb(235, 35, 45),
+                BackColor = Color.White,
+                Location = new Point(35, 38),
+                Size = new Size(120, 110),
+                TextAlign = ContentAlignment.MiddleCenter
+            };
+
             var lblBienvenido = new Label
             {
                 Text = "¡Bienvenido!",
-                Font = new Font("Segoe UI Semibold", 26F, FontStyle.Bold),
-                ForeColor = Color.FromArgb(15, 23, 42),
-                AutoSize = true,
-                Location = new Point(35, 30)
+                Font = new Font("Segoe UI Semibold", 30F, FontStyle.Bold),
+                ForeColor = Color.FromArgb(0, 32, 96),
+                Location = new Point(185, 45),
+                Size = new Size(430, 55)
             };
 
             var lblDesc = new Label
             {
                 Text = "Sistema de Votaciones Estudiantiles",
-                Font = new Font("Segoe UI", 13F),
-                ForeColor = Color.FromArgb(100, 116, 139),
-                AutoSize = true,
-                Location = new Point(38, 88)
+                Font = new Font("Segoe UI", 15F),
+                ForeColor = Color.FromArgb(65, 82, 115),
+                Location = new Point(190, 102),
+                Size = new Size(500, 32)
             };
+
+            var lblTexto = new Label
+            {
+                Text = "Selecciona una opción del menú para comenzar.",
+                Font = new Font("Segoe UI", 10.5F),
+                ForeColor = Color.FromArgb(95, 105, 125),
+                Location = new Point(192, 137),
+                Size = new Size(500, 28)
+            };
+
+            var lblEscuela = new Label
+            {
+                Text = "🏫",
+                Font = new Font("Segoe UI Emoji", 72F),
+                Location = new Point(700, 35),
+                Size = new Size(150, 130),
+                TextAlign = ContentAlignment.MiddleCenter
+            };
+
+            hero.Controls.Add(lblIconoHero);
+            hero.Controls.Add(lblBienvenido);
+            hero.Controls.Add(lblDesc);
+            hero.Controls.Add(lblTexto);
+            hero.Controls.Add(lblEscuela);
+
+            contenedor.Controls.Add(hero);
 
             var grid = new TableLayoutPanel
             {
-                Location = new Point(35, 150),
-                Size = new Size(900, 440),
+                Location = new Point(35, 245),
+                Size = new Size(900, 310),
                 ColumnCount = 3,
                 RowCount = 2,
                 BackColor = Color.Transparent
             };
 
-
-
             grid.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
             grid.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
             grid.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
@@ -157,16 +202,14 @@ namespace SistemaVotacion.UI.Forms
             grid.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             grid.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
 
-            grid.Controls.Add(CrearTarjeta("🗳️", "Votación", "Gestiona y controla las votaciones disponibles.", Color.FromArgb(111, 76, 255), CargarVotacion), 0, 0);
-            grid.Controls.Add(CrearTarjeta("📋", "Planchas", "Administra las planchas electorales del sistema.", Color.FromArgb(34, 197, 94), CargarPlanchas), 1, 0);
-            grid.Controls.Add(CrearTarjeta("👥", "Usuarios", "Gestiona usuarios, roles y accesos.", Color.FromArgb(37, 99, 235), CargarUsuarios), 2, 0);
+            grid.Controls.Add(CrearTarjeta("✓", "Votación", "Gestiona y controla las\nvotaciones disponibles.", Color.FromArgb(111, 76, 255), CargarVotacion), 0, 0);
+            grid.Controls.Add(CrearTarjeta("▤", "Planchas", "Administra las planchas\nelectorales del sistema.", Color.FromArgb(34, 197, 94), CargarPlanchas), 1, 0);
+            grid.Controls.Add(CrearTarjeta("👥", "Usuarios", "Gestiona usuarios, roles\ny accesos del sistema.", Color.FromArgb(37, 99, 235), CargarUsuarios), 2, 0);
 
-            grid.Controls.Add(CrearTarjeta("📜", "Padrón", "Administra el padrón electoral estudiantil.", Color.FromArgb(245, 158, 11), CargarPadron), 0, 1);
-            grid.Controls.Add(CrearTarjeta("📈", "Reportes", "Visualiza y descarga reportes del sistema.", Color.FromArgb(236, 72, 153), CargarReportes), 1, 1);
-            grid.Controls.Add(CrearTarjeta("🔒", "Auditoría", "Consulta movimientos y accesos del sistema.", Color.FromArgb(100, 116, 139), CargarAuditoria), 2, 1);
+            grid.Controls.Add(CrearTarjeta("▦", "Padrón", "Administra el padrón\nelectoral estudiantil.", Color.FromArgb(245, 158, 11), CargarPadron), 0, 1);
+            grid.Controls.Add(CrearTarjeta("▧", "Reportes", "Visualiza y descarga\nreportes del sistema.", Color.FromArgb(236, 72, 153), CargarReportes), 1, 1);
+            grid.Controls.Add(CrearTarjeta("🔒", "Auditoría", "Consulta movimientos y\naccesos del sistema.", Color.FromArgb(100, 116, 139), CargarAuditoria), 2, 1);
 
-            contenedor.Controls.Add(lblBienvenido);
-            contenedor.Controls.Add(lblDesc);
             contenedor.Controls.Add(grid);
 
             pnlContent.Controls.Add(contenedor);
@@ -178,55 +221,65 @@ namespace SistemaVotacion.UI.Forms
             {
                 Dock = DockStyle.Fill,
                 BackColor = Color.White,
-                Margin = new Padding(12),
+                Margin = new Padding(10),
                 Cursor = Cursors.Hand
             };
 
             var lblIcono = new Label
             {
                 Text = icono,
-                Font = new Font("Segoe UI Emoji", 42F),
+                Font = new Font("Segoe UI Emoji", 30F, FontStyle.Bold),
                 ForeColor = color,
                 AutoSize = false,
-                Size = new Size(120, 80),
-                Location = new Point(75, 18),
+                Size = new Size(70, 60),
+                Location = new Point(18, 35),
                 TextAlign = ContentAlignment.MiddleCenter
             };
 
             var lblTitulo = new Label
             {
                 Text = titulo,
-                Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold),
+                Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold),
                 ForeColor = color,
                 AutoSize = false,
-                Size = new Size(240, 38),
-                Location = new Point(15, 100),
-                TextAlign = ContentAlignment.MiddleCenter
+                Size = new Size(165, 32),
+                Location = new Point(95, 28),
+                TextAlign = ContentAlignment.MiddleLeft
             };
 
             var lblDescripcion = new Label
             {
                 Text = descripcion,
-                Font = new Font("Segoe UI", 10F),
-                ForeColor = Color.FromArgb(90, 95, 110),
+                Font = new Font("Segoe UI", 9.5F),
+                ForeColor = Color.FromArgb(70, 80, 100),
                 AutoSize = false,
-                Size = new Size(230, 55),
-                Location = new Point(20, 140),
-                TextAlign = ContentAlignment.TopCenter
+                Size = new Size(160, 55),
+                Location = new Point(97, 65),
+                TextAlign = ContentAlignment.TopLeft
             };
 
             var lblFlecha = new Label
             {
                 Text = "›",
-                Font = new Font("Segoe UI", 24F, FontStyle.Bold),
+                Font = new Font("Segoe UI", 22F, FontStyle.Bold),
                 ForeColor = color,
                 AutoSize = false,
                 Size = new Size(30, 35),
-                Location = new Point(228, 158),
+                Location = new Point(238, 88),
                 TextAlign = ContentAlignment.MiddleCenter
             };
 
-            void ClickCard(object? s, EventArgs e) => accion();
+            var linea = new Panel
+            {
+                Dock = DockStyle.Bottom,
+                Height = 4,
+                BackColor = color
+            };
+
+            void ClickCard(object? s, EventArgs e)
+            {
+                accion();
+            }
 
             card.Click += ClickCard;
             lblIcono.Click += ClickCard;
@@ -248,14 +301,15 @@ namespace SistemaVotacion.UI.Forms
             card.Controls.Add(lblTitulo);
             card.Controls.Add(lblDescripcion);
             card.Controls.Add(lblFlecha);
+            card.Controls.Add(linea);
 
             return card;
         }
 
-
         private void AbrirFormulario(Form frm, string titulo)
         {
             lblTitle.Text = titulo;
+            lblSubTitle.Text = $"Gestión de {titulo.ToLower()} del sistema";
 
             if (formularioActivo != null)
             {
@@ -276,7 +330,6 @@ namespace SistemaVotacion.UI.Forms
             frm.BringToFront();
             frm.Show();
         }
-
 
         private void CargarDashboard()
         {
@@ -305,7 +358,7 @@ namespace SistemaVotacion.UI.Forms
 
         private void CargarReportes()
         {
-            AbrirFormulario(new Reportes(), "Reportes");
+            AbrirFormulario(new Reportes(Sesion.UsuarioActual!.UsuarioId), "Reportes");
         }
 
         private void CargarAuditoria()
@@ -333,7 +386,7 @@ namespace SistemaVotacion.UI.Forms
 
         private void BtnLogout_MouseLeave(object? sender, EventArgs e)
         {
-            btnLogout.BackColor = Color.FromArgb(200, 40, 40);
+            btnLogout.BackColor = Color.FromArgb(235, 35, 45);
         }
     }
 }

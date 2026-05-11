@@ -43,6 +43,7 @@ namespace SistemaVotacion.UI.Forms
         private void btnSeleccionarLogo_Click(object sender, EventArgs e)
         {
             using OpenFileDialog open = new OpenFileDialog();
+
             open.Title = "Seleccionar logo";
             open.Filter = "Imágenes|*.png;*.jpg;*.jpeg";
 
@@ -107,32 +108,35 @@ namespace SistemaVotacion.UI.Forms
                     Activa = true
                 };
 
-                var (ok, msg, _) = _svc.Crear(nueva);
+                int id = _svc.Crear(nueva);
 
-                if (!ok)
+                if (id <= 0)
                 {
-                    Helpers.MsgError(msg);
+                    Helpers.MsgError("No se pudo crear la plancha.");
                     return;
                 }
+
+                Helpers.MsgExito("Plancha creada correctamente.");
+                DialogResult = DialogResult.OK;
+                Close();
+                return;
             }
-            else
+
+            _plancha.Nombre = txtNombre.Text.Trim();
+            _plancha.Descripcion = txtDescripcion.Text.Trim();
+            _plancha.Mision = txtMision.Text.Trim();
+            _plancha.Color = txtColor.Text.Trim();
+            _plancha.LogoPath = _logoPath;
+
+            bool ok = _svc.Actualizar(_plancha);
+
+            if (!ok)
             {
-                _plancha.Nombre = txtNombre.Text.Trim();
-                _plancha.Descripcion = txtDescripcion.Text.Trim();
-                _plancha.Mision = txtMision.Text.Trim();
-                _plancha.Color = txtColor.Text.Trim();
-                _plancha.LogoPath = _logoPath;
-
-                var (ok, msg) = _svc.Actualizar(_plancha);
-
-                if (!ok)
-                {
-                    Helpers.MsgError(msg);
-                    return;
-                }
+                Helpers.MsgError("No se pudo actualizar la plancha.");
+                return;
             }
 
-            Helpers.MsgExito("Plancha guardada correctamente.");
+            Helpers.MsgExito("Plancha actualizada correctamente.");
             DialogResult = DialogResult.OK;
             Close();
         }

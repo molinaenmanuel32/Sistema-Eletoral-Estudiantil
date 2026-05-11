@@ -25,11 +25,11 @@ namespace SistemaVotacion.UI.Forms
         private Button btnEditar;
         private Button btnEliminar;
         private Button btnAddMiembro;
+        private Button btnEditarMiembro;
         private Button btnQuitarMiembro;
 
         private DataGridView dgvPlanchas;
         private DataGridView dgvMiembros;
-
 
         protected override void Dispose(bool disposing)
         {
@@ -60,6 +60,7 @@ namespace SistemaVotacion.UI.Forms
             btnEditar = new Button();
             btnEliminar = new Button();
             btnAddMiembro = new Button();
+            btnEditarMiembro = new Button();
             btnQuitarMiembro = new Button();
 
             dgvPlanchas = new DataGridView();
@@ -76,7 +77,6 @@ namespace SistemaVotacion.UI.Forms
             Text = "Planchas";
             AutoScroll = true;
 
-            // HEADER
             pnlHeader.Dock = DockStyle.Top;
             pnlHeader.Height = 120;
             pnlHeader.BackColor = Color.White;
@@ -103,12 +103,10 @@ namespace SistemaVotacion.UI.Forms
             pnlHeader.Controls.Add(lblTitulo);
             pnlHeader.Controls.Add(lblSubtitulo);
 
-            // TOP
             pnlTop.Dock = DockStyle.Top;
             pnlTop.Height = 90;
             pnlTop.BackColor = Color.FromArgb(245, 247, 252);
 
-            // NUEVA
             btnNueva.Text = "+ Nueva Plancha";
             btnNueva.Size = new Size(180, 42);
             btnNueva.Location = new Point(0, 20);
@@ -119,12 +117,10 @@ namespace SistemaVotacion.UI.Forms
             btnNueva.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
             btnNueva.Cursor = Cursors.Hand;
             btnNueva.Click += btnNueva_Click;
-
             Tema.EstilizarBoton(btnNueva);
 
-            // EDITAR
-            btnEditar.Text = "Editar";
-            btnEditar.Size = new Size(120, 42);
+            btnEditar.Text = "Editar Plancha";
+            btnEditar.Size = new Size(150, 42);
             btnEditar.Location = new Point(195, 20);
             btnEditar.BackColor = Color.FromArgb(0, 55, 150);
             btnEditar.ForeColor = Color.White;
@@ -133,15 +129,11 @@ namespace SistemaVotacion.UI.Forms
             btnEditar.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
             btnEditar.Cursor = Cursors.Hand;
             btnEditar.Click += btnEditar_Click;
-
             Tema.EstilizarBoton(btnEditar);
-
-            // ELIMINAR
-            btnEliminar = new Button();
 
             btnEliminar.Text = "Eliminar";
             btnEliminar.Size = new Size(140, 42);
-            btnEliminar.Location = new Point(330, 20);
+            btnEliminar.Location = new Point(360, 20);
             btnEliminar.BackColor = Color.FromArgb(220, 38, 38);
             btnEliminar.ForeColor = Color.White;
             btnEliminar.FlatStyle = FlatStyle.Flat;
@@ -149,21 +141,17 @@ namespace SistemaVotacion.UI.Forms
             btnEliminar.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
             btnEliminar.Cursor = Cursors.Hand;
             btnEliminar.Click += BtnEliminar_Click;
-
             Tema.EstilizarBoton(btnEliminar);
 
-            // AGREGAR AL PANEL
             pnlTop.Controls.Add(btnNueva);
             pnlTop.Controls.Add(btnEditar);
             pnlTop.Controls.Add(btnEliminar);
 
-            // MAIN
             pnlMain.Dock = DockStyle.Fill;
             pnlMain.BackColor = Color.FromArgb(245, 247, 252);
 
-            // LEFT CARD
             pnlLeft.Dock = DockStyle.Left;
-            pnlLeft.Width = 610;
+            pnlLeft.Width = 420;
             pnlLeft.BackColor = Color.White;
             pnlLeft.Padding = new Padding(15);
 
@@ -179,11 +167,9 @@ namespace SistemaVotacion.UI.Forms
             pnlLeft.Controls.Add(dgvPlanchas);
             pnlLeft.Controls.Add(lblLeft);
 
-            // RIGHT CARD
             pnlRight.Dock = DockStyle.Fill;
             pnlRight.BackColor = Color.White;
             pnlRight.Padding = new Padding(15);
-            pnlRight.Margin = new Padding(15, 0, 0, 0);
 
             lblPlancha.Text = "Seleccione una plancha";
             lblPlancha.Dock = DockStyle.Top;
@@ -192,11 +178,11 @@ namespace SistemaVotacion.UI.Forms
             lblPlancha.ForeColor = Color.FromArgb(0, 55, 150);
 
             pnlMiembrosBotones.Dock = DockStyle.Top;
-            pnlMiembrosBotones.Height = 60;
+            pnlMiembrosBotones.Height = 62;
             pnlMiembrosBotones.BackColor = Color.White;
 
             btnAddMiembro.Text = "+ Agregar";
-            btnAddMiembro.Size = new Size(130, 38);
+            btnAddMiembro.Size = new Size(120, 38);
             btnAddMiembro.Location = new Point(0, 10);
             btnAddMiembro.BackColor = Color.FromArgb(22, 97, 255);
             btnAddMiembro.ForeColor = Color.White;
@@ -206,9 +192,20 @@ namespace SistemaVotacion.UI.Forms
             btnAddMiembro.Cursor = Cursors.Hand;
             btnAddMiembro.Click += btnAddMiembro_Click;
 
+            btnEditarMiembro.Text = "Editar Miembro";
+            btnEditarMiembro.Size = new Size(150, 38);
+            btnEditarMiembro.Location = new Point(135, 10);
+            btnEditarMiembro.BackColor = Color.FromArgb(0, 55, 150);
+            btnEditarMiembro.ForeColor = Color.White;
+            btnEditarMiembro.FlatStyle = FlatStyle.Flat;
+            btnEditarMiembro.FlatAppearance.BorderSize = 0;
+            btnEditarMiembro.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+            btnEditarMiembro.Cursor = Cursors.Hand;
+            btnEditarMiembro.Click += btnEditarMiembro_Click;
+
             btnQuitarMiembro.Text = "Quitar";
             btnQuitarMiembro.Size = new Size(110, 38);
-            btnQuitarMiembro.Location = new Point(145, 10);
+            btnQuitarMiembro.Location = new Point(300, 10);
             btnQuitarMiembro.BackColor = Color.FromArgb(230, 40, 45);
             btnQuitarMiembro.ForeColor = Color.White;
             btnQuitarMiembro.FlatStyle = FlatStyle.Flat;
@@ -218,6 +215,7 @@ namespace SistemaVotacion.UI.Forms
             btnQuitarMiembro.Click += btnQuitarMiembro_Click;
 
             pnlMiembrosBotones.Controls.Add(btnAddMiembro);
+            pnlMiembrosBotones.Controls.Add(btnEditarMiembro);
             pnlMiembrosBotones.Controls.Add(btnQuitarMiembro);
 
             dgvMiembros.Dock = DockStyle.Fill;
