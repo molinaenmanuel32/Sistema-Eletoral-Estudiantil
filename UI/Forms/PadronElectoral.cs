@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+using SistemaVotacion.BLL;
+=======
 ﻿using SistemaVotacion.BLL;
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 using SistemaVotacion.Models;
 using SistemaVotacion.Utils;
 using System;
@@ -148,7 +152,12 @@ namespace SistemaVotacion.UI.Forms
             {
                 if (cmb.SelectedValue is not int uid) return;
 
+<<<<<<< HEAD
+                var _r_ = _svc.AgregarAlPadron(vid, uid);
+            bool ok = _r_.Item1; string msg = _r_.Item2;
+=======
                 var (ok, msg) = _svc.AgregarAlPadron(vid, uid);
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
                 if (!ok)
                     Helpers.MsgError(msg);
@@ -168,7 +177,11 @@ namespace SistemaVotacion.UI.Forms
 
         private void btnQuitar_Click(object sender, EventArgs e)
         {
+<<<<<<< HEAD
+            if (dgv.CurrentRow == null) return;
+=======
             if (dgv.CurrentRow is null) return;
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
             if (!Helpers.Confirmar("¿Quitar del padrón?")) return;
 

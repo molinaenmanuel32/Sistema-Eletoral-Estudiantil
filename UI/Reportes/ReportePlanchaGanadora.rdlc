@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition"
+        xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSources>
+    <DataSource Name="dsEstadisticas">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+    </DataSource>
+  </DataSources>
+
+  <DataSets>
+    <!-- Dataset principal: EstadisticasVotacion -->
+    <DataSet Name="dsResumen">
+      <Query>
+        <DataSourceName>dsEstadisticas</DataSourceName>
+        <CommandText>/* dsResumen */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="TotalPadron">             <DataField>TotalPadron</DataField>             <rd:TypeName>System.Int32</rd:TypeName>  </Field>
+        <Field Name="TotalVotos">              <DataField>TotalVotos</DataField>              <rd:TypeName>System.Int32</rd:TypeName>  </Field>
+        <Field Name="VotosNulos">              <DataField>VotosNulos</DataField>              <rd:TypeName>System.Int32</rd:TypeName>  </Field>
+        <Field Name="VotosValidos">            <DataField>VotosValidos</DataField>            <rd:TypeName>System.Int32</rd:TypeName>  </Field>
+        <Field Name="SinVotar">               <DataField>SinVotar</DataField>               <rd:TypeName>System.Int32</rd:TypeName>  </Field>
+        <Field Name="PorcentajeParticipacion"><DataField>PorcentajeParticipacion</DataField><rd:TypeName>System.Decimal</rd:TypeName></Field>
+      </Fields>
+    </DataSet>
+
+    <!-- Dataset plancha ganadora: EstadisticaPlancha (1 fila) -->
+    <DataSet Name="dsGanadora">
+      <Query>
+        <DataSourceName>dsEstadisticas</DataSourceName>
+        <CommandText>/* dsGanadora */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="PlanchaId">  <DataField>PlanchaId</DataField>  <rd:TypeName>System.Int32</rd:TypeName>   </Field>
+        <Field Name="Plancha">    <DataField>Plancha</DataField>    <rd:TypeName>System.String</rd:TypeName>  </Field>
+        <Field Name="Color">      <DataField>Color</DataField>      <rd:TypeName>System.String</rd:TypeName>  </Field>
+        <Field Name="TotalVotos"> <DataField>TotalVotos</DataField> <rd:TypeName>System.Int32</rd:TypeName>   </Field>
+        <Field Name="Porcentaje"> <DataField>Porcentaje</DataField> <rd:TypeName>System.Decimal</rd:TypeName> </Field>
+        <Field Name="LogoPath">   <DataField>LogoPath</DataField>   <rd:TypeName>System.String</rd:TypeName>  </Field>
+      </Fields>
+    </DataSet>
+
+    <!-- Dataset todas las planchas: EstadisticaPlancha (lista) -->
+    <DataSet Name="dsPlanchas">
+      <Query>
+        <DataSourceName>dsEstadisticas</DataSourceName>
+        <CommandText>/* dsPlanchas */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="PlanchaId">  <DataField>PlanchaId</DataField>  <rd:TypeName>System.Int32</rd:TypeName>   </Field>
+        <Field Name="Plancha">    <DataField>Plancha</DataField>    <rd:TypeName>System.String</rd:TypeName>  </Field>
+        <Field Name="Color">      <DataField>Color</DataField>      <rd:TypeName>System.String</rd:TypeName>  </Field>
+        <Field Name="TotalVotos"> <DataField>TotalVotos</DataField> <rd:TypeName>System.Int32</rd:TypeName>   </Field>
+        <Field Name="Porcentaje"> <DataField>Porcentaje</DataField> <rd:TypeName>System.Decimal</rd:TypeName> </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+
+  <ReportParameters>
+    <ReportParameter Name="TituloVotacion">
+      <DataType>String</DataType>
+      <DefaultValue><Values><Value>Elecciones Estudiantiles</Value></Values></DefaultValue>
+      <Prompt>Título de la Votación</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="FechaReporte">
+      <DataType>DateTime</DataType>
+      <DefaultValue><Values><Value>=Now()</Value></Values></DefaultValue>
+      <Prompt>Fecha del Reporte</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>22cm</Height>
+        <ReportItems>
+
+          <!-- ══════════════════════════════════════
+               ENCABEZADO DEL REPORTE
+               ══════════════════════════════════════ -->
+          <Rectangle Name="rectHeader">
+            <Left>0cm</Left><Top>0cm</Top><Width>19cm</Width><Height>2.2cm</Height>
+            <Style>
+              <BackgroundColor>#1A1A2E</BackgroundColor>
+              <BorderStyle><Default>None</Default></BorderStyle>
+            </Style>
+            <ReportItems>
+              <Textbox Name="lblTitulo">
+                <Left>0.3cm</Left><Top>0.3cm</Top><Width>18.4cm</Width><Height>0.9cm</Height>
+                <Value>=Parameters!TituloVotacion.Value</Value>
+                <Style>
+                  <FontFamily>Segoe UI</FontFamily><FontSize>18pt</FontSize><FontWeight>Bold</FontWeight>
+                  <Color>White</Color><VerticalAlign>Middle</VerticalAlign>
+                </Style>
+              </Textbox>
+              <Textbox Name="lblSubtitulo">
+                <Left>0.3cm</Left><Top>1.2cm</Top><Width>18.4cm</Width><Height>0.7cm</Height>
+                <Value>Reporte de Plancha Ganadora y Estadísticas Generales</Value>
+                <Style>
+                  <FontFamily>Segoe UI</FontFamily><FontSize>10pt</FontSize>
+                  <Color>#A0AEC0</Color><VerticalAlign>Middle</VerticalAlign>
+                </Style>
+              </Textbox>
+            </ReportItems>
+          </Rectangle>
+
+          <!-- Fecha generación -->
+          <Textbox Name="lblFecha">
+            <Left>0cm</Left><Top>2.4cm</Top><Width>19cm</Width><Height>0.5cm</Height>
+            <Value>=Format(Now(),"dddd, dd 'de' MMMM 'de' yyyy  HH:mm")</Value>
+            <Style>
+              <FontFamily>Segoe UI</FontFamily><FontSize>8pt</FontSize><Color>#718096</Color>
+              <TextAlign>Right</TextAlign>
+            </Style>
+          </Textbox>
+
+          <!-- ══════════════════════════════════════
+               SECCIÓN PLANCHA GANADORA
+               ══════════════════════════════════════ -->
+          <Textbox Name="lblSeccionGanadora">
+            <Left>0cm</Left><Top>3.1cm</Top><Width>19cm</Width><Height>0.65cm</Height>
+            <Value>🏆  PLANCHA GANADORA</Value>
+            <Style>
+              <FontFamily>Segoe UI</FontFamily><FontSize>13pt</FontSize><FontWeight>Bold</FontWeight>
+              <Color>#2D3748</Color><BorderStyle><Bottom>Solid</Bottom></BorderStyle>
+              <BorderColor><Bottom>#E2E8F0</Bottom></BorderColor><BorderWidth><Bottom>1pt</Bottom></BorderWidth>
+            </Style>
+          </Textbox>
+
+          <!-- Card plancha ganadora (Tablix de 1 fila) -->
+          <Tablix Name="tblGanadora">
+            <DataSetName>dsGanadora</DataSetName>
+            <Left>0cm</Left><Top>3.9cm</Top><Width>19cm</Width>
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn><Width>4.5cm</Width></TablixColumn>
+                <TablixColumn><Width>8cm</Width></TablixColumn>
+                <TablixColumn><Width>3.25cm</Width></TablixColumn>
+                <TablixColumn><Width>3.25cm</Width></TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <!-- Encabezado columnas -->
+                <TablixRow>
+                  <Height>0.7cm</Height>
+                  <TablixCells>
+                    <TablixCell><CellContents><Textbox Name="hGanadoraNombre"><Value>Plancha</Value><Style><FontWeight>Bold</FontWeight><BackgroundColor>#2B6CB0</BackgroundColor><Color>White</Color><FontFamily>Segoe UI</FontFamily><FontSize>9pt</FontSize><VerticalAlign>Middle</VerticalAlign><PaddingLeft>6pt</PaddingLeft></Style></Textbox></CellContents></TablixCell>
+                    <TablixCell><CellContents><Textbox Name="hGanadoraDesc"><Value>Descripción / Color</Value><Style><FontWeight>Bold</FontWeight><BackgroundColor>#2B6CB0</BackgroundColor><Color>White</Color><FontFamily>Segoe UI</FontFamily><FontSize>9pt</FontSize><VerticalAlign>Middle</VerticalAlign><PaddingLeft>6pt</PaddingLeft></Style></Textbox></CellContents></TablixCell>
+                    <TablixCell><CellContents><Textbox Name="hGanadoraVotos"><Value>Total Votos</Value><Style><FontWeight>Bold</FontWeight><BackgroundColor>#2B6CB0</BackgroundColor><Color>White</Color><FontFamily>Segoe UI</FontFamily><FontSize>9pt</FontSize><TextAlign>Center</TextAlign><VerticalAlign>Middle</VerticalAlign></Style></Textbox></CellContents></TablixCell>
+                    <TablixCell><CellContents><Textbox Name="hGanadoraPct"><Value>Porcentaje</Value><Style><FontWeight>Bold</FontWeight><BackgroundColor>#2B6CB0</BackgroundColor><Color>White</Color><FontFamily>Segoe UI</FontFamily><FontSize>9pt</FontSize><TextAlign>Center</TextAlign><VerticalAlign>Middle</VerticalAlign></Style></Textbox></CellContents></TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <!-- Fila de datos -->
+                <TablixRow>
+                  <Height>1.2cm</Height>
+                  <TablixCells>
+                    <TablixCell><CellContents><Textbox Name="dGanadoraNombre"><Value>=Fields!Plancha.Value</Value><Style><FontFamily>Segoe UI</FontFamily><FontSize>11pt</FontSize><FontWeight>Bold</FontWeight><BackgroundColor>#EBF8FF</BackgroundColor><VerticalAlign>Middle</VerticalAlign><PaddingLeft>6pt</PaddingLeft></Style></Textbox></CellContents></TablixCell>
+                    <TablixCell><CellContents><Textbox Name="dGanadoraColor"><Value>=Fields!Color.Value</Value><Style><FontFamily>Segoe UI</FontFamily><FontSize>10pt</FontSize><BackgroundColor>#EBF8FF</BackgroundColor><VerticalAlign>Middle</VerticalAlign><PaddingLeft>6pt</PaddingLeft></Style></Textbox></CellContents></TablixCell>
+                    <TablixCell><CellContents><Textbox Name="dGanadoraVotos"><Value>=Fields!TotalVotos.Value</Value><Style><FontFamily>Segoe UI</FontFamily><FontSize>13pt</FontSize><FontWeight>Bold</FontWeight><BackgroundColor>#EBF8FF</BackgroundColor><TextAlign>Center</TextAlign><VerticalAlign>Middle</VerticalAlign></Style></Textbox></CellContents></TablixCell>
+                    <TablixCell><CellContents><Textbox Name="dGanadoraPct"><Value>=Format(Fields!Porcentaje.Value,"0.00") &amp; "%"</Value><Style><FontFamily>Segoe UI</FontFamily><FontSize>13pt</FontSize><FontWeight>Bold</FontWeight><Color>#276749</Color><BackgroundColor>#EBF8FF</BackgroundColor><TextAlign>Center</TextAlign><VerticalAlign>Middle</VerticalAlign></Style></Textbox></CellContents></TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+          </Tablix>
+
+          <!-- ══════════════════════════════════════
+               RESUMEN ESTADÍSTICO (KPI cards)
+               ══════════════════════════════════════ -->
+          <Textbox Name="lblSeccionEstadisticas">
+            <Left>0cm</Left><Top>6.3cm</Top><Width>19cm</Width><Height>0.65cm</Height>
+            <Value>📊  ESTADÍSTICAS GENERALES</Value>
+            <Style>
+              <FontFamily>Segoe UI</FontFamily><FontSize>13pt</FontSize><FontWeight>Bold</FontWeight>
+              <Color>#2D3748</Color><BorderStyle><Bottom>Solid</Bottom></BorderStyle>
+              <BorderColor><Bottom>#E2E8F0</Bottom></BorderColor><BorderWidth><Bottom>1pt</Bottom></BorderWidth>
+            </Style>
+          </Textbox>
+
+          <!-- KPI: Padrón -->
+          <Rectangle Name="cardPadron">
+            <Left>0cm</Left><Top>7.1cm</Top><Width>3.6cm</Width><Height>1.8cm</Height>
+            <Style><BackgroundColor>#EBF8FF</BackgroundColor><BorderRadius>4pt</BorderRadius></Style>
+            <ReportItems>
+              <Textbox Name="kpiPadronLabel"><Left>0.2cm</Left><Top>0.15cm</Top><Width>3.2cm</Width><Height>0.5cm</Height>
+                <Value>Total Padrón</Value><Style><FontFamily>Segoe UI</FontFamily><FontSize>8pt</FontSize><Color>#4A5568</Color></Style></Textbox>
+              <Textbox Name="kpiPadronValor"><Left>0.2cm</Left><Top>0.65cm</Top><Width>3.2cm</Width><Height>0.9cm</Height>
+                <DataSetName>dsResumen</DataSetName>
+                <Value>=First(Fields!TotalPadron.Value,"dsResumen")</Value>
+                <Style><FontFamily>Segoe UI</FontFamily><FontSize>22pt</FontSize><FontWeight>Bold</FontWeight><Color>#2B6CB0</Color></Style></Textbox>
+            </ReportItems>
+          </Rectangle>
+
+          <!-- KPI: Total Votos -->
+          <Rectangle Name="cardVotos">
+            <Left>3.85cm</Left><Top>7.1cm</Top><Width>3.6cm</Width><Height>1.8cm</Height>
+            <Style><BackgroundColor>#F0FFF4</BackgroundColor><BorderRadius>4pt</BorderRadius></Style>
+            <ReportItems>
+              <Textbox Name="kpiVotosLabel"><Left>0.2cm</Left><Top>0.15cm</Top><Width>3.2cm</Width><Height>0.5cm</Height>
+                <Value>Total Votos</Value><Style><FontFamily>Segoe UI</FontFamily><FontSize>8pt</FontSize><Color>#4A5568</Color></Style></Textbox>
+              <Textbox Name="kpiVotosValor"><Left>0.2cm</Left><Top>0.65cm</Top><Width>3.2cm</Width><Height>0.9cm</Height>
+                <DataSetName>dsResumen</DataSetName>
+                <Value>=First(Fields!TotalVotos.Value,"dsResumen")</Value>
+                <Style><FontFamily>Segoe UI</FontFamily><FontSize>22pt</FontSize><FontWeight>Bold</FontWeight><Color>#276749</Color></Style></Textbox>
+            </ReportItems>
+          </Rectangle>
+
+          <!-- KPI: Votos Válidos -->
+          <Rectangle Name="cardValidos">
+            <Left>7.7cm</Left><Top>7.1cm</Top><Width>3.6cm</Width><Height>1.8cm</Height>
+            <Style><BackgroundColor>#FFFFF0</BackgroundColor><BorderRadius>4pt</BorderRadius></Style>
+            <ReportItems>
+              <Textbox Name="kpiValidosLabel"><Left>0.2cm</Left><Top>0.15cm</Top><Width>3.2cm</Width><Height>0.5cm</Height>
+                <Value>Votos Válidos</Value><Style><FontFamily>Segoe UI</FontFamily><FontSize>8pt</FontSize><Color>#4A5568</Color></Style></Textbox>
+              <Textbox Name="kpiValidosValor"><Left>0.2cm</Left><Top>0.65cm</Top><Width>3.2cm</Width><Height>0.9cm</Height>
+                <DataSetName>dsResumen</DataSetName>
+                <Value>=First(Fields!VotosValidos.Value,"dsResumen")</Value>
+                <Style><FontFamily>Segoe UI</FontFamily><FontSize>22pt</FontSize><FontWeight>Bold</FontWeight><Color>#744210</Color></Style></Textbox>
+            </ReportItems>
+          </Rectangle>
+
+          <!-- KPI: Votos Nulos -->
+          <Rectangle Name="cardNulos">
+            <Left>11.55cm</Left><Top>7.1cm</Top><Width>3.6cm</Width><Height>1.8cm</Height>
+            <Style><BackgroundColor>#FFF5F5</BackgroundColor><BorderRadius>4pt</BorderRadius></Style>
+            <ReportItems>
+              <Textbox Name="kpiNulosLabel"><Left>0.2cm</Left><Top>0.15cm</Top><Width>3.2cm</Width><Height>0.5cm</Height>
+                <Value>Votos Nulos</Value><Style><FontFamily>Segoe UI</FontFamily><FontSize>8pt</FontSize><Color>#4A5568</Color></Style></Textbox>
+              <Textbox Name="kpiNulosValor"><Left>0.2cm</Left><Top>0.65cm</Top><Width>3.2cm</Width><Height>0.9cm</Height>
+                <DataSetName>dsResumen</DataSetName>
+                <Value>=First(Fields!VotosNulos.Value,"dsResumen")</Value>
+                <Style><FontFamily>Segoe UI</FontFamily><FontSize>22pt</FontSize><FontWeight>Bold</FontWeight><Color>#C53030</Color></Style></Textbox>
+            </ReportItems>
+          </Rectangle>
+
+          <!-- KPI: % Participación -->
+          <Rectangle Name="cardParticipacion">
+            <Left>15.4cm</Left><Top>7.1cm</Top><Width>3.6cm</Width><Height>1.8cm</Height>
+            <Style><BackgroundColor>#FAF5FF</BackgroundColor><BorderRadius>4pt</BorderRadius></Style>
+            <ReportItems>
+              <Textbox Name="kpiPctLabel"><Left>0.2cm</Left><Top>0.15cm</Top><Width>3.2cm</Width><Height>0.5cm</Height>
+                <Value>% Participación</Value><Style><FontFamily>Segoe UI</FontFamily><FontSize>8pt</FontSize><Color>#4A5568</Color></Style></Textbox>
+              <Textbox Name="kpiPctValor"><Left>0.2cm</Left><Top>0.65cm</Top><Width>3.2cm</Width><Height>0.9cm</Height>
+                <DataSetName>dsResumen</DataSetName>
+                <Value>=Format(First(Fields!PorcentajeParticipacion.Value,"dsResumen"),"0.0") &amp; "%"</Value>
+                <Style><FontFamily>Segoe UI</FontFamily><FontSize>20pt</FontSize><FontWeight>Bold</FontWeight><Color>#553C9A</Color></Style></Textbox>
+            </ReportItems>
+          </Rectangle>
+
+          <!-- ══════════════════════════════════════
+               TABLA COMPARATIVA TODAS LAS PLANCHAS
+               ══════════════════════════════════════ -->
+          <Textbox Name="lblSeccionPlanchas">
+            <Left>0cm</Left><Top>9.2cm</Top><Width>19cm</Width><Height>0.65cm</Height>
+            <Value>📋  RESULTADOS POR PLANCHA</Value>
+            <Style>
+              <FontFamily>Segoe UI</FontFamily><FontSize>13pt</FontSize><FontWeight>Bold</FontWeight>
+              <Color>#2D3748</Color><BorderStyle><Bottom>Solid</Bottom></BorderStyle>
+              <BorderColor><Bottom>#E2E8F0</Bottom></BorderColor><BorderWidth><Bottom>1pt</Bottom></BorderWidth>
+            </Style>
+          </Textbox>
+
+          <Tablix Name="tblPlanchas">
+            <DataSetName>dsPlanchas</DataSetName>
+            <Left>0cm</Left><Top>10cm</Top><Width>19cm</Width>
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn><Width>0.8cm</Width></TablixColumn>
+                <TablixColumn><Width>7cm</Width></TablixColumn>
+                <TablixColumn><Width>5.2cm</Width></TablixColumn>
+                <TablixColumn><Width>3cm</Width></TablixColumn>
+                <TablixColumn><Width>3cm</Width></TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.7cm</Height>
+                  <TablixCells>
+                    <TablixCell><CellContents><Textbox Name="hPN"><Value>#</Value><Style><FontWeight>Bold</FontWeight><BackgroundColor>#2D3748</BackgroundColor><Color>White</Color><FontFamily>Segoe UI</FontFamily><FontSize>9pt</FontSize><TextAlign>Center</TextAlign><VerticalAlign>Middle</VerticalAlign></Style></Textbox></CellContents></TablixCell>
+                    <TablixCell><CellContents><Textbox Name="hPNombre"><Value>Nombre Plancha</Value><Style><FontWeight>Bold</FontWeight><BackgroundColor>#2D3748</BackgroundColor><Color>White</Color><FontFamily>Segoe UI</FontFamily><FontSize>9pt</FontSize><PaddingLeft>6pt</PaddingLeft><VerticalAlign>Middle</VerticalAlign></Style></Textbox></CellContents></TablixCell>
+                    <TablixCell><CellContents><Textbox Name="hPColor"><Value>Color Representativo</Value><Style><FontWeight>Bold</FontWeight><BackgroundColor>#2D3748</BackgroundColor><Color>White</Color><FontFamily>Segoe UI</FontFamily><FontSize>9pt</FontSize><PaddingLeft>6pt</PaddingLeft><VerticalAlign>Middle</VerticalAlign></Style></Textbox></CellContents></TablixCell>
+                    <TablixCell><CellContents><Textbox Name="hPVotos"><Value>Votos</Value><Style><FontWeight>Bold</FontWeight><BackgroundColor>#2D3748</BackgroundColor><Color>White</Color><FontFamily>Segoe UI</FontFamily><FontSize>9pt</FontSize><TextAlign>Center</TextAlign><VerticalAlign>Middle</VerticalAlign></Style></Textbox></CellContents></TablixCell>
+                    <TablixCell><CellContents><Textbox Name="hPPct"><Value>Porcentaje</Value><Style><FontWeight>Bold</FontWeight><BackgroundColor>#2D3748</BackgroundColor><Color>White</Color><FontFamily>Segoe UI</FontFamily><FontSize>9pt</FontSize><TextAlign>Center</TextAlign><VerticalAlign>Middle</VerticalAlign></Style></Textbox></CellContents></TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.8cm</Height>
+                  <TablixCells>
+                    <TablixCell><CellContents><Textbox Name="dPN"><Value>=RowNumber(Nothing)</Value><Style><FontFamily>Segoe UI</FontFamily><FontSize>9pt</FontSize><TextAlign>Center</TextAlign><VerticalAlign>Middle</VerticalAlign><BackgroundColor>=IIF(RowNumber(Nothing) Mod 2 = 0,"#F7FAFC","White")</BackgroundColor></Style></Textbox></CellContents></TablixCell>
+                    <TablixCell><CellContents><Textbox Name="dPNombre"><Value>=Fields!Plancha.Value</Value><Style><FontFamily>Segoe UI</FontFamily><FontSize>9pt</FontSize><FontWeight>Bold</FontWeight><VerticalAlign>Middle</VerticalAlign><PaddingLeft>6pt</PaddingLeft><BackgroundColor>=IIF(RowNumber(Nothing) Mod 2 = 0,"#F7FAFC","White")</BackgroundColor></Style></Textbox></CellContents></TablixCell>
+                    <TablixCell><CellContents><Textbox Name="dPColor"><Value>=Fields!Color.Value</Value><Style><FontFamily>Segoe UI</FontFamily><FontSize>9pt</FontSize><VerticalAlign>Middle</VerticalAlign><PaddingLeft>6pt</PaddingLeft><BackgroundColor>=IIF(RowNumber(Nothing) Mod 2 = 0,"#F7FAFC","White")</BackgroundColor></Style></Textbox></CellContents></TablixCell>
+                    <TablixCell><CellContents><Textbox Name="dPVotos"><Value>=Fields!TotalVotos.Value</Value><Style><FontFamily>Segoe UI</FontFamily><FontSize>10pt</FontSize><FontWeight>Bold</FontWeight><TextAlign>Center</TextAlign><VerticalAlign>Middle</VerticalAlign><BackgroundColor>=IIF(RowNumber(Nothing) Mod 2 = 0,"#F7FAFC","White")</BackgroundColor></Style></Textbox></CellContents></TablixCell>
+                    <TablixCell><CellContents><Textbox Name="dPPct"><Value>=Format(Fields!Porcentaje.Value,"0.00") &amp; "%"</Value><Style><FontFamily>Segoe UI</FontFamily><FontSize>10pt</FontSize><FontWeight>Bold</FontWeight><Color>#276749</Color><TextAlign>Center</TextAlign><VerticalAlign>Middle</VerticalAlign><BackgroundColor>=IIF(RowNumber(Nothing) Mod 2 = 0,"#F7FAFC","White")</BackgroundColor></Style></Textbox></CellContents></TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+          </Tablix>
+
+        </ReportItems>
+      </Body>
+
+      <!-- ══════════════════════════════════════
+           PAGE HEADER
+           ══════════════════════════════════════ -->
+      <PageHeader>
+        <Height>0cm</Height>
+        <PrintOnFirstPage>true</PrintOnFirstPage>
+        <PrintOnLastPage>true</PrintOnLastPage>
+      </PageHeader>
+
+      <!-- ══════════════════════════════════════
+           PAGE FOOTER
+           ══════════════════════════════════════ -->
+      <PageFooter>
+        <Height>0.8cm</Height>
+        <PrintOnFirstPage>true</PrintOnFirstPage>
+        <PrintOnLastPage>true</PrintOnLastPage>
+        <ReportItems>
+          <Textbox Name="footLeft">
+            <Left>0cm</Left><Top>0.1cm</Top><Width>9.5cm</Width><Height>0.5cm</Height>
+            <Value>Sistema de Votación Estudiantil — Documento Confidencial</Value>
+            <Style><FontFamily>Segoe UI</FontFamily><FontSize>7pt</FontSize><Color>#718096</Color></Style>
+          </Textbox>
+          <Textbox Name="footRight">
+            <Left>9.5cm</Left><Top>0.1cm</Top><Width>9.5cm</Width><Height>0.5cm</Height>
+            <Value>="Página " &amp; Globals!PageNumber &amp; " de " &amp; Globals!TotalPages</Value>
+            <Style><FontFamily>Segoe UI</FontFamily><FontSize>7pt</FontSize><Color>#718096</Color><TextAlign>Right</TextAlign></Style>
+          </Textbox>
+        </ReportItems>
+      </PageFooter>
+
+      <Page>
+        <PageWidth>21.59cm</PageWidth>
+        <PageHeight>27.94cm</PageHeight>
+        <LeftMargin>1.3cm</LeftMargin>
+        <RightMargin>1.3cm</RightMargin>
+        <TopMargin>1cm</TopMargin>
+        <BottomMargin>1cm</BottomMargin>
+      </Page>
+    </ReportSection>
+  </ReportSections>
+
+  <rd:ReportID>a1b2c3d4-0001-0001-0001-000000000001</rd:ReportID>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+</Report>

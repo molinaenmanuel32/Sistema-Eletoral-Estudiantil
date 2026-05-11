@@ -22,6 +22,16 @@ namespace SistemaVotacion.UI.Forms
 
         private DataGridView dgv;
 
+<<<<<<< HEAD
+        private readonly Color Azul = Color.FromArgb(0, 55, 150);
+        private readonly Color AzulClaro = Color.FromArgb(22, 97, 255);
+        private readonly Color Rojo = Color.FromArgb(230, 40, 45);
+        private readonly Color Fondo = Color.FromArgb(245, 247, 252);
+        private readonly Color Card = Color.White;
+        private readonly Color Texto = Color.FromArgb(10, 35, 90);
+        private readonly Color TextoSuave = Color.FromArgb(80, 90, 115);
+        private readonly Color Borde = Color.FromArgb(220, 225, 235);
+=======
         private static readonly Color Azul = Color.FromArgb(0, 55, 150);
         private static readonly Color AzulClaro = Color.FromArgb(22, 97, 255);
         private static readonly Color Rojo = Color.FromArgb(230, 40, 45);
@@ -30,6 +40,7 @@ namespace SistemaVotacion.UI.Forms
         private static readonly Color Texto = Color.FromArgb(10, 35, 90);
         private static readonly Color TextoSuave = Color.FromArgb(80, 90, 115);
         private static readonly Color Borde = Color.FromArgb(220, 225, 235);
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
         protected override void Dispose(bool disposing)
         {
@@ -85,7 +96,11 @@ namespace SistemaVotacion.UI.Forms
             // 
             lblIcono.Text = "●";
             lblIcono.Font = new Font("Segoe UI", 26F, FontStyle.Bold);
+<<<<<<< HEAD
+            lblIcono.ForeColor = Color.FromArgb(22, 97, 255);
+=======
             lblIcono.ForeColor = AzulClaro;
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
             lblIcono.Location = new Point(20, 10);
             lblIcono.Name = "lblIcono";
             lblIcono.Size = new Size(40, 55);
@@ -96,7 +111,11 @@ namespace SistemaVotacion.UI.Forms
             // 
             lblTitulo.Text = "Gestión de Usuarios";
             lblTitulo.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
+<<<<<<< HEAD
+            lblTitulo.ForeColor = Color.FromArgb(0, 55, 150);
+=======
             lblTitulo.ForeColor = Azul;
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
             lblTitulo.Location = new Point(65, 18);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(500, 42);
@@ -107,7 +126,11 @@ namespace SistemaVotacion.UI.Forms
             // 
             lblSubtitulo.Text = "Administra los usuarios del sistema electoral estudiantil";
             lblSubtitulo.Font = new Font("Segoe UI", 10.5F);
+<<<<<<< HEAD
+            lblSubtitulo.ForeColor = Color.FromArgb(80, 90, 115);
+=======
             lblSubtitulo.ForeColor = TextoSuave;
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
             lblSubtitulo.Location = new Point(30, 65);
             lblSubtitulo.Name = "lblSubtitulo";
             lblSubtitulo.Size = new Size(700, 28);
@@ -184,7 +207,10 @@ namespace SistemaVotacion.UI.Forms
             txtBuscar.Font = new Font("Segoe UI", 10F);
             txtBuscar.Location = new Point(538, 23);
             txtBuscar.Name = "txtBuscar";
+<<<<<<< HEAD
+=======
             txtBuscar.PlaceholderText = "Nombre, matrícula o usuario...";
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
             txtBuscar.Size = new Size(280, 30);
             txtBuscar.TabIndex = 4;
             txtBuscar.TextChanged += txtBuscar_TextChanged;

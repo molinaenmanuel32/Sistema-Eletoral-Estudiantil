@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DsVotacion"
+           targetNamespace="http://tempuri.org/DsVotacion.xsd"
+           xmlns="http://tempuri.org/DsVotacion.xsd"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:msdata="urn:schemas-microsoft-com:xml-msdata"
+           xmlns:msprop="urn:schemas-microsoft-com:xml-msprop"
+           attributeFormDefault="qualified"
+           elementFormDefault="qualified">
+
+  <xs:element name="DsVotacion" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+
+        <!-- ══════════════════════════════════════════════════════
+             TABLA 1: dsResumen
+             Fuente: EstadisticasVotacion
+             Usada en: ReportePlanchaGanadora, ReporteGeneralVotos
+             ══════════════════════════════════════════════════════ -->
+        <xs:element name="dsResumen">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TotalPadron"             type="xs:int"     minOccurs="0" />
+              <xs:element name="TotalVotos"              type="xs:int"     minOccurs="0" />
+              <xs:element name="VotosNulos"              type="xs:int"     minOccurs="0" />
+              <xs:element name="VotosValidos"            type="xs:int"     minOccurs="0" />
+              <xs:element name="SinVotar"                type="xs:int"     minOccurs="0" />
+              <xs:element name="PorcentajeParticipacion" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+        <!-- ══════════════════════════════════════════════════════
+             TABLA 2: dsGanadora
+             Fuente: EstadisticaPlancha (1 fila — la ganadora)
+             Usada en: ReportePlanchaGanadora
+             ══════════════════════════════════════════════════════ -->
+        <xs:element name="dsGanadora">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PlanchaId"  type="xs:int"     minOccurs="0" />
+              <xs:element name="Plancha"    type="xs:string"  minOccurs="0" />
+              <xs:element name="Color"      type="xs:string"  minOccurs="0" />
+              <xs:element name="TotalVotos" type="xs:int"     minOccurs="0" />
+              <xs:element name="Porcentaje" type="xs:decimal" minOccurs="0" />
+              <xs:element name="LogoPath"   type="xs:string"  minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+        <!-- ══════════════════════════════════════════════════════
+             TABLA 3: dsPlanchas
+             Fuente: List<EstadisticaPlancha>
+             Usada en: ReportePlanchaGanadora, ReporteGeneralVotos
+             ══════════════════════════════════════════════════════ -->
+        <xs:element name="dsPlanchas">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PlanchaId"  type="xs:int"     minOccurs="0" />
+              <xs:element name="Plancha"    type="xs:string"  minOccurs="0" />
+              <xs:element name="Color"      type="xs:string"  minOccurs="0" />
+              <xs:element name="TotalVotos" type="xs:int"     minOccurs="0" />
+              <xs:element name="Porcentaje" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+        <!-- ══════════════════════════════════════════════════════
+             TABLA 4: dsInfoPlancha
+             Fuente: Plancha
+             Usada en: ReporteIntegrantesPlancha
+             ══════════════════════════════════════════════════════ -->
+        <xs:element name="dsInfoPlancha">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PlanchaId"   type="xs:int"     minOccurs="0" />
+              <xs:element name="Nombre"      type="xs:string"  minOccurs="0" />
+              <xs:element name="Descripcion" type="xs:string"  minOccurs="0" />
+              <xs:element name="Mision"      type="xs:string"  minOccurs="0" />
+              <xs:element name="Color"       type="xs:string"  minOccurs="0" />
+              <xs:element name="AdminNombre" type="xs:string"  minOccurs="0" />
+              <xs:element name="Activa"      type="xs:boolean" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+        <!-- ══════════════════════════════════════════════════════
+             TABLA 5: dsMiembros
+             Fuente: List<MiembroPlancha>
+             Usada en: ReporteIntegrantesPlancha
+             ══════════════════════════════════════════════════════ -->
+        <xs:element name="dsMiembros">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="MiembroId"      type="xs:int"    minOccurs="0" />
+              <xs:element name="NombreCompleto" type="xs:string" minOccurs="0" />
+              <xs:element name="Matricula"      type="xs:string" minOccurs="0" />
+              <xs:element name="Puesto"         type="xs:string" minOccurs="0" />
+              <xs:element name="Descripcion"    type="xs:string" minOccurs="0" />
+              <xs:element name="Orden"          type="xs:int"    minOccurs="0" />
+              <xs:element name="FotoPath"       type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+        <!-- ══════════════════════════════════════════════════════
+             TABLA 6: dsDetalleVotos
+             Fuente: VotoDetalle (JOIN Voto + Padron + Plancha)
+             Usada en: ReporteGeneralVotos
+             ══════════════════════════════════════════════════════ -->
+        <xs:element name="dsDetalleVotos">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="VotoId"        type="xs:int"      minOccurs="0" />
+              <xs:element name="NombreVotante" type="xs:string"   minOccurs="0" />
+              <xs:element name="Matricula"     type="xs:string"   minOccurs="0" />
+              <xs:element name="Curso"         type="xs:string"   minOccurs="0" />
+              <xs:element name="Seccion"       type="xs:string"   minOccurs="0" />
+              <xs:element name="PlanchaNombre" type="xs:string"   minOccurs="0" />
+              <xs:element name="EsNulo"        type="xs:boolean"  minOccurs="0" />
+              <xs:element name="FechaVoto"     type="xs:dateTime" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+        <!-- ══════════════════════════════════════════════════════
+             TABLA 7: dsParticipantes
+             Fuente: ParticipanteReporte (Padron + estado voto)
+             Usada en: ReporteListadoParticipantes
+             ══════════════════════════════════════════════════════ -->
+        <xs:element name="dsParticipantes">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PadronId"       type="xs:int"    minOccurs="0" />
+              <xs:element name="NombreCompleto" type="xs:string" minOccurs="0" />
+              <xs:element name="Matricula"      type="xs:string" minOccurs="0" />
+              <xs:element name="Curso"          type="xs:string" minOccurs="0" />
+              <xs:element name="Seccion"        type="xs:string" minOccurs="0" />
+              <xs:element name="EstadoVoto"     type="xs:string" minOccurs="0" />
+              <xs:element name="HoraVoto"       type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

@@ -9,11 +9,19 @@ namespace SistemaVotacion.UI.Forms
 {
     public partial class FrmEditarPlancha : Form
     {
+<<<<<<< HEAD
+        private readonly Plancha _plancha;
+        private readonly PlanchaService _svc = new PlanchaService();
+        private string _logoPath;
+
+        public FrmEditarPlancha(Plancha plancha)
+=======
         private readonly Plancha? _plancha;
         private readonly PlanchaService _svc = new();
         private string? _logoPath;
 
         public FrmEditarPlancha(Plancha? plancha)
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
         {
             _plancha = plancha;
 
@@ -31,10 +39,30 @@ namespace SistemaVotacion.UI.Forms
             lblTitulo.Text = "●  Editar Plancha";
             lblSubtitulo.Text = "Modifica la información de la plancha seleccionada.";
 
+<<<<<<< HEAD
+            txtNombre.Text = _plancha.Nombre;
+
+            txtDescripcion.Text =
+                _plancha.Descripcion != null
+                ? _plancha.Descripcion
+                : "";
+
+            txtMision.Text =
+                _plancha.Mision != null
+                ? _plancha.Mision
+                : "";
+
+            txtColor.Text =
+                _plancha.Color != null
+                ? _plancha.Color
+                : "#007BFF";
+
+=======
             txtNombre.Text = _plancha!.Nombre;
             txtDescripcion.Text = _plancha.Descripcion ?? "";
             txtMision.Text = _plancha.Mision ?? "";
             txtColor.Text = _plancha.Color ?? "#007BFF";
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
             _logoPath = _plancha.LogoPath;
 
             CargarLogoPreview(_logoPath);
@@ -42,7 +70,11 @@ namespace SistemaVotacion.UI.Forms
 
         private void btnSeleccionarLogo_Click(object sender, EventArgs e)
         {
+<<<<<<< HEAD
+            OpenFileDialog open = new OpenFileDialog();
+=======
             using OpenFileDialog open = new OpenFileDialog();
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
             open.Title = "Seleccionar logo";
             open.Filter = "Imágenes|*.png;*.jpg;*.jpeg";
@@ -52,17 +84,39 @@ namespace SistemaVotacion.UI.Forms
                 _logoPath = CopiarLogo(open.FileName);
                 CargarLogoPreview(_logoPath);
             }
+<<<<<<< HEAD
+
+            open.Dispose();
+=======
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
         }
 
         private string CopiarLogo(string origen)
         {
+<<<<<<< HEAD
+            string carpeta = Path.Combine(
+                Application.StartupPath,
+                "Assets",
+                "LogosPlanchas"
+            );
+=======
             string carpeta = Path.Combine(Application.StartupPath, "Assets", "LogosPlanchas");
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
             if (!Directory.Exists(carpeta))
                 Directory.CreateDirectory(carpeta);
 
             string extension = Path.GetExtension(origen);
+<<<<<<< HEAD
+
+            string nombreArchivo =
+                "logo_plancha_" +
+                DateTime.Now.ToString("yyyyMMddHHmmssfff") +
+                extension;
+
+=======
             string nombreArchivo = $"logo_plancha_{DateTime.Now:yyyyMMddHHmmssfff}{extension}";
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
             string destino = Path.Combine(carpeta, nombreArchivo);
 
             File.Copy(origen, destino, true);
@@ -70,7 +124,11 @@ namespace SistemaVotacion.UI.Forms
             return destino;
         }
 
+<<<<<<< HEAD
+        private void CargarLogoPreview(string ruta)
+=======
         private void CargarLogoPreview(string? ruta)
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
         {
             if (string.IsNullOrWhiteSpace(ruta) || !File.Exists(ruta))
             {
@@ -79,8 +137,15 @@ namespace SistemaVotacion.UI.Forms
                 return;
             }
 
+<<<<<<< HEAD
+            var imgTemp = System.Drawing.Image.FromFile(ruta);
+
+            picLogo.Image = new System.Drawing.Bitmap(imgTemp);
+
+=======
             using var imgTemp = System.Drawing.Image.FromFile(ruta);
             picLogo.Image = new System.Drawing.Bitmap(imgTemp);
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
             lblLogoTexto.Text = Path.GetFileName(ruta);
         }
 
@@ -97,6 +162,20 @@ namespace SistemaVotacion.UI.Forms
 
             if (_plancha == null)
             {
+<<<<<<< HEAD
+                Plancha nueva = new Plancha();
+
+                nueva.Nombre = txtNombre.Text.Trim();
+                nueva.Descripcion = txtDescripcion.Text.Trim();
+                nueva.Mision = txtMision.Text.Trim();
+                nueva.Color = txtColor.Text.Trim();
+                nueva.LogoPath = _logoPath;
+
+                if (Sesion.UsuarioActual != null)
+                    nueva.AdminUserId = Sesion.UsuarioActual.UsuarioId;
+
+                nueva.Activa = true;
+=======
                 var nueva = new Plancha
                 {
                     Nombre = txtNombre.Text.Trim(),
@@ -107,6 +186,7 @@ namespace SistemaVotacion.UI.Forms
                     AdminUserId = Sesion.UsuarioActual!.UsuarioId,
                     Activa = true
                 };
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
                 int id = _svc.Crear(nueva);
 
@@ -117,8 +197,15 @@ namespace SistemaVotacion.UI.Forms
                 }
 
                 Helpers.MsgExito("Plancha creada correctamente.");
+<<<<<<< HEAD
+
                 DialogResult = DialogResult.OK;
                 Close();
+
+=======
+                DialogResult = DialogResult.OK;
+                Close();
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
                 return;
             }
 
@@ -137,6 +224,10 @@ namespace SistemaVotacion.UI.Forms
             }
 
             Helpers.MsgExito("Plancha actualizada correctamente.");
+<<<<<<< HEAD
+
+=======
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
             DialogResult = DialogResult.OK;
             Close();
         }

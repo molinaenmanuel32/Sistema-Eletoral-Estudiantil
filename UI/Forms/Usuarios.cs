@@ -11,8 +11,14 @@ namespace SistemaVotacion.UI.Forms
 {
     public partial class Usuarios : Form
     {
+<<<<<<< HEAD
+        private readonly UsuarioService _svc = new UsuarioService();
+
+        private readonly string placeholderBuscar = "Nombre, matrícula o usuario...";
+=======
         private readonly UsuarioService _svc = new();
 
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
         public Usuarios()
         {
@@ -26,7 +32,34 @@ namespace SistemaVotacion.UI.Forms
             AplicarEstilos();
             Cargar();
 
+<<<<<<< HEAD
+            // Placeholder compatible con .NET Framework
+            txtBuscar.Text = placeholderBuscar;
+            txtBuscar.ForeColor = Color.Gray;
+
+            txtBuscar.Enter += TxtBuscar_Enter;
+            txtBuscar.Leave += TxtBuscar_Leave;
+        }
+
+        private void TxtBuscar_Enter(object sender, EventArgs e)
+        {
+            if (txtBuscar.Text == placeholderBuscar)
+            {
+                txtBuscar.Text = "";
+                txtBuscar.ForeColor = Color.Black;
+            }
+        }
+
+        private void TxtBuscar_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtBuscar.Text))
+            {
+                txtBuscar.Text = placeholderBuscar;
+                txtBuscar.ForeColor = Color.Gray;
+            }
+=======
   
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
         }
 
         private void btnNuevo_Click(object sender, EventArgs e)
@@ -39,12 +72,20 @@ namespace SistemaVotacion.UI.Forms
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
+<<<<<<< HEAD
+            if (dgv.CurrentRow == null) return;
+=======
             if (dgv.CurrentRow is null) return;
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
             int id = Convert.ToInt32(dgv.CurrentRow.Cells["UsuarioId"].Value);
             var usr = _svc.GetById(id);
 
+<<<<<<< HEAD
+            if (usr == null) return;
+=======
             if (usr is null) return;
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
             var f = new FrmEditarUsuario(usr);
 
@@ -54,7 +95,11 @@ namespace SistemaVotacion.UI.Forms
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
+<<<<<<< HEAD
+            if (dgv.CurrentRow == null) return;
+=======
             if (dgv.CurrentRow is null) return;
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
             if (!Helpers.Confirmar("¿Desactivar este usuario?")) return;
 
@@ -66,6 +111,12 @@ namespace SistemaVotacion.UI.Forms
 
         private void txtBuscar_TextChanged(object sender, EventArgs e)
         {
+<<<<<<< HEAD
+            if (txtBuscar.Text == placeholderBuscar)
+                return;
+
+=======
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
             Filtrar(txtBuscar.Text);
         }
 
@@ -100,9 +151,15 @@ namespace SistemaVotacion.UI.Forms
             dgv.Rows.Clear();
 
             foreach (var u in _svc.GetAll().Where(x =>
+<<<<<<< HEAD
+    x.NombreCompleto.ToLower().Contains(q.ToLower()) ||
+    x.Matricula.ToLower().Contains(q.ToLower()) ||
+    x.Username.ToLower().Contains(q.ToLower())))
+=======
                 x.NombreCompleto.Contains(q, StringComparison.OrdinalIgnoreCase) ||
                 x.Matricula.Contains(q, StringComparison.OrdinalIgnoreCase) ||
                 x.Username.Contains(q, StringComparison.OrdinalIgnoreCase)))
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
             {
                 dgv.Rows.Add(
                     u.UsuarioId,
@@ -163,7 +220,10 @@ namespace SistemaVotacion.UI.Forms
 
             dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 250, 255);
             dgv.AlternatingRowsDefaultCellStyle.ForeColor = Texto;
+<<<<<<< HEAD
+=======
 
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
         }
 
         private void ConfigurarColumnas()

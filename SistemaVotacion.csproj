@@ -1,3 +1,291 @@
+<<<<<<< HEAD
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <!-- ========================================================= -->
+  <!-- CONFIGURACIÓN GENERAL -->
+  <!-- ========================================================= -->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>SistemaVotacion</RootNamespace>
+    <AssemblyName>SistemaVotacion</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Deterministic>true</Deterministic>
+    <!-- C# MODERNO -->
+    <LangVersion>latest</LangVersion>
+    <!-- Nullable -->
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <!-- ========================================================= -->
+  <!-- DEBUG -->
+  <!-- ========================================================= -->
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <!-- ========================================================= -->
+  <!-- RELEASE -->
+  <!-- ========================================================= -->
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <!-- ========================================================= -->
+  <!-- REFERENCIAS -->
+  <!-- ========================================================= -->
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  <!-- ========================================================= -->
+  <!-- NUGET -->
+  <!-- ========================================================= -->
+  <ItemGroup>
+    <!-- ORM -->
+    <PackageReference Include="Dapper" Version="2.1.72" />
+    <!-- SQL -->
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
+    <!-- Report Viewer -->
+    <PackageReference Include="Microsoft.ReportingServices.ReportViewerControl.Winforms" Version="150.1652.0" />
+    <!-- BCrypt -->
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <!-- JSON -->
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+  <!-- ========================================================= -->
+  <!-- ARCHIVOS CS -->
+  <!-- ========================================================= -->
+  <ItemGroup>
+    <!-- MODELS -->
+    <Compile Include="Models\Entities.cs" />
+    <!-- DAL -->
+    <Compile Include="DAL\DbConnection.cs" />
+    <Compile Include="DAL\Repositories.cs" />
+    <Compile Include="DAL\UsuarioRepository.cs" />
+    <Compile Include="DAL\PlanchaRepository.cs" />
+    <!-- BLL -->
+    <Compile Include="BLL\Services.cs" />
+    <!-- UTILS -->
+    <Compile Include="UI\Forms\ReportesFRM\Frmreportegeneralvotos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\ReportesFRM\Frmreportegeneralvotos.Designer.cs">
+      <DependentUpon>Frmreportegeneralvotos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\ReportesFRM\Frmreporteintegrantesplancha.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\ReportesFRM\Frmreporteintegrantesplancha.Designer.cs">
+      <DependentUpon>Frmreporteintegrantesplancha.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\ReportesFRM\Frmreporteplanchaganadora.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\ReportesFRM\Frmreporteplanchaganadora.Designer.cs">
+      <DependentUpon>Frmreporteplanchaganadora.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Reportes\DsVotacion.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DsVotacion.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Reportes\ReportHelper.cs" />
+    <Compile Include="Utils\Tema.cs" />
+    <!-- PROGRAM -->
+    <Compile Include="Program.cs" />
+    <!-- RESOURCES -->
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <!-- CONTROLS -->
+    <Compile Include="UI\Controls\RoundedPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\UcOtros.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\UcPlanchas.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <!-- FORMS -->
+    <Compile Include="UI\Forms\Auditoria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Auditoria.Designer.cs">
+      <DependentUpon>Auditoria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\EditarPlancha.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\EditarPlancha.Designer.cs">
+      <DependentUpon>EditarPlancha.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\FrmAgregarMiembro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\FrmAgregarMiembro.Designer.cs">
+      <DependentUpon>FrmAgregarMiembro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\FrmDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\FrmDashboard.Designer.cs">
+      <DependentUpon>FrmDashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\FrmEditarUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\FrmEditarUsuario.Designer.cs">
+      <DependentUpon>FrmEditarUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\FrmL.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\FrmL.Designer.cs">
+      <DependentUpon>FrmL.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\FrmMenuAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\FrmMenuAdmin.Designer.cs">
+      <DependentUpon>FrmMenuAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\MenuAdminPartido\FrmAdminPartido.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\MenuAdminPartido\FrmAdminPartido.Designer.cs">
+      <DependentUpon>FrmAdminPartido.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\MenuAdminPartido\FrmDashboardPartido.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\MenuAdminPartido\FrmDashboardPartido.Designer.cs">
+      <DependentUpon>FrmDashboardPartido.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\MenuAdminPartido\FrmEditarMiPlancha.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\MenuAdminPartido\FrmEditarMiPlancha.Designer.cs">
+      <DependentUpon>FrmEditarMiPlancha.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\MenuVotaciones\FrmVotacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\MenuVotaciones\FrmVotacion.Designer.cs">
+      <DependentUpon>FrmVotacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\PadronElectoral.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\PadronElectoral.Designer.cs">
+      <DependentUpon>PadronElectoral.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\Planchas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Planchas.Designer.cs">
+      <DependentUpon>Planchas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\FrmReportes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\FrmReportes.Designer.cs">
+      <DependentUpon>FrmReportes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\Usuarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Usuarios.Designer.cs">
+      <DependentUpon>Usuarios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\VotacionAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\VotacionAdmin.Designer.cs">
+      <DependentUpon>VotacionAdmin.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <!-- ========================================================= -->
+  <!-- RESX -->
+  <!-- ========================================================= -->
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\FrmReportes.resx">
+      <DependentUpon>FrmReportes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\ReportesFRM\Frmreportegeneralvotos.resx">
+      <DependentUpon>Frmreportegeneralvotos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Reportes\ReporteGeneralVotos.rdlc" />
+    <EmbeddedResource Include="UI\Reportes\ReporteIntegrantesPlancha.rdlc" />
+    <EmbeddedResource Include="UI\Reportes\ReporteListadoParticipantes.rdlc" />
+    <EmbeddedResource Include="UI\Reportes\ReportePlanchaGanadora.rdlc" />
+  </ItemGroup>
+  <!-- ========================================================= -->
+  <!-- CONTENT -->
+  <!-- ========================================================= -->
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\login_fondo.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\login_fondo1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <!-- ========================================================= -->
+  <!-- IMPORT -->
+  <!-- ========================================================= -->
+  <ItemGroup>
+    <Folder Include="UI\Reportes\utils\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UI\Reportes\DsVotacion.xsc">
+      <DependentUpon>DsVotacion.xsd</DependentUpon>
+    </None>
+    <None Include="UI\Reportes\DsVotacion.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DsVotacion.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="UI\Reportes\DsVotacion.xss">
+      <DependentUpon>DsVotacion.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
+=======
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
@@ -47,3 +335,4 @@
   </ItemGroup>
 
 </Project>
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739

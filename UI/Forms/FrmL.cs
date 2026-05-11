@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+using SistemaVotacion.BLL;
+=======
 ﻿using SistemaVotacion.BLL;
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 using SistemaVotacion.Utils;
 using System;
 using System.Windows.Forms;
@@ -12,6 +16,10 @@ namespace SistemaVotacion.UI.Forms
         public FrmL()
         {
             InitializeComponent();
+<<<<<<< HEAD
+
+=======
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
             Tema.EstilizarBoton(btnLogin);
         }
 
@@ -40,7 +48,13 @@ namespace SistemaVotacion.UI.Forms
                 string hash = AuthService.HashPassword("039");
 
                 MessageBox.Show(hash, "HASH BCrypt para admin");
+<<<<<<< HEAD
+
                 Clipboard.SetText(hash);
+
+=======
+                Clipboard.SetText(hash);
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
                 MessageBox.Show("Hash copiado al portapapeles. Pégalo en SQL.");
 
                 return;
@@ -54,17 +68,36 @@ namespace SistemaVotacion.UI.Forms
             btnLogin.Enabled = true;
             btnLogin.Text = "Iniciar Sesión";
 
+<<<<<<< HEAD
+            bool ok = resultado.Item1;
+            string msg = resultado.Item2;
+            var user = resultado.Item3;
+
+            if (!ok || user == null)
+            {
+                lblError.Text = msg;
+
+                txtPass.Clear();
+                txtPass.Focus();
+
+=======
             if (!resultado.ok || resultado.user == null)
             {
                 lblError.Text = resultado.msg;
                 txtPass.Clear();
                 txtPass.Focus();
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
                 return;
             }
 
             Form siguiente;
 
+<<<<<<< HEAD
+            string rol = user.RolNombre.Trim();
+
+=======
             string rol = resultado.user.RolNombre.Trim();
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
             MessageBox.Show("Rol detectado: " + rol);
 
             if (rol.Equals("Admin", StringComparison.OrdinalIgnoreCase))
@@ -73,10 +106,14 @@ namespace SistemaVotacion.UI.Forms
             }
             else if (rol.Equals("AdminPartido", StringComparison.OrdinalIgnoreCase))
             {
+<<<<<<< HEAD
+                siguiente = new FrmMenuAdminPartido(user.Nombre, user.UsuarioId);
+=======
                 siguiente = new FrmMenuAdminPartido(
                     resultado.user.Nombre,
                     resultado.user.UsuarioId
                 );
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
             }
             else
             {
@@ -84,7 +121,16 @@ namespace SistemaVotacion.UI.Forms
             }
 
             this.Hide();
+<<<<<<< HEAD
+
+            siguiente.FormClosed += delegate
+            {
+                this.Close();
+            };
+
+=======
             siguiente.FormClosed += (s, args) => this.Close();
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
             siguiente.Show();
         }
     }

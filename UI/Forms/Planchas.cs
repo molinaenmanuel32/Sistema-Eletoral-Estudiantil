@@ -181,7 +181,11 @@ namespace SistemaVotacion.UI.Forms
                 if (string.IsNullOrWhiteSpace(ruta) || !File.Exists(ruta))
                     return null;
 
+<<<<<<< HEAD
+                var imgTemp = Image.FromFile(ruta);
+=======
                 using var imgTemp = Image.FromFile(ruta);
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
                 return new Bitmap(imgTemp, new Size(45, 45));
             }
             catch
@@ -231,7 +235,11 @@ namespace SistemaVotacion.UI.Forms
 
         private void btnNueva_Click(object sender, EventArgs e)
         {
+<<<<<<< HEAD
+            var frm = new FrmEditarPlancha(null);
+=======
             using var frm = new FrmEditarPlancha(null);
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
             if (frm.ShowDialog() == DialogResult.OK)
                 CargarPlanchas();
@@ -245,7 +253,11 @@ namespace SistemaVotacion.UI.Forms
                 return;
             }
 
+<<<<<<< HEAD
+            var frm = new FrmEditarPlancha(_planchaSeleccionada);
+=======
             using var frm = new FrmEditarPlancha(_planchaSeleccionada);
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
             if (frm.ShowDialog() == DialogResult.OK)
             {
@@ -288,7 +300,11 @@ namespace SistemaVotacion.UI.Forms
                 return;
             }
 
+<<<<<<< HEAD
+            var frm = new FrmAgregarMiembro(_planchaSeleccionada.PlanchaId);
+=======
             using var frm = new FrmAgregarMiembro(_planchaSeleccionada.PlanchaId);
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
             if (frm.ShowDialog() == DialogResult.OK)
                 CargarMiembros(_planchaSeleccionada.PlanchaId);
@@ -318,7 +334,11 @@ namespace SistemaVotacion.UI.Forms
                 return;
             }
 
+<<<<<<< HEAD
+            var frm = new FrmAgregarMiembro(_planchaSeleccionada.PlanchaId, miembro);
+=======
             using var frm = new FrmAgregarMiembro(_planchaSeleccionada.PlanchaId, miembro);
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
             if (frm.ShowDialog() == DialogResult.OK)
                 CargarMiembros(_planchaSeleccionada.PlanchaId);

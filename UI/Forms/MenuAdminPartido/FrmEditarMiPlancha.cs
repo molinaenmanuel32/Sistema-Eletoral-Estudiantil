@@ -105,7 +105,11 @@ namespace SistemaVotacion.UI.Forms
 
         private void CargarPlanchaDelUsuario()
         {
+<<<<<<< HEAD
+            var con = DbConnection.GetConnection();
+=======
             using var con = DbConnection.GetConnection();
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
             int? planchaId = con.QueryFirstOrDefault<int?>(
                 """
@@ -143,7 +147,11 @@ namespace SistemaVotacion.UI.Forms
 
         private void MostrarAsignacionPlancha()
         {
+<<<<<<< HEAD
+            var con = DbConnection.GetConnection();
+=======
             using var con = DbConnection.GetConnection();
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
             var libres = con.Query(
                 """
@@ -193,7 +201,11 @@ namespace SistemaVotacion.UI.Forms
 
             int planchaSeleccionada = Convert.ToInt32(cmbPlanchasDisponibles.SelectedValue);
 
+<<<<<<< HEAD
+            var con = DbConnection.GetConnection();
+=======
             using var con = DbConnection.GetConnection();
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
             con.Execute(
                 """
@@ -233,7 +245,11 @@ namespace SistemaVotacion.UI.Forms
                 return;
             }
 
+<<<<<<< HEAD
+            var con = DbConnection.GetConnection();
+=======
             using var con = DbConnection.GetConnection();
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
             int nuevaPlanchaId = con.ExecuteScalar<int>(
                 """
@@ -285,7 +301,11 @@ namespace SistemaVotacion.UI.Forms
 
         private void CargarPlancha()
         {
+<<<<<<< HEAD
+            var con = DbConnection.GetConnection();
+=======
             using var con = DbConnection.GetConnection();
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
             var plancha = con.QueryFirstOrDefault(
                 """
@@ -309,7 +329,11 @@ namespace SistemaVotacion.UI.Forms
         {
             dgvMiembros.Rows.Clear();
 
+<<<<<<< HEAD
+            var con = DbConnection.GetConnection();
+=======
             using var con = DbConnection.GetConnection();
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
             var miembros = con.Query(
                 """
@@ -352,7 +376,11 @@ namespace SistemaVotacion.UI.Forms
                 if (string.IsNullOrWhiteSpace(ruta) || !File.Exists(ruta))
                     return null;
 
+<<<<<<< HEAD
+                var imgTemp = Image.FromFile(ruta);
+=======
                 using var imgTemp = Image.FromFile(ruta);
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
                 return new Bitmap(imgTemp, new Size(45, 45));
             }
             catch
@@ -369,7 +397,11 @@ namespace SistemaVotacion.UI.Forms
                 return;
             }
 
+<<<<<<< HEAD
+            var con = DbConnection.GetConnection();
+=======
             using var con = DbConnection.GetConnection();
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
             con.Execute(
                 """
@@ -429,7 +461,11 @@ namespace SistemaVotacion.UI.Forms
                 return;
             }
 
+<<<<<<< HEAD
+            var imgTemp = Image.FromFile(ruta);
+=======
             using var imgTemp = Image.FromFile(ruta);
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
             picFoto.Image = new Bitmap(imgTemp);
             picFoto.SizeMode = PictureBoxSizeMode.Zoom;
             lblFotoTexto.Text = Path.GetFileName(ruta);
@@ -441,7 +477,11 @@ namespace SistemaVotacion.UI.Forms
                 !puesto.Equals("Vicepresidente", StringComparison.OrdinalIgnoreCase))
                 return false;
 
+<<<<<<< HEAD
+            var con = DbConnection.GetConnection();
+=======
             using var con = DbConnection.GetConnection();
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
             int total = con.ExecuteScalar<int>(
                 """
@@ -478,7 +518,11 @@ namespace SistemaVotacion.UI.Forms
                 return;
             }
 
+<<<<<<< HEAD
+            var con = DbConnection.GetConnection();
+=======
             using var con = DbConnection.GetConnection();
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
             con.Execute(
                 """
@@ -545,7 +589,11 @@ namespace SistemaVotacion.UI.Forms
                 return;
             }
 
+<<<<<<< HEAD
+            var con = DbConnection.GetConnection();
+=======
             using var con = DbConnection.GetConnection();
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
             con.Execute(
                 """
@@ -607,7 +655,11 @@ namespace SistemaVotacion.UI.Forms
             if (r != DialogResult.Yes)
                 return;
 
+<<<<<<< HEAD
+            var con = DbConnection.GetConnection();
+=======
             using var con = DbConnection.GetConnection();
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
             con.Execute(
                 """

@@ -10,7 +10,12 @@ namespace SistemaVotacion.UI.Forms
     {
         private readonly string _usuario;
         private readonly int _usuarioId;
+<<<<<<< HEAD
+
+        private Form formularioActivo = null;
+=======
         private Form? formularioActivo = null;
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
         public FrmMenuAdminPartido(string usuario, int usuarioId)
         {
@@ -19,7 +24,11 @@ namespace SistemaVotacion.UI.Forms
             _usuario = usuario;
             _usuarioId = usuarioId;
 
+<<<<<<< HEAD
+            lblUser.Text = _usuario + "\nAdminPartido";
+=======
             lblUser.Text = $"{_usuario}\nAdminPartido";
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
             ConstruirMenu();
             CargarInicio();
@@ -37,6 +46,28 @@ namespace SistemaVotacion.UI.Forms
 
         private Button CrearBotonMenu(string icono, string texto, Action accion, bool activo)
         {
+<<<<<<< HEAD
+            Button btn = new Button();
+
+            btn.Text = "  " + icono + "   " + texto;
+            btn.Height = 48;
+            btn.Width = 225;
+            btn.FlatStyle = FlatStyle.Flat;
+            btn.BackColor = activo
+                ? Color.FromArgb(235, 35, 45)
+                : Color.FromArgb(0, 32, 96);
+
+            btn.ForeColor = Color.White;
+            btn.TextAlign = ContentAlignment.MiddleLeft;
+            btn.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold);
+            btn.Cursor = Cursors.Hand;
+            btn.Margin = new Padding(0, 0, 0, 8);
+            btn.UseVisualStyleBackColor = false;
+
+            btn.FlatAppearance.BorderSize = 0;
+
+            btn.MouseEnter += delegate
+=======
             var btn = new Button
             {
                 Text = $"  {icono}   {texto}",
@@ -55,18 +86,27 @@ namespace SistemaVotacion.UI.Forms
             btn.FlatAppearance.BorderSize = 0;
 
             btn.MouseEnter += (s, e) =>
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
             {
                 if (btn.BackColor != Color.FromArgb(235, 35, 45))
                     btn.BackColor = Color.FromArgb(0, 55, 150);
             };
 
+<<<<<<< HEAD
+            btn.MouseLeave += delegate
+=======
             btn.MouseLeave += (s, e) =>
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
             {
                 if (btn.BackColor != Color.FromArgb(235, 35, 45))
                     btn.BackColor = Color.FromArgb(0, 32, 96);
             };
 
+<<<<<<< HEAD
+            btn.Click += delegate
+=======
             btn.Click += (s, e) =>
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
             {
                 DesmarcarBotones();
                 btn.BackColor = Color.FromArgb(235, 35, 45);
@@ -80,8 +120,15 @@ namespace SistemaVotacion.UI.Forms
         {
             foreach (Control c in pnlMenu.Controls)
             {
+<<<<<<< HEAD
+                if (c is Button)
+                {
+                    ((Button)c).BackColor = Color.FromArgb(0, 32, 96);
+                }
+=======
                 if (c is Button b)
                     b.BackColor = Color.FromArgb(0, 32, 96);
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
             }
         }
 
@@ -99,6 +146,33 @@ namespace SistemaVotacion.UI.Forms
 
             pnlContent.Controls.Clear();
 
+<<<<<<< HEAD
+            Panel contenedor = new Panel();
+            contenedor.Dock = DockStyle.Fill;
+            contenedor.BackColor = Color.FromArgb(245, 247, 252);
+            contenedor.AutoScroll = true;
+
+            Label lblBienvenido = new Label();
+            lblBienvenido.Text = "¡Bienvenido, " + _usuario + "!";
+            lblBienvenido.Font = new Font("Segoe UI", 24F, FontStyle.Bold);
+            lblBienvenido.ForeColor = Color.FromArgb(0, 32, 96);
+            lblBienvenido.Location = new Point(40, 40);
+            lblBienvenido.Size = new Size(700, 60);
+
+            Label lblTexto = new Label();
+            lblTexto.Text = "Panel de administración del partido";
+            lblTexto.Font = new Font("Segoe UI", 12F);
+            lblTexto.ForeColor = Color.Gray;
+            lblTexto.Location = new Point(45, 100);
+            lblTexto.Size = new Size(500, 30);
+
+            contenedor.Controls.Add(lblBienvenido);
+            contenedor.Controls.Add(lblTexto);
+
+            pnlContent.Controls.Add(contenedor);
+        }
+
+=======
             var contenedor = new Panel
             {
                 Dock = DockStyle.Fill,
@@ -284,6 +358,7 @@ namespace SistemaVotacion.UI.Forms
             return card;
         }
 
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
         private void AbrirFormulario(Form frm, string titulo, string subtitulo)
         {
             lblTitle.Text = titulo;
@@ -305,34 +380,65 @@ namespace SistemaVotacion.UI.Forms
             formularioActivo = frm;
 
             pnlContent.Controls.Add(frm);
+<<<<<<< HEAD
+
+=======
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
             frm.BringToFront();
             frm.Show();
         }
 
         private void CargarDashboard()
         {
+<<<<<<< HEAD
+            FrmDashboardPartido frm = new FrmDashboardPartido(_usuarioId);
+
+            AbrirFormulario(
+                frm,
+                "Dashboard",
+                "Resumen general de tu plancha"
+=======
             AbrirFormulario(
                 new FrmDashboardPartido(_usuarioId),
                 "Dashboard",
                 "Resumen general de tu plancha y actividad del sistema"
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
             );
         }
 
         private void CargarMiPlancha()
         {
+<<<<<<< HEAD
+            FrmEditarMiPlancha frm = new FrmEditarMiPlancha(_usuarioId);
+
+            AbrirFormulario(
+                frm,
+                "Editar Plancha",
+                "Administra la información de tu plancha"
+=======
             AbrirFormulario(
                 new FrmEditarMiPlancha(_usuarioId),
                 "Editar Plancha",
                 "Administra la información y los miembros de tu plancha"
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
             );
         }
 
         private void CargarReportes()
         {
+<<<<<<< HEAD
+            FrmReportes frm = new FrmReportes(Sesion.UsuarioActual.UsuarioId);
+
+            AbrirFormulario(
+                frm,
+                "Reportes",
+                "Visualiza reportes del sistema"
+=======
             AbrirFormulario(
                 new Reportes(Sesion.UsuarioActual!.UsuarioId),
                 "Reportes",
                 "Visualiza y descarga reportes relacionados con el sistema"
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
             );
         }
 
@@ -342,15 +448,28 @@ namespace SistemaVotacion.UI.Forms
                 return;
 
             Hide();
+<<<<<<< HEAD
+
+            FrmL login = new FrmL();
+            login.Show();
+        }
+
+        private void BtnLogout_MouseEnter(object sender, EventArgs e)
+=======
             new FrmL().Show();
         }
 
         private void BtnLogout_MouseEnter(object? sender, EventArgs e)
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
         {
             btnLogout.BackColor = Color.FromArgb(220, 60, 60);
         }
 
+<<<<<<< HEAD
+        private void BtnLogout_MouseLeave(object sender, EventArgs e)
+=======
         private void BtnLogout_MouseLeave(object? sender, EventArgs e)
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
         {
             btnLogout.BackColor = Color.FromArgb(235, 35, 45);
         }

@@ -358,7 +358,11 @@ namespace SistemaVotacion.UI.Forms
 
         private void CargarReportes()
         {
+<<<<<<< HEAD
+            AbrirFormulario(new FrmReportes(Sesion.UsuarioActual!.UsuarioId), "Reportes");
+=======
             AbrirFormulario(new Reportes(Sesion.UsuarioActual!.UsuarioId), "Reportes");
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
         }
 
         private void CargarAuditoria()

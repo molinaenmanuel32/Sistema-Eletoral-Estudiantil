@@ -1,3 +1,10 @@
+<<<<<<< HEAD
+﻿using System;
+using System.Drawing;
+using System.Windows.Forms;
+
+=======
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 namespace SistemaVotacion.Utils;
 
 /// <summary>
@@ -6,6 +13,27 @@ namespace SistemaVotacion.Utils;
 public static class Tema
 {
     // Paleta principal
+<<<<<<< HEAD
+    public static readonly Color Primario = Color.FromArgb(30, 136, 229);   // Azul
+    public static readonly Color PrimarioOscuro = Color.FromArgb(13, 71, 161);
+    public static readonly Color Acento = Color.FromArgb(255, 152, 0);   // Naranja
+    public static readonly Color Exito = Color.FromArgb(56, 142, 60);   // Verde
+    public static readonly Color Peligro = Color.FromArgb(211, 47, 47);   // Rojo
+    public static readonly Color Advertencia = Color.FromArgb(245, 127, 23);
+    public static readonly Color Fondo = Color.FromArgb(18, 18, 18);   // Dark bg
+    public static readonly Color FondoPanel = Color.FromArgb(30, 30, 46);
+    public static readonly Color FondoCard = Color.FromArgb(40, 42, 58);
+    public static readonly Color Texto = Color.FromArgb(236, 236, 236);
+    public static readonly Color TextoSecundario = Color.FromArgb(160, 163, 189);
+    public static readonly Color Borde = Color.FromArgb(60, 62, 80);
+
+    // Fuentes
+    public static readonly Font FuenteTitulo = new("Segoe UI", 20f, FontStyle.Bold);
+    public static readonly Font FuenteSubtitulo = new("Segoe UI", 14f, FontStyle.Bold);
+    public static readonly Font FuenteNormal = new("Segoe UI", 9f);
+    public static readonly Font FuenteBoton = new("Segoe UI", 10f, FontStyle.Bold);
+    public static readonly Font FuentePequeña = new("Segoe UI", 8f);
+=======
     public static readonly Color Primario       = Color.FromArgb(30,  136, 229);   // Azul
     public static readonly Color PrimarioOscuro = Color.FromArgb(13,   71, 161);
     public static readonly Color Acento         = Color.FromArgb(255, 152,   0);   // Naranja
@@ -25,6 +53,7 @@ public static class Tema
     public static readonly Font FuenteNormal    = new("Segoe UI",  9f);
     public static readonly Font FuenteBoton     = new("Segoe UI", 10f, FontStyle.Bold);
     public static readonly Font FuentePequeña   = new("Segoe UI",  8f);
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
     // Aplica estilo a un Button
     public static void EstilizarBoton(Button btn, Color? bg = null)
@@ -33,18 +62,30 @@ public static class Tema
         btn.FlatAppearance.BorderSize = 0;
         btn.BackColor = bg ?? Primario;
         btn.ForeColor = Color.White;
+<<<<<<< HEAD
+        btn.Font = FuenteBoton;
+        btn.Cursor = Cursors.Hand;
+=======
         btn.Font      = FuenteBoton;
         btn.Cursor    = Cursors.Hand;
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
         btn.FlatAppearance.MouseOverBackColor = ControlPaint.Light(bg ?? Primario, 0.2f);
     }
 
     // Aplica estilo a un TextBox
     public static void EstilizarTextBox(TextBox tb)
     {
+<<<<<<< HEAD
+        tb.BackColor = FondoCard;
+        tb.ForeColor = Texto;
+        tb.BorderStyle = BorderStyle.FixedSingle;
+        tb.Font = FuenteNormal;
+=======
         tb.BackColor   = FondoCard;
         tb.ForeColor   = Texto;
         tb.BorderStyle = BorderStyle.FixedSingle;
         tb.Font        = FuenteNormal;
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
     }
 
     // Panel con estilo de card
@@ -52,21 +93,36 @@ public static class Tema
     {
         var panel = new Panel
         {
+<<<<<<< HEAD
+            Location = new Point(x, y),
+            Size = new Size(w, h),
+            BackColor = FondoCard,
+            Padding = new Padding(12)
+=======
             Location  = new Point(x, y),
             Size      = new Size(w, h),
             BackColor = FondoCard,
             Padding   = new Padding(12)
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
         };
 
         if (!string.IsNullOrEmpty(titulo))
         {
             var lbl = new Label
             {
+<<<<<<< HEAD
+                Text = titulo,
+                Font = FuenteSubtitulo,
+                ForeColor = Texto,
+                AutoSize = true,
+                Location = new Point(12, 10)
+=======
                 Text      = titulo,
                 Font      = FuenteSubtitulo,
                 ForeColor = Texto,
                 AutoSize  = true,
                 Location  = new Point(12, 10)
+>>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
             };
             panel.Controls.Add(lbl);
         }
