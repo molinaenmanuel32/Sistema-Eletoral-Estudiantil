@@ -37,17 +37,9 @@ namespace SistemaVotacion.UI.Forms
         private Button btnGuardar;
         private Button btnCancelar;
 
-<<<<<<< HEAD
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
-=======
-
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && components != null)
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
                 components.Dispose();
 
             base.Dispose(disposing);
@@ -55,305 +47,153 @@ namespace SistemaVotacion.UI.Forms
 
         private void InitializeComponent()
         {
-<<<<<<< HEAD
-=======
-            
-            
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
-            pnlHeader = new Panel();
-            pnlBody = new Panel();
+            this.pnlHeader = new Panel();
+            this.pnlBody = new Panel();
 
-            lblTitulo = new Label();
-            lblSubtitulo = new Label();
+            this.lblTitulo = new Label();
+            this.lblSubtitulo = new Label();
 
-            lblNombre = new Label();
-            lblApellido = new Label();
-            lblMatricula = new Label();
-            lblCurso = new Label();
-            lblSeccion = new Label();
-            lblEmail = new Label();
-            lblUsername = new Label();
-            lblPassword = new Label();
-            lblRol = new Label();
+            this.lblNombre = new Label();
+            this.lblApellido = new Label();
+            this.lblMatricula = new Label();
+            this.lblCurso = new Label();
+            this.lblSeccion = new Label();
+            this.lblEmail = new Label();
+            this.lblUsername = new Label();
+            this.lblPassword = new Label();
+            this.lblRol = new Label();
 
-            txtNombre = new TextBox();
-            txtApellido = new TextBox();
-            txtMatricula = new TextBox();
-            txtCurso = new TextBox();
-            txtSeccion = new TextBox();
-            txtEmail = new TextBox();
-            txtUsername = new TextBox();
-            txtPassword = new TextBox();
+            this.txtNombre = new TextBox();
+            this.txtApellido = new TextBox();
+            this.txtMatricula = new TextBox();
+            this.txtCurso = new TextBox();
+            this.txtSeccion = new TextBox();
+            this.txtEmail = new TextBox();
+            this.txtUsername = new TextBox();
+            this.txtPassword = new TextBox();
 
-            cmbRol = new ComboBox();
+            this.cmbRol = new ComboBox();
 
-            btnGuardar = new Button();
-            btnCancelar = new Button();
+            this.btnGuardar = new Button();
+            this.btnCancelar = new Button();
 
-            SuspendLayout();
-
-<<<<<<< HEAD
             // FORM
-=======
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
-            BackColor = Color.FromArgb(243, 245, 250);
-            ClientSize = new Size(620, 620);
-            FormBorderStyle = FormBorderStyle.FixedDialog;
-            MaximizeBox = false;
-            StartPosition = FormStartPosition.CenterParent;
-            Text = "Nuevo Usuario";
+            this.SuspendLayout();
 
-<<<<<<< HEAD
+            this.BackColor = Color.FromArgb(243, 245, 250);
+            this.ClientSize = new Size(620, 620);
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.StartPosition = FormStartPosition.CenterParent;
+            this.Text = "Usuario";
+
             // HEADER
-=======
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
-            pnlHeader.Dock = DockStyle.Top;
-            pnlHeader.Height = 115;
-            pnlHeader.BackColor = Color.White;
+            this.pnlHeader.Dock = DockStyle.Top;
+            this.pnlHeader.Height = 115;
+            this.pnlHeader.BackColor = Color.White;
 
-<<<<<<< HEAD
-            // TITULO
-            lblTitulo.Text = "● Nuevo Usuario";
-            lblTitulo.Font = new Font("Segoe UI", 22F, FontStyle.Bold);
-=======
-            lblTitulo.Text = "●  Nuevo Usuario";
-            lblTitulo.Font = new Font("Segoe UI Semibold", 22F, FontStyle.Bold);
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
-            lblTitulo.ForeColor = Color.FromArgb(0, 60, 170);
-            lblTitulo.AutoSize = true;
-            lblTitulo.Location = new Point(35, 25);
+            this.lblTitulo.AutoSize = true;
+            this.lblTitulo.Font = new Font("Segoe UI", 22F, FontStyle.Bold);
+            this.lblTitulo.ForeColor = Color.FromArgb(0, 60, 170);
+            this.lblTitulo.Location = new Point(35, 25);
+            this.lblTitulo.Text = "● Usuario";
 
-<<<<<<< HEAD
-            // SUBTITULO
-=======
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
-            lblSubtitulo.Text = "Registra o modifica los datos del usuario.";
-            lblSubtitulo.Font = new Font("Segoe UI", 10.5F);
-            lblSubtitulo.ForeColor = Color.FromArgb(80, 85, 100);
-            lblSubtitulo.AutoSize = true;
-            lblSubtitulo.Location = new Point(40, 75);
+            this.lblSubtitulo.AutoSize = true;
+            this.lblSubtitulo.Font = new Font("Segoe UI", 10.5F);
+            this.lblSubtitulo.ForeColor = Color.FromArgb(80, 85, 100);
+            this.lblSubtitulo.Location = new Point(40, 75);
+            this.lblSubtitulo.Text = "Registra o modifica los datos del usuario.";
 
-            pnlHeader.Controls.Add(lblTitulo);
-            pnlHeader.Controls.Add(lblSubtitulo);
+            this.pnlHeader.Controls.Add(this.lblTitulo);
+            this.pnlHeader.Controls.Add(this.lblSubtitulo);
 
-<<<<<<< HEAD
             // BODY
-            pnlBody.Dock = DockStyle.Fill;
-            pnlBody.BackColor = Color.FromArgb(243, 245, 250);
+            this.pnlBody.Dock = DockStyle.Fill;
+            this.pnlBody.BackColor = Color.FromArgb(243, 245, 250);
 
-            // NOMBRE
-            lblNombre.Text = "Nombre";
-            lblNombre.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
-            lblNombre.ForeColor = Color.FromArgb(0, 45, 110);
-            lblNombre.AutoSize = true;
-            lblNombre.Location = new Point(35, 30);
+            // CAMPOS - LABELS Y TEXTBOXES
 
-            txtNombre.Location = new Point(35, 55);
-            txtNombre.Size = new Size(250, 30);
-            txtNombre.Font = new Font("Segoe UI", 10F);
+            // Nombre
+            this.lblNombre.AutoSize = true;
+            this.lblNombre.Location = new Point(30, 20);
+            this.lblNombre.Text = "Nombre";
+            this.txtNombre.Location = new Point(30, 40);
+            this.txtNombre.Size = new Size(250, 28);
 
-            // APELLIDO
-            lblApellido.Text = "Apellido";
-            lblApellido.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
-            lblApellido.ForeColor = Color.FromArgb(0, 45, 110);
-            lblApellido.AutoSize = true;
-            lblApellido.Location = new Point(315, 30);
+            // Apellido
+            this.lblApellido.AutoSize = true;
+            this.lblApellido.Location = new Point(310, 20);
+            this.lblApellido.Text = "Apellido";
+            this.txtApellido.Location = new Point(310, 40);
+            this.txtApellido.Size = new Size(250, 28);
 
-            txtApellido.Location = new Point(315, 55);
-            txtApellido.Size = new Size(250, 30);
-            txtApellido.Font = new Font("Segoe UI", 10F);
+            // Matrícula
+            this.lblMatricula.AutoSize = true;
+            this.lblMatricula.Location = new Point(30, 80);
+            this.lblMatricula.Text = "Matrícula";
+            this.txtMatricula.Location = new Point(30, 100);
+            this.txtMatricula.Size = new Size(250, 28);
 
-            // MATRICULA
-            lblMatricula.Text = "Matrícula";
-            lblMatricula.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
-            lblMatricula.ForeColor = Color.FromArgb(0, 45, 110);
-            lblMatricula.AutoSize = true;
-            lblMatricula.Location = new Point(35, 105);
+            // Curso
+            this.lblCurso.AutoSize = true;
+            this.lblCurso.Location = new Point(310, 80);
+            this.lblCurso.Text = "Curso";
+            this.txtCurso.Location = new Point(310, 100);
+            this.txtCurso.Size = new Size(250, 28);
 
-            txtMatricula.Location = new Point(35, 130);
-            txtMatricula.Size = new Size(250, 30);
-            txtMatricula.Font = new Font("Segoe UI", 10F);
+            // Sección
+            this.lblSeccion.AutoSize = true;
+            this.lblSeccion.Location = new Point(30, 140);
+            this.lblSeccion.Text = "Sección";
+            this.txtSeccion.Location = new Point(30, 160);
+            this.txtSeccion.Size = new Size(250, 28);
 
-            // CURSO
-            lblCurso.Text = "Curso";
-            lblCurso.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
-            lblCurso.ForeColor = Color.FromArgb(0, 45, 110);
-            lblCurso.AutoSize = true;
-            lblCurso.Location = new Point(315, 105);
+            // Email
+            this.lblEmail.AutoSize = true;
+            this.lblEmail.Location = new Point(310, 140);
+            this.lblEmail.Text = "Email";
+            this.txtEmail.Location = new Point(310, 160);
+            this.txtEmail.Size = new Size(250, 28);
 
-            txtCurso.Location = new Point(315, 130);
-            txtCurso.Size = new Size(250, 30);
-            txtCurso.Font = new Font("Segoe UI", 10F);
+            // Username
+            this.lblUsername.AutoSize = true;
+            this.lblUsername.Location = new Point(30, 200);
+            this.lblUsername.Text = "Usuario";
+            this.txtUsername.Location = new Point(30, 220);
+            this.txtUsername.Size = new Size(250, 28);
 
-            // SECCION
-            lblSeccion.Text = "Sección";
-            lblSeccion.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
-            lblSeccion.ForeColor = Color.FromArgb(0, 45, 110);
-            lblSeccion.AutoSize = true;
-            lblSeccion.Location = new Point(35, 180);
+            // Password
+            this.lblPassword.AutoSize = true;
+            this.lblPassword.Location = new Point(310, 200);
+            this.lblPassword.Text = "Contraseña";
+            this.txtPassword.Location = new Point(310, 220);
+            this.txtPassword.Size = new Size(250, 28);
+            this.txtPassword.PasswordChar = '*';
 
-            txtSeccion.Location = new Point(35, 205);
-            txtSeccion.Size = new Size(250, 30);
-            txtSeccion.Font = new Font("Segoe UI", 10F);
+            // Rol
+            this.lblRol.AutoSize = true;
+            this.lblRol.Location = new Point(30, 260);
+            this.lblRol.Text = "Rol";
 
-            // EMAIL
-            lblEmail.Text = "Email";
-            lblEmail.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
-            lblEmail.ForeColor = Color.FromArgb(0, 45, 110);
-            lblEmail.AutoSize = true;
-            lblEmail.Location = new Point(315, 180);
+            this.cmbRol.Location = new Point(30, 280);
+            this.cmbRol.Size = new Size(250, 28);
+            this.cmbRol.DropDownStyle = ComboBoxStyle.DropDownList;
 
-            txtEmail.Location = new Point(315, 205);
-            txtEmail.Size = new Size(250, 30);
-            txtEmail.Font = new Font("Segoe UI", 10F);
+            // BOTONES
+            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.Location = new Point(310, 520);
+            this.btnGuardar.Size = new Size(130, 40);
 
-            // USERNAME
-            lblUsername.Text = "Usuario";
-            lblUsername.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
-            lblUsername.ForeColor = Color.FromArgb(0, 45, 110);
-            lblUsername.AutoSize = true;
-            lblUsername.Location = new Point(35, 255);
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.Location = new Point(450, 520);
+            this.btnCancelar.Size = new Size(130, 40);
 
-            txtUsername.Location = new Point(35, 280);
-            txtUsername.Size = new Size(250, 30);
-            txtUsername.Font = new Font("Segoe UI", 10F);
+            // EVENTOS
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
 
-            // PASSWORD
-            lblPassword.Text = "Contraseña";
-            lblPassword.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
-            lblPassword.ForeColor = Color.FromArgb(0, 45, 110);
-            lblPassword.AutoSize = true;
-            lblPassword.Location = new Point(315, 255);
-
-            txtPassword.Location = new Point(315, 280);
-            txtPassword.Size = new Size(250, 30);
-            txtPassword.Font = new Font("Segoe UI", 10F);
-            txtPassword.PasswordChar = '*';
-
-            // ROL
-            lblRol.Text = "Rol";
-            lblRol.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
-=======
-            pnlBody.Dock = DockStyle.Fill;
-            pnlBody.BackColor = Color.FromArgb(243, 245, 250);
-            pnlBody.Padding = new Padding(35);
-
-            CrearCampo(lblNombre, txtNombre, "Nombre", 35, 30);
-            CrearCampo(lblApellido, txtApellido, "Apellido", 315, 30);
-
-            CrearCampo(lblMatricula, txtMatricula, "Matrícula", 35, 105);
-            CrearCampo(lblCurso, txtCurso, "Curso", 315, 105);
-
-            CrearCampo(lblSeccion, txtSeccion, "Sección", 35, 180);
-            CrearCampo(lblEmail, txtEmail, "Email", 315, 180);
-
-            CrearCampo(lblUsername, txtUsername, "Usuario", 35, 255);
-            CrearCampo(lblPassword, txtPassword, "Contraseña", 315, 255);
-            txtPassword.PasswordChar = '*';
-
-            lblRol.Text = "Rol";
-            lblRol.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold);
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
-            lblRol.ForeColor = Color.FromArgb(0, 45, 110);
-            lblRol.AutoSize = true;
-            lblRol.Location = new Point(35, 330);
-
-            cmbRol.Location = new Point(35, 355);
-<<<<<<< HEAD
-            cmbRol.Size = new Size(250, 30);
-            cmbRol.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbRol.Font = new Font("Segoe UI", 10F);
-
-            // GUARDAR
-=======
-            cmbRol.Size = new Size(250, 32);
-            cmbRol.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbRol.Font = new Font("Segoe UI", 10F);
-
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
-            btnGuardar.Text = "Guardar";
-            btnGuardar.Size = new Size(135, 42);
-            btnGuardar.Location = new Point(315, 440);
-            btnGuardar.FlatStyle = FlatStyle.Flat;
-            btnGuardar.FlatAppearance.BorderSize = 0;
-            btnGuardar.BackColor = Color.FromArgb(37, 99, 235);
-            btnGuardar.ForeColor = Color.White;
-<<<<<<< HEAD
-            btnGuardar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btnGuardar.UseVisualStyleBackColor = false;
-            btnGuardar.Click += btnGuardar_Click;
-
-            // CANCELAR
-=======
-            btnGuardar.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            btnGuardar.Cursor = Cursors.Hand;
-            btnGuardar.UseVisualStyleBackColor = false;
-            btnGuardar.Click += btnGuardar_Click;
-
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
-            btnCancelar.Text = "Cancelar";
-            btnCancelar.Size = new Size(135, 42);
-            btnCancelar.Location = new Point(460, 440);
-            btnCancelar.FlatStyle = FlatStyle.Flat;
-            btnCancelar.FlatAppearance.BorderSize = 0;
-            btnCancelar.BackColor = Color.FromArgb(235, 40, 50);
-            btnCancelar.ForeColor = Color.White;
-<<<<<<< HEAD
-            btnCancelar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btnCancelar.UseVisualStyleBackColor = false;
-            btnCancelar.Click += btnCancelar_Click;
-
-            // AGREGAR CONTROLES
-            pnlBody.Controls.Add(lblNombre);
-            pnlBody.Controls.Add(txtNombre);
-
-            pnlBody.Controls.Add(lblApellido);
-            pnlBody.Controls.Add(txtApellido);
-
-            pnlBody.Controls.Add(lblMatricula);
-            pnlBody.Controls.Add(txtMatricula);
-
-            pnlBody.Controls.Add(lblCurso);
-            pnlBody.Controls.Add(txtCurso);
-
-            pnlBody.Controls.Add(lblSeccion);
-            pnlBody.Controls.Add(txtSeccion);
-
-            pnlBody.Controls.Add(lblEmail);
-            pnlBody.Controls.Add(txtEmail);
-
-            pnlBody.Controls.Add(lblUsername);
-            pnlBody.Controls.Add(txtUsername);
-
-            pnlBody.Controls.Add(lblPassword);
-            pnlBody.Controls.Add(txtPassword);
-
-            pnlBody.Controls.Add(lblRol);
-            pnlBody.Controls.Add(cmbRol);
-
-            pnlBody.Controls.Add(btnGuardar);
-            pnlBody.Controls.Add(btnCancelar);
-=======
-            btnCancelar.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            btnCancelar.Cursor = Cursors.Hand;
-            btnCancelar.UseVisualStyleBackColor = false;
-            btnCancelar.Click += btnCancelar_Click;
-
-            cmbRol.SelectedIndexChanged += (s, e) =>
-            {
-                if (_usuario == null)
-                {
-                    string rol = cmbRol.SelectedItem?.ToString() ?? "Votante";
-                    txtMatricula.Text = GenerarMatriculaPorRol(rol);
-                }
-            };
-
-            if (_usuario == null)
-            {
-                txtMatricula.Text = GenerarMatriculaPorRol("Votante");
-            }
-
-            pnlBody.Controls.AddRange(new Control[]
+            // ADD CONTROLS
+            this.pnlBody.Controls.AddRange(new Control[]
             {
                 lblNombre, txtNombre,
                 lblApellido, txtApellido,
@@ -366,31 +206,11 @@ namespace SistemaVotacion.UI.Forms
                 lblRol, cmbRol,
                 btnGuardar, btnCancelar
             });
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
-            Controls.Add(pnlBody);
-            Controls.Add(pnlHeader);
+            this.Controls.Add(this.pnlBody);
+            this.Controls.Add(this.pnlHeader);
 
-            ResumeLayout(false);
+            this.ResumeLayout(false);
         }
-<<<<<<< HEAD
-=======
-
-        private void CrearCampo(Label lbl, TextBox txt, string texto, int x, int y)
-        {
-            lbl.Text = texto;
-            lbl.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold);
-            lbl.ForeColor = Color.FromArgb(0, 45, 110);
-            lbl.AutoSize = true;
-            lbl.Location = new Point(x, y);
-
-            txt.Location = new Point(x, y + 25);
-            txt.Size = new Size(250, 32);
-            txt.Font = new Font("Segoe UI", 10F);
-            txt.BorderStyle = BorderStyle.FixedSingle;
-        }
-
-
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
     }
 }

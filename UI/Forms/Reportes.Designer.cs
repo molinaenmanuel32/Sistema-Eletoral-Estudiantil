@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace SistemaVotacion.UI.Forms
@@ -34,7 +35,7 @@ namespace SistemaVotacion.UI.Forms
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing && components != null)
+            if (disposing && (components != null))
                 components.Dispose();
 
             base.Dispose(disposing);
@@ -54,165 +55,149 @@ namespace SistemaVotacion.UI.Forms
 
             lblGeneralTitulo = new Label();
             lblGeneralDesc = new Label();
-            btnVerGeneral = new Button();
-            btnPdfGeneral = new Button();
 
             lblPadronTitulo = new Label();
             lblPadronDesc = new Label();
-            btnVerPadron = new Button();
-            btnPdfPadron = new Button();
 
             lblGanadorTitulo = new Label();
             lblGanadorDesc = new Label();
+
+            btnVerGeneral = new Button();
+            btnPdfGeneral = new Button();
+
+            btnVerPadron = new Button();
+            btnPdfPadron = new Button();
+
             btnVerGanador = new Button();
             btnPdfGanador = new Button();
 
             SuspendLayout();
 
-            // ======================================================
-            // FORM
-            // ======================================================
+            // ================= FORM =================
             BackColor = Color.FromArgb(243, 245, 250);
             FormBorderStyle = FormBorderStyle.None;
             ClientSize = new Size(1190, 768);
+            Text = "Reportes";
 
-            // ======================================================
-            // HEADER
-            // ======================================================
+            // ================= HEADER =================
             pnlHeader.Dock = DockStyle.Top;
             pnlHeader.Height = 120;
             pnlHeader.BackColor = Color.White;
 
-            lblTitulo.Text = "●  Reportes del Sistema";
-            lblTitulo.Font = new Font("Segoe UI Semibold", 24F, FontStyle.Bold);
+            lblTitulo.Text = "● Reportes del Sistema";
+            lblTitulo.Font = new Font("Segoe UI", 24F, FontStyle.Bold);
             lblTitulo.ForeColor = Color.FromArgb(0, 60, 170);
-            lblTitulo.AutoSize = true;
             lblTitulo.Location = new Point(40, 25);
+            lblTitulo.AutoSize = true;
 
-            lblSubtitulo.Text = "Seleccione un reporte para visualizarlo o descargarlo en PDF.";
+            lblSubtitulo.Text = "Seleccione un reporte para visualizar o descargar.";
             lblSubtitulo.Font = new Font("Segoe UI", 11F);
-            lblSubtitulo.ForeColor = Color.FromArgb(80, 85, 100);
-            lblSubtitulo.AutoSize = true;
+            lblSubtitulo.ForeColor = Color.Gray;
             lblSubtitulo.Location = new Point(45, 78);
+            lblSubtitulo.AutoSize = true;
 
             pnlHeader.Controls.Add(lblTitulo);
             pnlHeader.Controls.Add(lblSubtitulo);
 
-            // ======================================================
-            // BODY
-            // ======================================================
+            // ================= BODY =================
             pnlBody.Dock = DockStyle.Fill;
-            pnlBody.BackColor = Color.FromArgb(243, 245, 250);
-            pnlBody.Padding = new Padding(35, 30, 35, 35);
+            pnlBody.Padding = new Padding(35);
             pnlBody.FlowDirection = FlowDirection.TopDown;
-            pnlBody.WrapContents = false;
             pnlBody.AutoScroll = true;
 
-            // ======================================================
-            // CARD GENERAL
-            // ======================================================
-            CrearCard(cardGeneral);
+            // ================= CARD GENERAL =================
+            cardGeneral.Size = new Size(890, 120);
+            cardGeneral.BackColor = Color.White;
+            cardGeneral.Margin = new Padding(0, 0, 0, 20);
 
-            CrearTitulo(lblGeneralTitulo, "📊 Reporte General de Votos");
+            lblGeneralTitulo.Text = "📊 Reporte General de Votos";
+            lblGeneralTitulo.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            lblGeneralTitulo.Location = new Point(30, 25);
+            lblGeneralTitulo.AutoSize = true;
 
-            CrearDescripcion(
-                lblGeneralDesc,
-                "Muestra el resumen general de los votos registrados en la votación."
-            );
+            lblGeneralDesc.Text = "Resumen general de votos registrados.";
+            lblGeneralDesc.Location = new Point(30, 65);
+            lblGeneralDesc.AutoSize = true;
 
-            CrearBotonAzul(
-                btnVerGeneral,
-                "Ver reporte",
-                new Point(560, 38)
-            );
+            btnVerGeneral.Text = "Ver reporte";
+            btnVerGeneral.Size = new Size(130, 40);
+            btnVerGeneral.Location = new Point(560, 40);
+            btnVerGeneral.BackColor = Color.RoyalBlue;
+            btnVerGeneral.ForeColor = Color.White;
 
-            CrearBotonRojo(
-                btnPdfGeneral,
-                "Descargar PDF",
-                new Point(705, 38)
-            );
-
-            btnVerGeneral.Click += btnVerGeneral_Click;
-            btnPdfGeneral.Click += btnPdfGeneral_Click;
+            btnPdfGeneral.Text = "PDF";
+            btnPdfGeneral.Size = new Size(130, 40);
+            btnPdfGeneral.Location = new Point(700, 40);
+            btnPdfGeneral.BackColor = Color.Crimson;
+            btnPdfGeneral.ForeColor = Color.White;
 
             cardGeneral.Controls.Add(lblGeneralTitulo);
             cardGeneral.Controls.Add(lblGeneralDesc);
             cardGeneral.Controls.Add(btnVerGeneral);
             cardGeneral.Controls.Add(btnPdfGeneral);
 
-            // ======================================================
-            // CARD PADRON
-            // ======================================================
-            CrearCard(cardPadron);
+            // ================= CARD PADRON =================
+            cardPadron.Size = new Size(890, 120);
+            cardPadron.BackColor = Color.White;
+            cardPadron.Margin = new Padding(0, 0, 0, 20);
 
-            CrearTitulo(
-                lblPadronTitulo,
-                "🧾 Reporte de Padrón Electoral"
-            );
+            lblPadronTitulo.Text = "🧾 Padrón Electoral";
+            lblPadronTitulo.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            lblPadronTitulo.Location = new Point(30, 25);
+            lblPadronTitulo.AutoSize = true;
 
-            CrearDescripcion(
-                lblPadronDesc,
-                "Lista los estudiantes habilitados para participar en la votación."
-            );
+            lblPadronDesc.Text = "Lista de estudiantes habilitados.";
+            lblPadronDesc.Location = new Point(30, 65);
+            lblPadronDesc.AutoSize = true;
 
-            CrearBotonAzul(
-                btnVerPadron,
-                "Ver reporte",
-                new Point(560, 38)
-            );
+            btnVerPadron.Text = "Ver reporte";
+            btnVerPadron.Size = new Size(130, 40);
+            btnVerPadron.Location = new Point(560, 40);
+            btnVerPadron.BackColor = Color.RoyalBlue;
+            btnVerPadron.ForeColor = Color.White;
 
-            CrearBotonRojo(
-                btnPdfPadron,
-                "Descargar PDF",
-                new Point(705, 38)
-            );
-
-            btnVerPadron.Click += btnVerPadron_Click;
-            btnPdfPadron.Click += btnPdfPadron_Click;
+            btnPdfPadron.Text = "PDF";
+            btnPdfPadron.Size = new Size(130, 40);
+            btnPdfPadron.Location = new Point(700, 40);
+            btnPdfPadron.BackColor = Color.Crimson;
+            btnPdfPadron.ForeColor = Color.White;
 
             cardPadron.Controls.Add(lblPadronTitulo);
             cardPadron.Controls.Add(lblPadronDesc);
             cardPadron.Controls.Add(btnVerPadron);
             cardPadron.Controls.Add(btnPdfPadron);
 
-            // ======================================================
-            // CARD GANADOR
-            // ======================================================
-            CrearCard(cardGanador);
+            // ================= CARD GANADOR =================
+            cardGanador.Size = new Size(890, 120);
+            cardGanador.BackColor = Color.White;
 
-            CrearTitulo(
-                lblGanadorTitulo,
-                "🏆 Reporte de Plancha Ganadora"
-            );
+            lblGanadorTitulo.Text = "🏆 Plancha Ganadora";
+            lblGanadorTitulo.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            lblGanadorTitulo.Location = new Point(30, 25);
+            lblGanadorTitulo.AutoSize = true;
 
-            CrearDescripcion(
-                lblGanadorDesc,
-                "Presenta la plancha ganadora y los resultados finales."
-            );
+            lblGanadorDesc.Text = "Resultados finales de la votación.";
+            lblGanadorDesc.Location = new Point(30, 65);
+            lblGanadorDesc.AutoSize = true;
 
-            CrearBotonAzul(
-                btnVerGanador,
-                "Ver reporte",
-                new Point(560, 38)
-            );
+            btnVerGanador.Text = "Ver reporte";
+            btnVerGanador.Size = new Size(130, 40);
+            btnVerGanador.Location = new Point(560, 40);
+            btnVerGanador.BackColor = Color.RoyalBlue;
+            btnVerGanador.ForeColor = Color.White;
 
-            CrearBotonRojo(
-                btnPdfGanador,
-                "Descargar PDF",
-                new Point(705, 38)
-            );
-
-            btnVerGanador.Click += btnVerGanador_Click;
-            btnPdfGanador.Click += btnPdfGanador_Click;
+            btnPdfGanador.Text = "PDF";
+            btnPdfGanador.Size = new Size(130, 40);
+            btnPdfGanador.Location = new Point(700, 40);
+            btnPdfGanador.BackColor = Color.Crimson;
+            btnPdfGanador.ForeColor = Color.White;
 
             cardGanador.Controls.Add(lblGanadorTitulo);
             cardGanador.Controls.Add(lblGanadorDesc);
             cardGanador.Controls.Add(btnVerGanador);
             cardGanador.Controls.Add(btnPdfGanador);
 
-            // ======================================================
-            // ADD CONTROLS
-            // ======================================================
+            // ================= ADD =================
             pnlBody.Controls.Add(cardGeneral);
             pnlBody.Controls.Add(cardPadron);
             pnlBody.Controls.Add(cardGanador);
@@ -220,71 +205,7 @@ namespace SistemaVotacion.UI.Forms
             Controls.Add(pnlBody);
             Controls.Add(pnlHeader);
 
-            Name = "Reportes";
-            Text = "Reportes";
-
             ResumeLayout(false);
-        }
-
-        private void CrearCard(Panel card)
-        {
-            card.Size = new Size(890, 120);
-            card.BackColor = Color.White;
-            card.Margin = new Padding(0, 0, 0, 22);
-        }
-
-        private void CrearTitulo(Label label, string texto)
-        {
-            label.Text = texto;
-            label.Location = new Point(30, 25);
-            label.AutoSize = true;
-            label.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold);
-            label.ForeColor = Color.FromArgb(0, 60, 170);
-        }
-
-        private void CrearDescripcion(Label label, string texto)
-        {
-            label.Text = texto;
-            label.Location = new Point(33, 68);
-            label.AutoSize = true;
-            label.Font = new Font("Segoe UI", 10F);
-            label.ForeColor = Color.FromArgb(80, 85, 100);
-        }
-
-        private void CrearBotonAzul(Button btn, string texto, Point location)
-        {
-            btn.Text = texto;
-            btn.Location = location;
-            btn.Size = new Size(130, 42);
-
-            btn.FlatStyle = FlatStyle.Flat;
-            btn.FlatAppearance.BorderSize = 0;
-
-            btn.BackColor = Color.FromArgb(37, 99, 235);
-            btn.ForeColor = Color.White;
-
-            btn.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold);
-
-            btn.Cursor = Cursors.Hand;
-            btn.UseVisualStyleBackColor = false;
-        }
-
-        private void CrearBotonRojo(Button btn, string texto, Point location)
-        {
-            btn.Text = texto;
-            btn.Location = location;
-            btn.Size = new Size(145, 42);
-
-            btn.FlatStyle = FlatStyle.Flat;
-            btn.FlatAppearance.BorderSize = 0;
-
-            btn.BackColor = Color.FromArgb(235, 40, 50);
-            btn.ForeColor = Color.White;
-
-            btn.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold);
-
-            btn.Cursor = Cursors.Hand;
-            btn.UseVisualStyleBackColor = false;
         }
     }
 }

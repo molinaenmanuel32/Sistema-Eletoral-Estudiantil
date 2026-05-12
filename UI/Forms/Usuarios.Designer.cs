@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace SistemaVotacion.UI.Forms
@@ -9,42 +10,32 @@ namespace SistemaVotacion.UI.Forms
 
         private Panel pnlHeader;
         private Panel pnlTop;
+        private DataGridView dgv;
 
         private Label lblTitulo;
         private Label lblSubtitulo;
         private Label lblBuscar;
+        private Label lblIcono;
+
+        private TextBox txtBuscar;
 
         private Button btnNuevo;
         private Button btnEditar;
         private Button btnEliminar;
-        private Label lblIcono;
-        private TextBox txtBuscar;
 
-        private DataGridView dgv;
-
-<<<<<<< HEAD
-        private readonly Color Azul = Color.FromArgb(0, 55, 150);
-        private readonly Color AzulClaro = Color.FromArgb(22, 97, 255);
-        private readonly Color Rojo = Color.FromArgb(230, 40, 45);
-        private readonly Color Fondo = Color.FromArgb(245, 247, 252);
-        private readonly Color Card = Color.White;
-        private readonly Color Texto = Color.FromArgb(10, 35, 90);
-        private readonly Color TextoSuave = Color.FromArgb(80, 90, 115);
-        private readonly Color Borde = Color.FromArgb(220, 225, 235);
-=======
-        private static readonly Color Azul = Color.FromArgb(0, 55, 150);
-        private static readonly Color AzulClaro = Color.FromArgb(22, 97, 255);
-        private static readonly Color Rojo = Color.FromArgb(230, 40, 45);
-        private static readonly Color Fondo = Color.FromArgb(245, 247, 252);
-        private static readonly Color Card = Color.White;
-        private static readonly Color Texto = Color.FromArgb(10, 35, 90);
-        private static readonly Color TextoSuave = Color.FromArgb(80, 90, 115);
-        private static readonly Color Borde = Color.FromArgb(220, 225, 235);
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
+        private DataGridViewTextBoxColumn colId;
+        private DataGridViewTextBoxColumn colApellido;
+        private DataGridViewTextBoxColumn colNombre;
+        private DataGridViewTextBoxColumn colMatricula;
+        private DataGridViewTextBoxColumn colCurso;
+        private DataGridViewTextBoxColumn colSeccion;
+        private DataGridViewTextBoxColumn colUsuario;
+        private DataGridViewTextBoxColumn colRol;
+        private DataGridViewCheckBoxColumn colActivo;
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && components != null)
                 components.Dispose();
 
             base.Dispose(disposing);
@@ -52,289 +43,229 @@ namespace SistemaVotacion.UI.Forms
 
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            pnlHeader = new Panel();
-            lblIcono = new Label();
-            lblTitulo = new Label();
-            lblSubtitulo = new Label();
-            pnlTop = new Panel();
-            btnNuevo = new Button();
-            btnEditar = new Button();
-            btnEliminar = new Button();
-            lblBuscar = new Label();
-            txtBuscar = new TextBox();
-            dgv = new DataGridView();
-            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn5 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn6 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn7 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn8 = new DataGridViewTextBoxColumn();
-            dataGridViewCheckBoxColumn1 = new DataGridViewCheckBoxColumn();
-            pnlHeader.SuspendLayout();
-            pnlTop.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgv).BeginInit();
-            SuspendLayout();
+            this.pnlHeader = new System.Windows.Forms.Panel();
+            this.lblIcono = new System.Windows.Forms.Label();
+            this.lblTitulo = new System.Windows.Forms.Label();
+            this.lblSubtitulo = new System.Windows.Forms.Label();
+            this.pnlTop = new System.Windows.Forms.Panel();
+            this.btnNuevo = new System.Windows.Forms.Button();
+            this.btnEditar = new System.Windows.Forms.Button();
+            this.btnEliminar = new System.Windows.Forms.Button();
+            this.lblBuscar = new System.Windows.Forms.Label();
+            this.txtBuscar = new System.Windows.Forms.TextBox();
+            this.dgv = new System.Windows.Forms.DataGridView();
+            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colApellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMatricula = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCurso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSeccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colActivo = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.pnlHeader.SuspendLayout();
+            this.pnlTop.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
+            this.SuspendLayout();
             // 
             // pnlHeader
             // 
-            pnlHeader.Controls.Add(lblIcono);
-            pnlHeader.Controls.Add(lblTitulo);
-            pnlHeader.Controls.Add(lblSubtitulo);
-            pnlHeader.Dock = DockStyle.Top;
-            pnlHeader.Location = new Point(25, 25);
-            pnlHeader.Name = "pnlHeader";
-            pnlHeader.Padding = new Padding(25, 15, 25, 15);
-            pnlHeader.Size = new Size(1050, 120);
-            pnlHeader.TabIndex = 2;
+            this.pnlHeader.BackColor = System.Drawing.Color.White;
+            this.pnlHeader.Controls.Add(this.lblIcono);
+            this.pnlHeader.Controls.Add(this.lblTitulo);
+            this.pnlHeader.Controls.Add(this.lblSubtitulo);
+            this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlHeader.Location = new System.Drawing.Point(25, 25);
+            this.pnlHeader.Name = "pnlHeader";
+            this.pnlHeader.Size = new System.Drawing.Size(1050, 120);
+            this.pnlHeader.TabIndex = 2;
             // 
             // lblIcono
             // 
-            lblIcono.Text = "●";
-            lblIcono.Font = new Font("Segoe UI", 26F, FontStyle.Bold);
-<<<<<<< HEAD
-            lblIcono.ForeColor = Color.FromArgb(22, 97, 255);
-=======
-            lblIcono.ForeColor = AzulClaro;
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
-            lblIcono.Location = new Point(20, 10);
-            lblIcono.Name = "lblIcono";
-            lblIcono.Size = new Size(40, 55);
-            lblIcono.TabIndex = 0;
-
+            this.lblIcono.Font = new System.Drawing.Font("Segoe UI", 26F, System.Drawing.FontStyle.Bold);
+            this.lblIcono.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(97)))), ((int)(((byte)(255)))));
+            this.lblIcono.Location = new System.Drawing.Point(643, 56);
+            this.lblIcono.Name = "lblIcono";
+            this.lblIcono.Size = new System.Drawing.Size(100, 23);
+            this.lblIcono.TabIndex = 0;
+            this.lblIcono.Text = "●";
             // 
             // lblTitulo
             // 
-            lblTitulo.Text = "Gestión de Usuarios";
-            lblTitulo.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
-<<<<<<< HEAD
-            lblTitulo.ForeColor = Color.FromArgb(0, 55, 150);
-=======
-            lblTitulo.ForeColor = Azul;
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
-            lblTitulo.Location = new Point(65, 18);
-            lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(500, 42);
-            lblTitulo.TabIndex = 1;
-
+            this.lblTitulo.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold);
+            this.lblTitulo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(55)))), ((int)(((byte)(150)))));
+            this.lblTitulo.Location = new System.Drawing.Point(26, 10);
+            this.lblTitulo.Name = "lblTitulo";
+            this.lblTitulo.Size = new System.Drawing.Size(388, 55);
+            this.lblTitulo.TabIndex = 1;
+            this.lblTitulo.Text = "Gestión de Usuarios";
             // 
             // lblSubtitulo
             // 
-            lblSubtitulo.Text = "Administra los usuarios del sistema electoral estudiantil";
-            lblSubtitulo.Font = new Font("Segoe UI", 10.5F);
-<<<<<<< HEAD
-            lblSubtitulo.ForeColor = Color.FromArgb(80, 90, 115);
-=======
-            lblSubtitulo.ForeColor = TextoSuave;
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
-            lblSubtitulo.Location = new Point(30, 65);
-            lblSubtitulo.Name = "lblSubtitulo";
-            lblSubtitulo.Size = new Size(700, 28);
-            lblSubtitulo.TabIndex = 2;
+            this.lblSubtitulo.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.lblSubtitulo.ForeColor = System.Drawing.Color.Gray;
+            this.lblSubtitulo.Location = new System.Drawing.Point(30, 65);
+            this.lblSubtitulo.Name = "lblSubtitulo";
+            this.lblSubtitulo.Size = new System.Drawing.Size(100, 23);
+            this.lblSubtitulo.TabIndex = 2;
+            this.lblSubtitulo.Text = "Administra los usuarios del sistema electoral";
             // 
             // pnlTop
             // 
-            pnlTop.Controls.Add(btnNuevo);
-            pnlTop.Controls.Add(btnEditar);
-            pnlTop.Controls.Add(btnEliminar);
-            pnlTop.Controls.Add(lblBuscar);
-            pnlTop.Controls.Add(txtBuscar);
-            pnlTop.Dock = DockStyle.Top;
-            pnlTop.Location = new Point(25, 145);
-            pnlTop.Name = "pnlTop";
-            pnlTop.Padding = new Padding(0, 15, 0, 15);
-            pnlTop.Size = new Size(1050, 82);
-            pnlTop.TabIndex = 1;
+            this.pnlTop.Controls.Add(this.btnNuevo);
+            this.pnlTop.Controls.Add(this.btnEditar);
+            this.pnlTop.Controls.Add(this.btnEliminar);
+            this.pnlTop.Controls.Add(this.lblBuscar);
+            this.pnlTop.Controls.Add(this.txtBuscar);
+            this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlTop.Location = new System.Drawing.Point(25, 145);
+            this.pnlTop.Name = "pnlTop";
+            this.pnlTop.Size = new System.Drawing.Size(1050, 80);
+            this.pnlTop.TabIndex = 1;
             // 
             // btnNuevo
             // 
-            btnNuevo.Cursor = Cursors.Hand;
-            btnNuevo.FlatAppearance.BorderSize = 0;
-            btnNuevo.FlatStyle = FlatStyle.Flat;
-            btnNuevo.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            btnNuevo.ForeColor = Color.White;
-            btnNuevo.Location = new Point(0, 18);
-            btnNuevo.Name = "btnNuevo";
-            btnNuevo.Size = new Size(160, 42);
-            btnNuevo.TabIndex = 0;
-            btnNuevo.Text = "+ Nuevo Usuario";
-            btnNuevo.Click += btnNuevo_Click;
+            this.btnNuevo.Location = new System.Drawing.Point(0, 18);
+            this.btnNuevo.Name = "btnNuevo";
+            this.btnNuevo.Size = new System.Drawing.Size(75, 23);
+            this.btnNuevo.TabIndex = 0;
+            this.btnNuevo.Text = "Nuevo";
             // 
             // btnEditar
             // 
-            btnEditar.Cursor = Cursors.Hand;
-            btnEditar.FlatAppearance.BorderSize = 0;
-            btnEditar.FlatStyle = FlatStyle.Flat;
-            btnEditar.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            btnEditar.ForeColor = Color.White;
-            btnEditar.Location = new Point(175, 18);
-            btnEditar.Name = "btnEditar";
-            btnEditar.Size = new Size(100, 42);
-            btnEditar.TabIndex = 1;
-            btnEditar.Text = "Editar";
-            btnEditar.Click += btnEditar_Click;
+            this.btnEditar.Location = new System.Drawing.Point(120, 18);
+            this.btnEditar.Name = "btnEditar";
+            this.btnEditar.Size = new System.Drawing.Size(75, 23);
+            this.btnEditar.TabIndex = 1;
+            this.btnEditar.Text = "Editar";
             // 
             // btnEliminar
             // 
-            btnEliminar.Cursor = Cursors.Hand;
-            btnEliminar.FlatAppearance.BorderSize = 0;
-            btnEliminar.FlatStyle = FlatStyle.Flat;
-            btnEliminar.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            btnEliminar.ForeColor = Color.White;
-            btnEliminar.Location = new Point(290, 18);
-            btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(120, 42);
-            btnEliminar.TabIndex = 2;
-            btnEliminar.Text = "Desactivar";
-            btnEliminar.Click += btnEliminar_Click;
+            this.btnEliminar.Location = new System.Drawing.Point(240, 18);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(75, 23);
+            this.btnEliminar.TabIndex = 2;
+            this.btnEliminar.Text = "Eliminar";
             // 
             // lblBuscar
             // 
-            lblBuscar.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            lblBuscar.Location = new Point(462, 28);
-            lblBuscar.Name = "lblBuscar";
-            lblBuscar.Size = new Size(70, 25);
-            lblBuscar.TabIndex = 3;
-            lblBuscar.Text = "Buscar:";
+            this.lblBuscar.Location = new System.Drawing.Point(400, 25);
+            this.lblBuscar.Name = "lblBuscar";
+            this.lblBuscar.Size = new System.Drawing.Size(100, 23);
+            this.lblBuscar.TabIndex = 3;
+            this.lblBuscar.Text = "Buscar:";
             // 
             // txtBuscar
             // 
-            txtBuscar.BorderStyle = BorderStyle.FixedSingle;
-            txtBuscar.Font = new Font("Segoe UI", 10F);
-            txtBuscar.Location = new Point(538, 23);
-            txtBuscar.Name = "txtBuscar";
-<<<<<<< HEAD
-=======
-            txtBuscar.PlaceholderText = "Nombre, matrícula o usuario...";
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
-            txtBuscar.Size = new Size(280, 30);
-            txtBuscar.TabIndex = 4;
-            txtBuscar.TextChanged += txtBuscar_TextChanged;
+            this.txtBuscar.Location = new System.Drawing.Point(460, 20);
+            this.txtBuscar.Name = "txtBuscar";
+            this.txtBuscar.Size = new System.Drawing.Size(250, 22);
+            this.txtBuscar.TabIndex = 4;
             // 
             // dgv
             // 
-            dgv.AllowUserToAddRows = false;
-            dgv.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(248, 250, 255);
-            dgv.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgv.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.Control;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dgv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            dgv.ColumnHeadersHeight = 45;
-            dgv.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn4, dataGridViewTextBoxColumn5, dataGridViewTextBoxColumn6, dataGridViewTextBoxColumn7, dataGridViewTextBoxColumn8, dataGridViewCheckBoxColumn1 });
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = SystemColors.Window;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 10F);
-            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle3.Padding = new Padding(5, 0, 5, 0);
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = Color.White;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            dgv.DefaultCellStyle = dataGridViewCellStyle3;
-            dgv.Dock = DockStyle.Fill;
-            dgv.EnableHeadersVisualStyles = false;
-            dgv.Font = new Font("Segoe UI", 10F);
-            dgv.Location = new Point(25, 227);
-            dgv.MultiSelect = false;
-            dgv.Name = "dgv";
-            dgv.ReadOnly = true;
-            dgv.RowHeadersVisible = false;
-            dgv.RowHeadersWidth = 51;
-            dgv.RowTemplate.Height = 38;
-            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgv.Size = new Size(1050, 448);
-            dgv.TabIndex = 0;
+            this.dgv.AllowUserToAddRows = false;
+            this.dgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgv.ColumnHeadersHeight = 29;
+            this.dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colId,
+            this.colApellido,
+            this.colNombre,
+            this.colMatricula,
+            this.colCurso,
+            this.colSeccion,
+            this.colUsuario,
+            this.colRol,
+            this.colActivo});
+            this.dgv.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgv.Location = new System.Drawing.Point(25, 225);
+            this.dgv.Name = "dgv";
+            this.dgv.ReadOnly = true;
+            this.dgv.RowHeadersVisible = false;
+            this.dgv.RowHeadersWidth = 51;
+            this.dgv.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgv.Size = new System.Drawing.Size(1050, 450);
+            this.dgv.TabIndex = 0;
             // 
-            // dataGridViewTextBoxColumn1
+            // colId
             // 
-            dataGridViewTextBoxColumn1.MinimumWidth = 6;
-            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.colId.HeaderText = "ID";
+            this.colId.MinimumWidth = 6;
+            this.colId.Name = "colId";
+            this.colId.ReadOnly = true;
             // 
-            // dataGridViewTextBoxColumn2
+            // colApellido
             // 
-            dataGridViewTextBoxColumn2.MinimumWidth = 6;
-            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.colApellido.HeaderText = "Apellido";
+            this.colApellido.MinimumWidth = 6;
+            this.colApellido.Name = "colApellido";
+            this.colApellido.ReadOnly = true;
             // 
-            // dataGridViewTextBoxColumn3
+            // colNombre
             // 
-            dataGridViewTextBoxColumn3.MinimumWidth = 6;
-            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.colNombre.HeaderText = "Nombre";
+            this.colNombre.MinimumWidth = 6;
+            this.colNombre.Name = "colNombre";
+            this.colNombre.ReadOnly = true;
             // 
-            // dataGridViewTextBoxColumn4
+            // colMatricula
             // 
-            dataGridViewTextBoxColumn4.MinimumWidth = 6;
-            dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.colMatricula.HeaderText = "Matrícula";
+            this.colMatricula.MinimumWidth = 6;
+            this.colMatricula.Name = "colMatricula";
+            this.colMatricula.ReadOnly = true;
             // 
-            // dataGridViewTextBoxColumn5
+            // colCurso
             // 
-            dataGridViewTextBoxColumn5.MinimumWidth = 6;
-            dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            dataGridViewTextBoxColumn5.ReadOnly = true;
+            this.colCurso.HeaderText = "Curso";
+            this.colCurso.MinimumWidth = 6;
+            this.colCurso.Name = "colCurso";
+            this.colCurso.ReadOnly = true;
             // 
-            // dataGridViewTextBoxColumn6
+            // colSeccion
             // 
-            dataGridViewTextBoxColumn6.MinimumWidth = 6;
-            dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            dataGridViewTextBoxColumn6.ReadOnly = true;
+            this.colSeccion.HeaderText = "Sección";
+            this.colSeccion.MinimumWidth = 6;
+            this.colSeccion.Name = "colSeccion";
+            this.colSeccion.ReadOnly = true;
             // 
-            // dataGridViewTextBoxColumn7
+            // colUsuario
             // 
-            dataGridViewTextBoxColumn7.MinimumWidth = 6;
-            dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            dataGridViewTextBoxColumn7.ReadOnly = true;
+            this.colUsuario.HeaderText = "Usuario";
+            this.colUsuario.MinimumWidth = 6;
+            this.colUsuario.Name = "colUsuario";
+            this.colUsuario.ReadOnly = true;
             // 
-            // dataGridViewTextBoxColumn8
+            // colRol
             // 
-            dataGridViewTextBoxColumn8.MinimumWidth = 6;
-            dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            dataGridViewTextBoxColumn8.ReadOnly = true;
+            this.colRol.HeaderText = "Rol";
+            this.colRol.MinimumWidth = 6;
+            this.colRol.Name = "colRol";
+            this.colRol.ReadOnly = true;
             // 
-            // dataGridViewCheckBoxColumn1
+            // colActivo
             // 
-            dataGridViewCheckBoxColumn1.MinimumWidth = 6;
-            dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
-            dataGridViewCheckBoxColumn1.ReadOnly = true;
+            this.colActivo.HeaderText = "Activo";
+            this.colActivo.MinimumWidth = 6;
+            this.colActivo.Name = "colActivo";
+            this.colActivo.ReadOnly = true;
             // 
             // Usuarios
             // 
-            AutoScroll = true;
-            ClientSize = new Size(1100, 700);
-            Controls.Add(dgv);
-            Controls.Add(pnlTop);
-            Controls.Add(pnlHeader);
-            Name = "Usuarios";
-            Padding = new Padding(25);
-            Text = "Usuarios";
-            pnlHeader.ResumeLayout(false);
-            pnlTop.ResumeLayout(false);
-            pnlTop.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgv).EndInit();
-            ResumeLayout(false);
-        }
+            this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(1100, 700);
+            this.Controls.Add(this.dgv);
+            this.Controls.Add(this.pnlTop);
+            this.Controls.Add(this.pnlHeader);
+            this.Name = "Usuarios";
+            this.Padding = new System.Windows.Forms.Padding(25);
+            this.Text = "Usuarios";
+            this.pnlHeader.ResumeLayout(false);
+            this.pnlTop.ResumeLayout(false);
+            this.pnlTop.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
+            this.ResumeLayout(false);
 
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
-        private DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
+        }
     }
 }

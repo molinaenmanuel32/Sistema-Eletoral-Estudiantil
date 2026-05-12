@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using SistemaVotacion.Utils;
 
@@ -235,6 +236,11 @@ namespace SistemaVotacion.UI.Forms
             ((System.ComponentModel.ISupportInitialize)dgvMiembros).EndInit();
 
             ResumeLayout(false);
+        }
+
+        private void BtnEliminar_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

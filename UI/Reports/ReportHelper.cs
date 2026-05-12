@@ -1,4 +1,4 @@
-// ══════════════════════════════════════════════════════════════════
+﻿// ══════════════════════════════════════════════════════════════════
 //  ReportHelper.cs  –  SistemaVotacion
 //  Métodos de extensión para cargar cada .rdlc en ReportViewer.
 //  Referencia NuGet requerida:
@@ -49,11 +49,11 @@ namespace SistemaVotacion.Reports
 
             // ── dsResumen: 1 fila con los totales ──────────────────
             var dtResumen = new DataTable("dsResumen");
-            dtResumen.Columns.Add("TotalPadron",             typeof(int));
-            dtResumen.Columns.Add("TotalVotos",              typeof(int));
-            dtResumen.Columns.Add("VotosNulos",              typeof(int));
-            dtResumen.Columns.Add("VotosValidos",            typeof(int));
-            dtResumen.Columns.Add("SinVotar",                typeof(int));
+            dtResumen.Columns.Add("TotalPadron", typeof(int));
+            dtResumen.Columns.Add("TotalVotos", typeof(int));
+            dtResumen.Columns.Add("VotosNulos", typeof(int));
+            dtResumen.Columns.Add("VotosValidos", typeof(int));
+            dtResumen.Columns.Add("SinVotar", typeof(int));
             dtResumen.Columns.Add("PorcentajeParticipacion", typeof(decimal));
             dtResumen.Rows.Add(
                 estadisticas.TotalPadron,
@@ -64,14 +64,14 @@ namespace SistemaVotacion.Reports
                 estadisticas.PorcentajeParticipacion);
 
             // ── dsGanadora: plancha con más votos ──────────────────
-            var ganadora  = estadisticas.PorPlancha.OrderByDescending(p => p.TotalVotos).First();
+            var ganadora = estadisticas.PorPlancha.OrderByDescending(p => p.TotalVotos).First();
             var dtGanadora = new DataTable("dsGanadora");
-            dtGanadora.Columns.Add("PlanchaId",  typeof(int));
-            dtGanadora.Columns.Add("Plancha",    typeof(string));
-            dtGanadora.Columns.Add("Color",      typeof(string));
+            dtGanadora.Columns.Add("PlanchaId", typeof(int));
+            dtGanadora.Columns.Add("Plancha", typeof(string));
+            dtGanadora.Columns.Add("Color", typeof(string));
             dtGanadora.Columns.Add("TotalVotos", typeof(int));
             dtGanadora.Columns.Add("Porcentaje", typeof(decimal));
-            dtGanadora.Columns.Add("LogoPath",   typeof(string));
+            dtGanadora.Columns.Add("LogoPath", typeof(string));
             dtGanadora.Rows.Add(
                 ganadora.PlanchaId,
                 ganadora.Plancha,
@@ -82,9 +82,9 @@ namespace SistemaVotacion.Reports
 
             // ── dsPlanchas: todas las planchas ─────────────────────
             var dtPlanchas = new DataTable("dsPlanchas");
-            dtPlanchas.Columns.Add("PlanchaId",  typeof(int));
-            dtPlanchas.Columns.Add("Plancha",    typeof(string));
-            dtPlanchas.Columns.Add("Color",      typeof(string));
+            dtPlanchas.Columns.Add("PlanchaId", typeof(int));
+            dtPlanchas.Columns.Add("Plancha", typeof(string));
+            dtPlanchas.Columns.Add("Color", typeof(string));
             dtPlanchas.Columns.Add("TotalVotos", typeof(int));
             dtPlanchas.Columns.Add("Porcentaje", typeof(decimal));
             foreach (var p in estadisticas.PorPlancha.OrderByDescending(x => x.TotalVotos))
@@ -92,7 +92,7 @@ namespace SistemaVotacion.Reports
 
             // ── Bind ────────────────────────────────────────────────
             viewer.LocalReport.DataSources.Clear();
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("dsResumen",  dtResumen));
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("dsResumen", dtResumen));
             viewer.LocalReport.DataSources.Add(new ReportDataSource("dsGanadora", dtGanadora));
             viewer.LocalReport.DataSources.Add(new ReportDataSource("dsPlanchas", dtPlanchas));
 
@@ -119,44 +119,44 @@ namespace SistemaVotacion.Reports
 
             // ── dsInfoPlancha: datos de la plancha ─────────────────
             var dtInfo = new DataTable("dsInfoPlancha");
-            dtInfo.Columns.Add("PlanchaId",   typeof(int));
-            dtInfo.Columns.Add("Nombre",      typeof(string));
+            dtInfo.Columns.Add("PlanchaId", typeof(int));
+            dtInfo.Columns.Add("Nombre", typeof(string));
             dtInfo.Columns.Add("Descripcion", typeof(string));
-            dtInfo.Columns.Add("Mision",      typeof(string));
-            dtInfo.Columns.Add("Color",       typeof(string));
+            dtInfo.Columns.Add("Mision", typeof(string));
+            dtInfo.Columns.Add("Color", typeof(string));
             dtInfo.Columns.Add("AdminNombre", typeof(string));
-            dtInfo.Columns.Add("Activa",      typeof(bool));
+            dtInfo.Columns.Add("Activa", typeof(bool));
             dtInfo.Rows.Add(
                 plancha.PlanchaId,
                 plancha.Nombre,
                 plancha.Descripcion ?? "",
-                plancha.Mision      ?? "",
-                plancha.Color       ?? "#007BFF",
+                plancha.Mision ?? "",
+                plancha.Color ?? "#007BFF",
                 plancha.AdminNombre ?? "",
                 plancha.Activa);
 
             // ── dsMiembros: integrantes ─────────────────────────────
             var dtMiembros = new DataTable("dsMiembros");
-            dtMiembros.Columns.Add("MiembroId",      typeof(int));
+            dtMiembros.Columns.Add("MiembroId", typeof(int));
             dtMiembros.Columns.Add("NombreCompleto", typeof(string));
-            dtMiembros.Columns.Add("Matricula",      typeof(string));
-            dtMiembros.Columns.Add("Puesto",         typeof(string));
-            dtMiembros.Columns.Add("Descripcion",    typeof(string));
-            dtMiembros.Columns.Add("Orden",          typeof(int));
-            dtMiembros.Columns.Add("FotoPath",       typeof(string));
+            dtMiembros.Columns.Add("Matricula", typeof(string));
+            dtMiembros.Columns.Add("Puesto", typeof(string));
+            dtMiembros.Columns.Add("Descripcion", typeof(string));
+            dtMiembros.Columns.Add("Orden", typeof(int));
+            dtMiembros.Columns.Add("FotoPath", typeof(string));
             foreach (var m in plancha.Miembros.OrderBy(x => x.Orden))
                 dtMiembros.Rows.Add(
                     m.MiembroId,
                     m.NombreCompleto ?? m.Nombre,
-                    m.Matricula      ?? "",
-                    m.Puesto         ?? "",
-                    m.Descripcion    ?? "",
+                    m.Matricula ?? "",
+                    m.Puesto ?? "",
+                    m.Descripcion ?? "",
                     m.Orden,
-                    m.FotoPath       ?? "");
+                    m.FotoPath ?? "");
 
             viewer.LocalReport.DataSources.Clear();
             viewer.LocalReport.DataSources.Add(new ReportDataSource("dsInfoPlancha", dtInfo));
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("dsMiembros",    dtMiembros));
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("dsMiembros", dtMiembros));
 
             viewer.RefreshReport();
         }
@@ -188,11 +188,11 @@ namespace SistemaVotacion.Reports
 
             // ── dsResumen ──────────────────────────────────────────
             var dtResumen = new DataTable("dsResumen");
-            dtResumen.Columns.Add("TotalPadron",             typeof(int));
-            dtResumen.Columns.Add("TotalVotos",              typeof(int));
-            dtResumen.Columns.Add("VotosNulos",              typeof(int));
-            dtResumen.Columns.Add("VotosValidos",            typeof(int));
-            dtResumen.Columns.Add("SinVotar",                typeof(int));
+            dtResumen.Columns.Add("TotalPadron", typeof(int));
+            dtResumen.Columns.Add("TotalVotos", typeof(int));
+            dtResumen.Columns.Add("VotosNulos", typeof(int));
+            dtResumen.Columns.Add("VotosValidos", typeof(int));
+            dtResumen.Columns.Add("SinVotar", typeof(int));
             dtResumen.Columns.Add("PorcentajeParticipacion", typeof(decimal));
             dtResumen.Rows.Add(
                 estadisticas.TotalPadron,
@@ -204,23 +204,23 @@ namespace SistemaVotacion.Reports
 
             // ── dsPorPlancha ───────────────────────────────────────
             var dtPorPlancha = new DataTable("dsPorPlancha");
-            dtPorPlancha.Columns.Add("Plancha",    typeof(string));
+            dtPorPlancha.Columns.Add("Plancha", typeof(string));
             dtPorPlancha.Columns.Add("TotalVotos", typeof(int));
             dtPorPlancha.Columns.Add("Porcentaje", typeof(decimal));
-            dtPorPlancha.Columns.Add("Color",      typeof(string));
+            dtPorPlancha.Columns.Add("Color", typeof(string));
             foreach (var p in estadisticas.PorPlancha.OrderByDescending(x => x.TotalVotos))
                 dtPorPlancha.Rows.Add(p.Plancha, p.TotalVotos, p.Porcentaje, p.Color);
 
             // ── dsDetalleVotos ─────────────────────────────────────
             var dtDetalle = new DataTable("dsDetalleVotos");
-            dtDetalle.Columns.Add("VotoId",         typeof(int));
-            dtDetalle.Columns.Add("NombreVotante",  typeof(string));
-            dtDetalle.Columns.Add("Matricula",      typeof(string));
-            dtDetalle.Columns.Add("Curso",          typeof(string));
-            dtDetalle.Columns.Add("Seccion",        typeof(string));
-            dtDetalle.Columns.Add("PlanchaNombre",  typeof(string));
-            dtDetalle.Columns.Add("EsNulo",         typeof(bool));
-            dtDetalle.Columns.Add("FechaVoto",      typeof(DateTime));
+            dtDetalle.Columns.Add("VotoId", typeof(int));
+            dtDetalle.Columns.Add("NombreVotante", typeof(string));
+            dtDetalle.Columns.Add("Matricula", typeof(string));
+            dtDetalle.Columns.Add("Curso", typeof(string));
+            dtDetalle.Columns.Add("Seccion", typeof(string));
+            dtDetalle.Columns.Add("PlanchaNombre", typeof(string));
+            dtDetalle.Columns.Add("EsNulo", typeof(bool));
+            dtDetalle.Columns.Add("FechaVoto", typeof(DateTime));
             foreach (var v in votos.OrderBy(x => x.FechaVoto))
                 dtDetalle.Rows.Add(
                     v.VotoId,
@@ -233,8 +233,8 @@ namespace SistemaVotacion.Reports
                     v.FechaVoto);
 
             viewer.LocalReport.DataSources.Clear();
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("dsResumen",      dtResumen));
-            viewer.LocalReport.DataSources.Add(new ReportDataSource("dsPorPlancha",   dtPorPlancha));
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("dsResumen", dtResumen));
+            viewer.LocalReport.DataSources.Add(new ReportDataSource("dsPorPlancha", dtPorPlancha));
             viewer.LocalReport.DataSources.Add(new ReportDataSource("dsDetalleVotos", dtDetalle));
 
             viewer.RefreshReport();
@@ -252,7 +252,7 @@ namespace SistemaVotacion.Reports
             IEnumerable<ParticipanteReporte> participantes,
             string tituloVotacion,
             string filtroEstado = "Todos",
-            string filtroCurso  = "")
+            string filtroCurso = "")
         {
             viewer.Reset();
             viewer.LocalReport.ReportPath = ReportsPath + "ReporteListadoParticipantes.rdlc";
@@ -265,13 +265,13 @@ namespace SistemaVotacion.Reports
             });
 
             var dtParticipantes = new DataTable("dsParticipantes");
-            dtParticipantes.Columns.Add("PadronId",       typeof(int));
+            dtParticipantes.Columns.Add("PadronId", typeof(int));
             dtParticipantes.Columns.Add("NombreCompleto", typeof(string));
-            dtParticipantes.Columns.Add("Matricula",      typeof(string));
-            dtParticipantes.Columns.Add("Curso",          typeof(string));
-            dtParticipantes.Columns.Add("Seccion",        typeof(string));
-            dtParticipantes.Columns.Add("EstadoVoto",     typeof(string));
-            dtParticipantes.Columns.Add("HoraVoto",       typeof(string));
+            dtParticipantes.Columns.Add("Matricula", typeof(string));
+            dtParticipantes.Columns.Add("Curso", typeof(string));
+            dtParticipantes.Columns.Add("Seccion", typeof(string));
+            dtParticipantes.Columns.Add("EstadoVoto", typeof(string));
+            dtParticipantes.Columns.Add("HoraVoto", typeof(string));
 
             // Aplicar filtros antes de añadir al DataTable (optimización)
             var query = participantes.AsEnumerable();
@@ -306,14 +306,14 @@ namespace SistemaVotacion.Reports
     /// </summary>
     public class VotoDetalle
     {
-        public int      VotoId        { get; set; }
-        public string   NombreVotante { get; set; }
-        public string   Matricula     { get; set; }
-        public string   Curso         { get; set; }
-        public string   Seccion       { get; set; }
-        public string   PlanchaNombre { get; set; }
-        public bool     EsNulo        { get; set; }
-        public DateTime FechaVoto     { get; set; }
+        public int VotoId { get; set; }
+        public string NombreVotante { get; set; }
+        public string Matricula { get; set; }
+        public string Curso { get; set; }
+        public string Seccion { get; set; }
+        public string PlanchaNombre { get; set; }
+        public bool EsNulo { get; set; }
+        public DateTime FechaVoto { get; set; }
     }
 
     /// <summary>
@@ -323,12 +323,12 @@ namespace SistemaVotacion.Reports
     /// </summary>
     public class ParticipanteReporte
     {
-        public int    PadronId       { get; set; }
+        public int PadronId { get; set; }
         public string NombreCompleto { get; set; }
-        public string Matricula      { get; set; }
-        public string Curso          { get; set; }
-        public string Seccion        { get; set; }
-        public string EstadoVoto     { get; set; }  // "Votó" | "Pendiente"
-        public string HoraVoto       { get; set; }
+        public string Matricula { get; set; }
+        public string Curso { get; set; }
+        public string Seccion { get; set; }
+        public string EstadoVoto { get; set; }  // "Votó" | "Pendiente"
+        public string HoraVoto { get; set; }
     }
 }

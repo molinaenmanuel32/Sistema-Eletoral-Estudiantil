@@ -1,10 +1,7 @@
-﻿using Microsoft.Reporting.WinForms;
-using SistemaVotacion.Models;
-using SistemaVotacion.Reports;
-using SistemaVotacion.UI.Forms;
-using System;
-using System.Drawing;
+﻿using System;
 using System.Windows.Forms;
+using Microsoft.Reporting.WinForms;
+using SistemaVotacion.Models;
 
 namespace SistemaVotacion.UI.Reportes
 {
@@ -12,16 +9,11 @@ namespace SistemaVotacion.UI.Reportes
     {
         private readonly EstadisticasVotacion _estadisticas;
         private readonly string _tituloVotacion;
-        private readonly int _usuarioId; // 🔥 FIX IMPORTANTE
 
-        public FrmReportePlanchaGanadora(
-            EstadisticasVotacion estadisticas,
-            string tituloVotacion,
-            int usuarioId) // 🔥 FIX
+        public FrmReportePlanchaGanadora(EstadisticasVotacion estadisticas, string tituloVotacion)
         {
             _estadisticas = estadisticas ?? throw new ArgumentNullException(nameof(estadisticas));
             _tituloVotacion = tituloVotacion ?? "Votación";
-            _usuarioId = usuarioId;
 
             InitializeComponent();
 
@@ -39,11 +31,16 @@ namespace SistemaVotacion.UI.Reportes
             {
                 Cursor = Cursors.WaitCursor;
 
-                ReportHelper.CargarReportePlanchaGanadora(
-                    reportViewer,
-                    _estadisticas,
-                    _tituloVotacion
+                reportViewer.LocalReport.DataSources.Clear();
+
+                // ⚠️ Ajusta según tu RDLC real
+                var dataSource = new ReportDataSource(
+                    "DataSetPlanchaGanadora",
+                    new[] { _estadisticas }
                 );
+
+                reportViewer.LocalReport.DataSources.Add(dataSource);
+                reportViewer.RefreshReport();
             }
             catch (Exception ex)
             {
@@ -58,20 +55,14 @@ namespace SistemaVotacion.UI.Reportes
                 Cursor = Cursors.Default;
             }
         }
-
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            // Regresa al formulario anterior (Reportes)
+            this.Close();
+        }
         private void btnActualizar_Click(object sender, EventArgs e)
         {
             CargarReporte();
-        }
-
-        private void btnVolver_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-
-            FrmReportes menu = new FrmReportes(_usuarioId);
-            menu.Show();
-
-            this.Close();
         }
 
         private void btnCerrar_Click(object sender, EventArgs e)

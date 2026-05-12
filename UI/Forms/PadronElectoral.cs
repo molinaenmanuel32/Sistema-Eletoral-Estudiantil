@@ -1,20 +1,16 @@
-<<<<<<< HEAD
-using SistemaVotacion.BLL;
-=======
-﻿using SistemaVotacion.BLL;
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
-using SistemaVotacion.Models;
-using SistemaVotacion.Utils;
 using System;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using SistemaVotacion.BLL;
+using SistemaVotacion.Models;
+using SistemaVotacion.Utils;
 
 namespace SistemaVotacion.UI.Forms
 {
     public partial class PadronElectoral : Form
     {
-        private readonly VotacionService _svc = new();
+        private readonly VotacionService _svc = new VotacionService();
 
         public PadronElectoral()
         {
@@ -65,6 +61,7 @@ namespace SistemaVotacion.UI.Forms
             dgv.DefaultCellStyle.ForeColor = Color.FromArgb(10, 35, 90);
             dgv.DefaultCellStyle.SelectionBackColor = Color.FromArgb(22, 97, 255);
             dgv.DefaultCellStyle.SelectionForeColor = Color.White;
+
             dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 250, 255);
         }
 
@@ -76,13 +73,16 @@ namespace SistemaVotacion.UI.Forms
             cmbVotacion.DisplayMember = "Titulo";
             cmbVotacion.ValueMember = "VotacionId";
 
-            if (votaciones.Any())
+            if (votaciones.Count > 0)
                 Cargar();
         }
 
         private void Cargar()
         {
-            if (cmbVotacion.SelectedValue is not int vid) return;
+            int vid;
+
+            if (!int.TryParse(cmbVotacion.SelectedValue.ToString(), out vid))
+                return;
 
             dgv.Rows.Clear();
 
@@ -105,59 +105,49 @@ namespace SistemaVotacion.UI.Forms
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (cmbVotacion.SelectedValue is not int vid) return;
+            int vid;
+            if (!int.TryParse(cmbVotacion.SelectedValue.ToString(), out vid))
+                return;
 
             var disponibles = new UsuarioService().GetVotantesDisponibles(vid).ToList();
 
-            if (!disponibles.Any())
+            if (disponibles.Count == 0)
             {
-                Helpers.MsgError("No hay votantes disponibles para agregar.");
+                Helpers.MsgError("No hay votantes disponibles.");
                 return;
             }
 
-            var frm = new Form
+            Form frm = new Form();
+            frm.Text = "Agregar al Padrón";
+            frm.Size = new Size(430, 170);
+            frm.StartPosition = FormStartPosition.CenterParent;
+            frm.BackColor = Color.FromArgb(245, 247, 252);
+
+            ComboBox cmb = new ComboBox();
+            cmb.Location = new Point(25, 25);
+            cmb.Size = new Size(360, 30);
+            cmb.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmb.DataSource = disponibles;
+            cmb.DisplayMember = "NombreCompleto";
+            cmb.ValueMember = "UsuarioId";
+
+            Button btn = new Button();
+            btn.Text = "Agregar";
+            btn.Location = new Point(270, 80);
+            btn.Size = new Size(115, 38);
+            btn.BackColor = Color.FromArgb(22, 97, 255);
+            btn.ForeColor = Color.White;
+            btn.FlatStyle = FlatStyle.Flat;
+
+            btn.Click += delegate
             {
-                Text = "Agregar al Padrón",
-                Size = new Size(430, 170),
-                StartPosition = FormStartPosition.CenterParent,
-                BackColor = Color.FromArgb(245, 247, 252),
-                FormBorderStyle = FormBorderStyle.FixedDialog,
-                MaximizeBox = false,
-                MinimizeBox = false
-            };
+                int uid;
+                if (!int.TryParse(cmb.SelectedValue.ToString(), out uid))
+                    return;
 
-            var cmb = new ComboBox
-            {
-                Location = new Point(25, 25),
-                Size = new Size(360, 30),
-                DropDownStyle = ComboBoxStyle.DropDownList,
-                DataSource = disponibles,
-                DisplayMember = "NombreCompleto",
-                ValueMember = "UsuarioId"
-            };
-
-            var btn = new Button
-            {
-                Text = "Agregar",
-                Location = new Point(270, 80),
-                Size = new Size(115, 38),
-                BackColor = Color.FromArgb(22, 97, 255),
-                ForeColor = Color.White,
-                FlatStyle = FlatStyle.Flat
-            };
-
-            btn.FlatAppearance.BorderSize = 0;
-
-            btn.Click += (s, ev) =>
-            {
-                if (cmb.SelectedValue is not int uid) return;
-
-<<<<<<< HEAD
-                var _r_ = _svc.AgregarAlPadron(vid, uid);
-            bool ok = _r_.Item1; string msg = _r_.Item2;
-=======
-                var (ok, msg) = _svc.AgregarAlPadron(vid, uid);
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
+                var r = _svc.AgregarAlPadron(vid, uid);
+                bool ok = r.Item1;
+                string msg = r.Item2;
 
                 if (!ok)
                     Helpers.MsgError(msg);
@@ -177,13 +167,10 @@ namespace SistemaVotacion.UI.Forms
 
         private void btnQuitar_Click(object sender, EventArgs e)
         {
-<<<<<<< HEAD
             if (dgv.CurrentRow == null) return;
-=======
-            if (dgv.CurrentRow is null) return;
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
-            if (!Helpers.Confirmar("¿Quitar del padrón?")) return;
+            if (!Helpers.Confirmar("¿Quitar del padrón?"))
+                return;
 
             int id = Convert.ToInt32(dgv.CurrentRow.Cells["PadronId"].Value);
 

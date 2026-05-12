@@ -1,4 +1,4 @@
-﻿using Dapper;
+using Dapper;
 using SistemaVotacion.DAL;
 using SistemaVotacion.Utils;
 using System;
@@ -46,6 +46,8 @@ namespace SistemaVotacion.UI.Forms
                 HeaderText = "ID",
                 Width = 50
             });
+
+
 
             dgvMiembros.Columns.Add(new DataGridViewTextBoxColumn
             {
@@ -105,28 +107,20 @@ namespace SistemaVotacion.UI.Forms
 
         private void CargarPlanchaDelUsuario()
         {
-<<<<<<< HEAD
             var con = DbConnection.GetConnection();
-=======
-            using var con = DbConnection.GetConnection();
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
             int? planchaId = con.QueryFirstOrDefault<int?>(
-                """
-                SELECT TOP 1 PlanchaId
-                FROM Usuarios
-                WHERE UsuarioId = @id
-                """,
+                @"SELECT TOP 1 PlanchaId
+                  FROM Usuarios
+                  WHERE UsuarioId = @id",
                 new { id = _usuarioId });
 
             if (planchaId == null || planchaId <= 0)
             {
                 planchaId = con.QueryFirstOrDefault<int?>(
-                    """
-                    SELECT TOP 1 PlanchaId
-                    FROM Planchas
-                    WHERE AdminUserId = @id
-                    """,
+                    @"SELECT TOP 1 PlanchaId
+                      FROM Planchas
+                      WHERE AdminUserId = @id",
                     new { id = _usuarioId });
             }
 
@@ -144,27 +138,46 @@ namespace SistemaVotacion.UI.Forms
                 CargarMiembros();
             }
         }
+        private int ObtenerOrdenPorPuesto(string puesto)
+        {
+            return puesto.ToLower() switch
+            {
+                "presidente" => 1,
+                "vicepresidente" => 2,
+                "secretario" => 3,
+                "tesorero" => 4,
+                _ => 5
+            };
+        }
+        private string CopiarFoto(string origen)
+        {
+            string carpeta = Path.Combine(Application.StartupPath, "Assets", "FotosMiembros");
 
+            if (!Directory.Exists(carpeta))
+                Directory.CreateDirectory(carpeta);
+
+            string extension = Path.GetExtension(origen);
+            string nombreArchivo = $"miembro_{DateTime.Now:yyyyMMddHHmmssfff}{extension}";
+            string destino = Path.Combine(carpeta, nombreArchivo);
+
+            File.Copy(origen, destino, true);
+
+            return destino;
+        }
         private void MostrarAsignacionPlancha()
         {
-<<<<<<< HEAD
             var con = DbConnection.GetConnection();
-=======
-            using var con = DbConnection.GetConnection();
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
             var libres = con.Query(
-                """
-                SELECT p.PlanchaId, p.Nombre
-                FROM Planchas p
-                WHERE NOT EXISTS 
-                (
-                    SELECT 1
-                    FROM Usuarios u
-                    WHERE u.PlanchaId = p.PlanchaId
-                )
-                ORDER BY p.Nombre
-                """).ToList();
+                @"SELECT p.PlanchaId, p.Nombre
+                  FROM Planchas p
+                  WHERE NOT EXISTS 
+                  (
+                      SELECT 1
+                      FROM Usuarios u
+                      WHERE u.PlanchaId = p.PlanchaId
+                  )
+                  ORDER BY p.Nombre").ToList();
 
             pnlAsignarPlancha.Visible = true;
             pnlPlancha.Visible = false;
@@ -201,18 +214,12 @@ namespace SistemaVotacion.UI.Forms
 
             int planchaSeleccionada = Convert.ToInt32(cmbPlanchasDisponibles.SelectedValue);
 
-<<<<<<< HEAD
             var con = DbConnection.GetConnection();
-=======
-            using var con = DbConnection.GetConnection();
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
             con.Execute(
-                """
-                UPDATE Usuarios
-                SET PlanchaId = @planchaId
-                WHERE UsuarioId = @usuarioId
-                """,
+                @"UPDATE Usuarios
+                  SET PlanchaId = @planchaId
+                  WHERE UsuarioId = @usuarioId",
                 new
                 {
                     planchaId = planchaSeleccionada,
@@ -220,12 +227,10 @@ namespace SistemaVotacion.UI.Forms
                 });
 
             con.Execute(
-                """
-                UPDATE Planchas
-                SET AdminUserId = @usuarioId,
-                    FechaModificacion = GETDATE()
-                WHERE PlanchaId = @planchaId
-                """,
+                @"UPDATE Planchas
+                  SET AdminUserId = @usuarioId,
+                      FechaModificacion = GETDATE()
+                  WHERE PlanchaId = @planchaId",
                 new
                 {
                     planchaId = planchaSeleccionada,
@@ -233,7 +238,6 @@ namespace SistemaVotacion.UI.Forms
                 });
 
             MessageBox.Show("Plancha asignada correctamente.");
-
             CargarPlanchaDelUsuario();
         }
 
@@ -245,36 +249,14 @@ namespace SistemaVotacion.UI.Forms
                 return;
             }
 
-<<<<<<< HEAD
             var con = DbConnection.GetConnection();
-=======
-            using var con = DbConnection.GetConnection();
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
             int nuevaPlanchaId = con.ExecuteScalar<int>(
-                """
-                INSERT INTO Planchas 
-                (
-                    Nombre, 
-                    Descripcion, 
-                    Mision, 
-                    LogoPath, 
-                    Color, 
-                    AdminUserId, 
-                    Activa
-                )
-                OUTPUT INSERTED.PlanchaId
-                VALUES 
-                (
-                    @nombre, 
-                    @descripcion, 
-                    '', 
-                    NULL, 
-                    '#007BFF', 
-                    @adminUserId, 
-                    1
-                )
-                """,
+                @"INSERT INTO Planchas 
+                  (Nombre, Descripcion, Mision, LogoPath, Color, AdminUserId, Activa)
+                  OUTPUT INSERTED.PlanchaId
+                  VALUES 
+                  (@nombre, @descripcion, '', NULL, '#007BFF', @adminUserId, 1)",
                 new
                 {
                     nombre = txtNuevaPlancha.Text.Trim(),
@@ -283,11 +265,9 @@ namespace SistemaVotacion.UI.Forms
                 });
 
             con.Execute(
-                """
-                UPDATE Usuarios
-                SET PlanchaId = @planchaId
-                WHERE UsuarioId = @usuarioId
-                """,
+                @"UPDATE Usuarios
+                  SET PlanchaId = @planchaId
+                  WHERE UsuarioId = @usuarioId",
                 new
                 {
                     planchaId = nuevaPlanchaId,
@@ -295,24 +275,17 @@ namespace SistemaVotacion.UI.Forms
                 });
 
             MessageBox.Show("Tu plancha fue creada correctamente.");
-
             CargarPlanchaDelUsuario();
         }
 
         private void CargarPlancha()
         {
-<<<<<<< HEAD
             var con = DbConnection.GetConnection();
-=======
-            using var con = DbConnection.GetConnection();
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
             var plancha = con.QueryFirstOrDefault(
-                """
-                SELECT *
-                FROM Planchas
-                WHERE PlanchaId = @id
-                """,
+                @"SELECT *
+                  FROM Planchas
+                  WHERE PlanchaId = @id",
                 new { id = _planchaId });
 
             if (plancha == null)
@@ -329,28 +302,14 @@ namespace SistemaVotacion.UI.Forms
         {
             dgvMiembros.Rows.Clear();
 
-<<<<<<< HEAD
             var con = DbConnection.GetConnection();
-=======
-            using var con = DbConnection.GetConnection();
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
             var miembros = con.Query(
-                """
-                SELECT 
-                    MiembroId,
-                    PlanchaId,
-                    UsuarioId,
-                    Puesto,
-                    Orden,
-                    Descripcion,
-                    Nombre,
-                    Matricula,
-                    FotoPath
-                FROM MiembrosPlanchas
-                WHERE PlanchaId = @id
-                ORDER BY Orden, MiembroId
-                """,
+                @"SELECT MiembroId, PlanchaId, UsuarioId, Puesto, Orden,
+                         Descripcion, Nombre, Matricula, FotoPath
+                  FROM MiembrosPlanchas
+                  WHERE PlanchaId = @id
+                  ORDER BY Orden, MiembroId",
                 new { id = _planchaId });
 
             foreach (var m in miembros)
@@ -376,11 +335,7 @@ namespace SistemaVotacion.UI.Forms
                 if (string.IsNullOrWhiteSpace(ruta) || !File.Exists(ruta))
                     return null;
 
-<<<<<<< HEAD
                 var imgTemp = Image.FromFile(ruta);
-=======
-                using var imgTemp = Image.FromFile(ruta);
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
                 return new Bitmap(imgTemp, new Size(45, 45));
             }
             catch
@@ -391,26 +346,14 @@ namespace SistemaVotacion.UI.Forms
 
         private void btnGuardarPlancha_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtNombrePlancha.Text))
-            {
-                MessageBox.Show("Escribe el nombre de la plancha.");
-                return;
-            }
-
-<<<<<<< HEAD
             var con = DbConnection.GetConnection();
-=======
-            using var con = DbConnection.GetConnection();
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
             con.Execute(
-                """
-                UPDATE Planchas
-                SET Nombre = @nombre,
-                    Descripcion = @descripcion,
-                    FechaModificacion = GETDATE()
-                WHERE PlanchaId = @id
-                """,
+                @"UPDATE Planchas
+                  SET Nombre = @nombre,
+                      Descripcion = @descripcion,
+                      FechaModificacion = GETDATE()
+                  WHERE PlanchaId = @id",
                 new
                 {
                     nombre = txtNombrePlancha.Text.Trim(),
@@ -420,280 +363,6 @@ namespace SistemaVotacion.UI.Forms
 
             MessageBox.Show("Plancha actualizada correctamente.");
             CargarPlancha();
-        }
-
-        private void btnSeleccionarFoto_Click(object sender, EventArgs e)
-        {
-            using OpenFileDialog open = new OpenFileDialog();
-
-            open.Title = "Seleccionar foto del miembro";
-            open.Filter = "Imágenes|*.png;*.jpg;*.jpeg;*.bmp";
-
-            if (open.ShowDialog() != DialogResult.OK)
-                return;
-
-            _fotoPath = CopiarFoto(open.FileName);
-            CargarFotoPreview(_fotoPath);
-        }
-
-        private string CopiarFoto(string origen)
-        {
-            string carpeta = Path.Combine(Application.StartupPath, "Assets", "FotosMiembros");
-
-            if (!Directory.Exists(carpeta))
-                Directory.CreateDirectory(carpeta);
-
-            string extension = Path.GetExtension(origen);
-            string nombreArchivo = $"miembro_{DateTime.Now:yyyyMMddHHmmssfff}{extension}";
-            string destino = Path.Combine(carpeta, nombreArchivo);
-
-            File.Copy(origen, destino, true);
-
-            return destino;
-        }
-
-        private void CargarFotoPreview(string? ruta)
-        {
-            if (string.IsNullOrWhiteSpace(ruta) || !File.Exists(ruta))
-            {
-                picFoto.Image = null;
-                lblFotoTexto.Text = "Sin foto";
-                return;
-            }
-
-<<<<<<< HEAD
-            var imgTemp = Image.FromFile(ruta);
-=======
-            using var imgTemp = Image.FromFile(ruta);
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
-            picFoto.Image = new Bitmap(imgTemp);
-            picFoto.SizeMode = PictureBoxSizeMode.Zoom;
-            lblFotoTexto.Text = Path.GetFileName(ruta);
-        }
-
-        private bool ExisteCargoUnico(string puesto, int miembroIdExcluir = 0)
-        {
-            if (!puesto.Equals("Presidente", StringComparison.OrdinalIgnoreCase) &&
-                !puesto.Equals("Vicepresidente", StringComparison.OrdinalIgnoreCase))
-                return false;
-
-<<<<<<< HEAD
-            var con = DbConnection.GetConnection();
-=======
-            using var con = DbConnection.GetConnection();
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
-
-            int total = con.ExecuteScalar<int>(
-                """
-                SELECT COUNT(1)
-                FROM MiembrosPlanchas
-                WHERE PlanchaId = @planchaId
-                  AND LOWER(LTRIM(RTRIM(Puesto))) = LOWER(LTRIM(RTRIM(@puesto)))
-                  AND MiembroId <> @miembroIdExcluir
-                """,
-                new
-                {
-                    planchaId = _planchaId,
-                    puesto,
-                    miembroIdExcluir
-                });
-
-            return total > 0;
-        }
-
-        private void btnAgregarMiembro_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(txtNombreMiembro.Text) ||
-                string.IsNullOrWhiteSpace(txtMatricula.Text))
-            {
-                MessageBox.Show("Completa nombre y matrícula.");
-                return;
-            }
-
-            string puesto = cmbPuesto.Text.Trim();
-
-            if (ExisteCargoUnico(puesto))
-            {
-                MessageBox.Show($"Ya existe un {puesto} en esta plancha.");
-                return;
-            }
-
-<<<<<<< HEAD
-            var con = DbConnection.GetConnection();
-=======
-            using var con = DbConnection.GetConnection();
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
-
-            con.Execute(
-                """
-                INSERT INTO MiembrosPlanchas
-                (
-                    UsuarioId,
-                    PlanchaId,
-                    Puesto,
-                    Orden,
-                    Nombre,
-                    Matricula,
-                    Descripcion,
-                    FotoPath
-                )
-                VALUES
-                (
-                    @usuarioId,
-                    @planchaId,
-                    @puesto,
-                    @orden,
-                    @nombre,
-                    @matricula,
-                    @descripcion,
-                    @fotoPath
-                )
-                """,
-                new
-                {
-                    usuarioId = _usuarioId,
-                    planchaId = _planchaId,
-                    puesto,
-                    orden = ObtenerOrdenPorPuesto(puesto),
-                    nombre = txtNombreMiembro.Text.Trim(),
-                    matricula = txtMatricula.Text.Trim(),
-                    descripcion = txtDescripcionMiembro.Text.Trim(),
-                    fotoPath = _fotoPath
-                });
-
-            MessageBox.Show("Miembro agregado correctamente.");
-
-            CargarMiembros();
-        }
-
-        private void btnActualizarMiembro_Click(object sender, EventArgs e)
-        {
-            if (_miembroSeleccionadoId <= 0)
-            {
-                MessageBox.Show("Selecciona un miembro para actualizar.");
-                return;
-            }
-
-            if (string.IsNullOrWhiteSpace(txtNombreMiembro.Text) ||
-                string.IsNullOrWhiteSpace(txtMatricula.Text))
-            {
-                MessageBox.Show("Completa nombre y matrícula.");
-                return;
-            }
-
-            string puesto = cmbPuesto.Text.Trim();
-
-            if (ExisteCargoUnico(puesto, _miembroSeleccionadoId))
-            {
-                MessageBox.Show($"Ya existe un {puesto} en esta plancha.");
-                return;
-            }
-
-<<<<<<< HEAD
-            var con = DbConnection.GetConnection();
-=======
-            using var con = DbConnection.GetConnection();
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
-
-            con.Execute(
-                """
-                UPDATE MiembrosPlanchas
-                SET Puesto = @puesto,
-                    Orden = @orden,
-                    Nombre = @nombre,
-                    Matricula = @matricula,
-                    Descripcion = @descripcion,
-                    FotoPath = @fotoPath
-                WHERE MiembroId = @miembroId
-                  AND PlanchaId = @planchaId
-                """,
-                new
-                {
-                    puesto,
-                    orden = ObtenerOrdenPorPuesto(puesto),
-                    nombre = txtNombreMiembro.Text.Trim(),
-                    matricula = txtMatricula.Text.Trim(),
-                    descripcion = txtDescripcionMiembro.Text.Trim(),
-                    fotoPath = _fotoPath,
-                    miembroId = _miembroSeleccionadoId,
-                    planchaId = _planchaId
-                });
-
-            MessageBox.Show("Miembro actualizado correctamente.");
-
-            CargarMiembros();
-        }
-
-        private int ObtenerOrdenPorPuesto(string puesto)
-        {
-            return puesto.ToLower() switch
-            {
-                "presidente" => 1,
-                "vicepresidente" => 2,
-                "secretario" => 3,
-                "tesorero" => 4,
-                _ => 5
-            };
-        }
-
-        private void btnEliminarMiembro_Click(object sender, EventArgs e)
-        {
-            if (dgvMiembros.CurrentRow == null)
-            {
-                MessageBox.Show("Selecciona un miembro.");
-                return;
-            }
-
-            int miembroId = Convert.ToInt32(dgvMiembros.CurrentRow.Cells["MiembroId"].Value);
-
-            DialogResult r = MessageBox.Show(
-                "¿Seguro que deseas eliminar este miembro?",
-                "Confirmar",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-
-            if (r != DialogResult.Yes)
-                return;
-
-<<<<<<< HEAD
-            var con = DbConnection.GetConnection();
-=======
-            using var con = DbConnection.GetConnection();
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
-
-            con.Execute(
-                """
-                DELETE FROM MiembrosPlanchas
-                WHERE MiembroId = @id
-                  AND PlanchaId = @planchaId
-                """,
-                new
-                {
-                    id = miembroId,
-                    planchaId = _planchaId
-                });
-
-            MessageBox.Show("Miembro eliminado correctamente.");
-            CargarMiembros();
-        }
-
-        private void dgvMiembros_SelectionChanged(object? sender, EventArgs e)
-        {
-            if (dgvMiembros.CurrentRow == null)
-                return;
-
-            if (dgvMiembros.CurrentRow.Cells["MiembroId"].Value == null)
-                return;
-
-            _miembroSeleccionadoId = Convert.ToInt32(dgvMiembros.CurrentRow.Cells["MiembroId"].Value);
-
-            cmbPuesto.Text = dgvMiembros.CurrentRow.Cells["Puesto"].Value?.ToString() ?? "Presidente";
-            txtNombreMiembro.Text = dgvMiembros.CurrentRow.Cells["Nombre"].Value?.ToString() ?? "";
-            txtMatricula.Text = dgvMiembros.CurrentRow.Cells["Matricula"].Value?.ToString() ?? "";
-            txtDescripcionMiembro.Text = dgvMiembros.CurrentRow.Cells["Descripcion"].Value?.ToString() ?? "";
-            _fotoPath = dgvMiembros.CurrentRow.Cells["FotoPath"].Value?.ToString();
-
-            CargarFotoPreview(_fotoPath);
         }
 
         private void LimpiarMiembro()
@@ -706,6 +375,149 @@ namespace SistemaVotacion.UI.Forms
             _fotoPath = null;
             CargarFotoPreview(null);
             txtNombreMiembro.Focus();
+        }
+
+        private void CargarFotoPreview(string? ruta)
+        {
+            if (string.IsNullOrWhiteSpace(ruta) || !File.Exists(ruta))
+            {
+                picFoto.Image = null;
+                lblFotoTexto.Text = "Sin foto";
+                return;
+            }
+
+            try
+            {
+                using (var imgTemp = Image.FromFile(ruta))
+                {
+                    picFoto.Image = new Bitmap(imgTemp);
+                }
+
+                picFoto.SizeMode = PictureBoxSizeMode.Zoom;
+                lblFotoTexto.Text = Path.GetFileName(ruta);
+            }
+            catch
+            {
+                picFoto.Image = null;
+                lblFotoTexto.Text = "Sin foto";
+            }
+        }
+
+        private void dgvMiembros_SelectionChanged(object? sender, EventArgs e)
+        {
+            if (dgvMiembros.CurrentRow == null) return;
+
+            _miembroSeleccionadoId = Convert.ToInt32(dgvMiembros.CurrentRow.Cells["MiembroId"].Value);
+
+            cmbPuesto.Text = dgvMiembros.CurrentRow.Cells["Puesto"].Value?.ToString();
+            txtNombreMiembro.Text = dgvMiembros.CurrentRow.Cells["Nombre"].Value?.ToString();
+            txtMatricula.Text = dgvMiembros.CurrentRow.Cells["Matricula"].Value?.ToString();
+            txtDescripcionMiembro.Text = dgvMiembros.CurrentRow.Cells["Descripcion"].Value?.ToString();
+            _fotoPath = dgvMiembros.CurrentRow.Cells["FotoPath"].Value?.ToString();
+
+            CargarFotoPreview(_fotoPath);
+        }
+
+        private void btnSeleccionarFoto_Click(object sender, EventArgs e)
+        {
+            using OpenFileDialog open = new OpenFileDialog
+            {
+                Title = "Seleccionar foto del miembro",
+                Filter = "Imágenes|*.png;*.jpg;*.jpeg;*.bmp"
+            };
+
+            if (open.ShowDialog() != DialogResult.OK)
+                return;
+
+            _fotoPath = CopiarFoto(open.FileName);
+            CargarFotoPreview(_fotoPath);
+        }
+
+        private void btnAgregarMiembro_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtNombreMiembro.Text) ||
+                string.IsNullOrWhiteSpace(txtMatricula.Text))
+            {
+                MessageBox.Show("Completa nombre y matrícula.");
+                return;
+            }
+
+            var con = DbConnection.GetConnection();
+
+            con.Execute(
+                @"INSERT INTO MiembrosPlanchas
+          (UsuarioId, PlanchaId, Puesto, Orden, Nombre, Matricula, Descripcion, FotoPath)
+          VALUES
+          (@usuarioId, @planchaId, @puesto, @orden, @nombre, @matricula, @descripcion, @fotoPath)",
+                new
+                {
+                    usuarioId = _usuarioId,
+                    planchaId = _planchaId,
+                    puesto = cmbPuesto.Text,
+                    orden = ObtenerOrdenPorPuesto(cmbPuesto.Text),
+                    nombre = txtNombreMiembro.Text.Trim(),
+                    matricula = txtMatricula.Text.Trim(),
+                    descripcion = txtDescripcionMiembro.Text.Trim(),
+                    fotoPath = _fotoPath
+                });
+
+            CargarMiembros();
+        }
+
+        private void btnActualizarMiembro_Click(object sender, EventArgs e)
+        {
+            if (_miembroSeleccionadoId <= 0)
+            {
+                MessageBox.Show("Selecciona un miembro.");
+                return;
+            }
+
+            var con = DbConnection.GetConnection();
+
+            con.Execute(
+                @"UPDATE MiembrosPlanchas
+          SET Puesto = @puesto,
+              Orden = @orden,
+              Nombre = @nombre,
+              Matricula = @matricula,
+              Descripcion = @descripcion,
+              FotoPath = @fotoPath
+          WHERE MiembroId = @id AND PlanchaId = @planchaId",
+                new
+                {
+                    id = _miembroSeleccionadoId,
+                    planchaId = _planchaId,
+                    puesto = cmbPuesto.Text,
+                    orden = ObtenerOrdenPorPuesto(cmbPuesto.Text),
+                    nombre = txtNombreMiembro.Text.Trim(),
+                    matricula = txtMatricula.Text.Trim(),
+                    descripcion = txtDescripcionMiembro.Text.Trim(),
+                    fotoPath = _fotoPath
+                });
+
+            CargarMiembros();
+        }
+
+        private void btnEliminarMiembro_Click(object sender, EventArgs e)
+        {
+            if (_miembroSeleccionadoId <= 0)
+            {
+                MessageBox.Show("Selecciona un miembro.");
+                return;
+            }
+
+            var con = DbConnection.GetConnection();
+
+            con.Execute(
+                @"DELETE FROM MiembrosPlanchas
+          WHERE MiembroId = @id AND PlanchaId = @planchaId",
+                new
+                {
+                    id = _miembroSeleccionadoId,
+                    planchaId = _planchaId
+                });
+
+            CargarMiembros();
         }
     }
 }

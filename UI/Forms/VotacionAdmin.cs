@@ -2,17 +2,14 @@
 using System.Drawing;
 using System.Windows.Forms;
 using SistemaVotacion.BLL;
-<<<<<<< HEAD
-=======
 using SistemaVotacion.UI.Controls;
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 using SistemaVotacion.Utils;
 
 namespace SistemaVotacion.UI.Forms
 {
     public partial class VotacionAdmin : Form
     {
-        private readonly VotacionService _svc = new();
+        private readonly VotacionService _svc = new VotacionService();
 
         public VotacionAdmin()
         {
@@ -109,11 +106,7 @@ namespace SistemaVotacion.UI.Forms
 
             var activa = _svc.GetActiva();
 
-<<<<<<< HEAD
-            lblEstado.Text = activa == null
-=======
             lblEstado.Text = activa is null
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
                 ? "Sin votación activa"
                 : $"Votación activa: {activa.Titulo}";
 
@@ -131,11 +124,7 @@ namespace SistemaVotacion.UI.Forms
 
         private void btnNueva_Click(object sender, EventArgs e)
         {
-<<<<<<< HEAD
             var frm = new FrmVotacion();
-=======
-            var frm = new FrmNuevaVotacion();
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
             if (frm.ShowDialog() == DialogResult.OK)
                 Cargar();
@@ -143,11 +132,7 @@ namespace SistemaVotacion.UI.Forms
 
         private void btnActivar_Click(object sender, EventArgs e)
         {
-<<<<<<< HEAD
-            if (dgv.CurrentRow == null) return;
-=======
             if (dgv.CurrentRow is null) return;
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
             int id = Convert.ToInt32(dgv.CurrentRow.Cells["VotacionId"].Value);
 
@@ -160,11 +145,7 @@ namespace SistemaVotacion.UI.Forms
 
         private void btnCerrar_Click(object sender, EventArgs e)
         {
-<<<<<<< HEAD
-            if (dgv.CurrentRow == null) return;
-=======
             if (dgv.CurrentRow is null) return;
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
             int id = Convert.ToInt32(dgv.CurrentRow.Cells["VotacionId"].Value);
 
@@ -174,14 +155,10 @@ namespace SistemaVotacion.UI.Forms
             _svc.Cerrar(id);
             Cargar();
         }
-<<<<<<< HEAD
 
         private void VotacionAdmin_Load(object sender, EventArgs e)
         {
-            // FIX: eliminamos reportViewer1 porque NO existe en tu formulario
-            // Si lo necesitas, debes agregarlo desde el Designer
+            // Si necesitas inicialización extra al cargar el formulario, colócala aquí
         }
-=======
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
     }
 }

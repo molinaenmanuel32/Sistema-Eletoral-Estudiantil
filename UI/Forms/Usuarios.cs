@@ -6,34 +6,27 @@ using SistemaVotacion.BLL;
 using SistemaVotacion.Models;
 using SistemaVotacion.UI.Controls;
 using SistemaVotacion.Utils;
+using static SistemaVotacion.Utils.Tema;
 
 namespace SistemaVotacion.UI.Forms
 {
     public partial class Usuarios : Form
     {
-<<<<<<< HEAD
         private readonly UsuarioService _svc = new UsuarioService();
-
         private readonly string placeholderBuscar = "Nombre, matrícula o usuario...";
-=======
-        private readonly UsuarioService _svc = new();
-
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
         public Usuarios()
         {
             InitializeComponent();
 
-            this.TopLevel = false;
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.Dock = DockStyle.Fill;
+            TopLevel = false;
+            FormBorderStyle = FormBorderStyle.None;
+            Dock = DockStyle.Fill;
 
             ConfigurarColumnas();
             AplicarEstilos();
             Cargar();
 
-<<<<<<< HEAD
-            // Placeholder compatible con .NET Framework
             txtBuscar.Text = placeholderBuscar;
             txtBuscar.ForeColor = Color.Gray;
 
@@ -46,7 +39,7 @@ namespace SistemaVotacion.UI.Forms
             if (txtBuscar.Text == placeholderBuscar)
             {
                 txtBuscar.Text = "";
-                txtBuscar.ForeColor = Color.Black;
+                txtBuscar.ForeColor = Color.White;
             }
         }
 
@@ -57,9 +50,6 @@ namespace SistemaVotacion.UI.Forms
                 txtBuscar.Text = placeholderBuscar;
                 txtBuscar.ForeColor = Color.Gray;
             }
-=======
-  
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
         }
 
         private void btnNuevo_Click(object sender, EventArgs e)
@@ -72,20 +62,12 @@ namespace SistemaVotacion.UI.Forms
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-<<<<<<< HEAD
             if (dgv.CurrentRow == null) return;
-=======
-            if (dgv.CurrentRow is null) return;
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
             int id = Convert.ToInt32(dgv.CurrentRow.Cells["UsuarioId"].Value);
             var usr = _svc.GetById(id);
 
-<<<<<<< HEAD
             if (usr == null) return;
-=======
-            if (usr is null) return;
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
             var f = new FrmEditarUsuario(usr);
 
@@ -95,13 +77,10 @@ namespace SistemaVotacion.UI.Forms
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-<<<<<<< HEAD
             if (dgv.CurrentRow == null) return;
-=======
-            if (dgv.CurrentRow is null) return;
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 
-            if (!Helpers.Confirmar("¿Desactivar este usuario?")) return;
+            if (!Helpers.Confirmar("¿Desactivar este usuario?"))
+                return;
 
             int id = Convert.ToInt32(dgv.CurrentRow.Cells["UsuarioId"].Value);
 
@@ -111,12 +90,9 @@ namespace SistemaVotacion.UI.Forms
 
         private void txtBuscar_TextChanged(object sender, EventArgs e)
         {
-<<<<<<< HEAD
             if (txtBuscar.Text == placeholderBuscar)
                 return;
 
-=======
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
             Filtrar(txtBuscar.Text);
         }
 
@@ -126,17 +102,7 @@ namespace SistemaVotacion.UI.Forms
 
             foreach (var u in _svc.GetAll())
             {
-                dgv.Rows.Add(
-                    u.UsuarioId,
-                    u.Apellido,
-                    u.Nombre,
-                    u.Matricula,
-                    u.Curso,
-                    u.Seccion,
-                    u.Username,
-                    u.RolNombre,
-                    u.Activo
-                );
+                AgregarFila(u);
             }
         }
 
@@ -150,80 +116,73 @@ namespace SistemaVotacion.UI.Forms
 
             dgv.Rows.Clear();
 
-            foreach (var u in _svc.GetAll().Where(x =>
-<<<<<<< HEAD
-    x.NombreCompleto.ToLower().Contains(q.ToLower()) ||
-    x.Matricula.ToLower().Contains(q.ToLower()) ||
-    x.Username.ToLower().Contains(q.ToLower())))
-=======
-                x.NombreCompleto.Contains(q, StringComparison.OrdinalIgnoreCase) ||
-                x.Matricula.Contains(q, StringComparison.OrdinalIgnoreCase) ||
-                x.Username.Contains(q, StringComparison.OrdinalIgnoreCase)))
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
+            var lista = _svc.GetAll().Where(x =>
+                (x.NombreCompleto ?? "").IndexOf(q, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                (x.Matricula ?? "").IndexOf(q, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                (x.Username ?? "").IndexOf(q, StringComparison.OrdinalIgnoreCase) >= 0);
+
+            foreach (var u in lista)
             {
-                dgv.Rows.Add(
-                    u.UsuarioId,
-                    u.Apellido,
-                    u.Nombre,
-                    u.Matricula,
-                    u.Curso,
-                    u.Seccion,
-                    u.Username,
-                    u.RolNombre,
-                    u.Activo
-                );
+                AgregarFila(u);
             }
+        }
+
+        private void AgregarFila(Usuario u)
+        {
+            dgv.Rows.Add(
+                u.UsuarioId,
+                u.Apellido,
+                u.Nombre,
+                u.Matricula,
+                u.Curso,
+                u.Seccion,
+                u.Username,
+                u.RolNombre,
+                u.Activo
+            );
         }
 
         private void AplicarEstilos()
         {
             BackColor = Fondo;
 
-            btnNuevo.BackColor = AzulClaro;
+            btnNuevo.BackColor = Primario;
+            btnEditar.BackColor = PrimarioOscuro;
+            btnEliminar.BackColor = Peligro;
+
             btnNuevo.ForeColor = Color.White;
-            btnNuevo.FlatStyle = FlatStyle.Flat;
-            btnNuevo.FlatAppearance.BorderSize = 0;
-
-            btnEditar.BackColor = Azul;
             btnEditar.ForeColor = Color.White;
-            btnEditar.FlatStyle = FlatStyle.Flat;
-            btnEditar.FlatAppearance.BorderSize = 0;
-
-            btnEliminar.BackColor = Rojo;
             btnEliminar.ForeColor = Color.White;
+
+            btnNuevo.FlatStyle = FlatStyle.Flat;
+            btnEditar.FlatStyle = FlatStyle.Flat;
             btnEliminar.FlatStyle = FlatStyle.Flat;
+
+            btnNuevo.FlatAppearance.BorderSize = 0;
+            btnEditar.FlatAppearance.BorderSize = 0;
             btnEliminar.FlatAppearance.BorderSize = 0;
 
             dgv.EnableHeadersVisualStyles = false;
-            dgv.BackgroundColor = Card;
+            dgv.BackgroundColor = FondoCard;
             dgv.GridColor = Borde;
             dgv.BorderStyle = BorderStyle.None;
+
             dgv.RowHeadersVisible = false;
             dgv.ReadOnly = true;
             dgv.AllowUserToAddRows = false;
             dgv.AllowUserToDeleteRows = false;
+
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-            dgv.ColumnHeadersVisible = true;
             dgv.ColumnHeadersHeight = 42;
-            dgv.ColumnHeadersDefaultCellStyle.BackColor = Azul;
+            dgv.ColumnHeadersDefaultCellStyle.BackColor = Primario;
             dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", 10f, FontStyle.Bold);
-            dgv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
 
-            dgv.DefaultCellStyle.BackColor = Card;
+            dgv.DefaultCellStyle.BackColor = FondoCard;
             dgv.DefaultCellStyle.ForeColor = Texto;
-            dgv.DefaultCellStyle.SelectionBackColor = AzulClaro;
+            dgv.DefaultCellStyle.SelectionBackColor = PrimarioOscuro;
             dgv.DefaultCellStyle.SelectionForeColor = Color.White;
-            dgv.DefaultCellStyle.Font = new Font("Segoe UI", 10f);
-
-            dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 250, 255);
-            dgv.AlternatingRowsDefaultCellStyle.ForeColor = Texto;
-<<<<<<< HEAD
-=======
-
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
         }
 
         private void ConfigurarColumnas()
@@ -231,68 +190,15 @@ namespace SistemaVotacion.UI.Forms
             dgv.Columns.Clear();
             dgv.AutoGenerateColumns = false;
 
-            dgv.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                Name = "UsuarioId",
-                HeaderText = "ID",
-                Width = 60
-            });
-
-            dgv.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                Name = "Apellido",
-                HeaderText = "Apellido",
-                Width = 120
-            });
-
-            dgv.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                Name = "Nombre",
-                HeaderText = "Nombre",
-                Width = 120
-            });
-
-            dgv.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                Name = "Matricula",
-                HeaderText = "Matrícula",
-                Width = 120
-            });
-
-            dgv.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                Name = "Curso",
-                HeaderText = "Curso",
-                Width = 110
-            });
-
-            dgv.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                Name = "Seccion",
-                HeaderText = "Sección",
-                Width = 90
-            });
-
-            dgv.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                Name = "Username",
-                HeaderText = "Usuario",
-                Width = 120
-            });
-
-            dgv.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                Name = "RolNombre",
-                HeaderText = "Rol",
-                Width = 110
-            });
-
-            dgv.Columns.Add(new DataGridViewCheckBoxColumn
-            {
-                Name = "Activo",
-                HeaderText = "Activo",
-                Width = 70
-            });
+            dgv.Columns.Add(new DataGridViewTextBoxColumn { Name = "UsuarioId", HeaderText = "ID", Width = 60 });
+            dgv.Columns.Add(new DataGridViewTextBoxColumn { Name = "Apellido", HeaderText = "Apellido" });
+            dgv.Columns.Add(new DataGridViewTextBoxColumn { Name = "Nombre", HeaderText = "Nombre" });
+            dgv.Columns.Add(new DataGridViewTextBoxColumn { Name = "Matricula", HeaderText = "Matrícula" });
+            dgv.Columns.Add(new DataGridViewTextBoxColumn { Name = "Curso", HeaderText = "Curso" });
+            dgv.Columns.Add(new DataGridViewTextBoxColumn { Name = "Seccion", HeaderText = "Sección" });
+            dgv.Columns.Add(new DataGridViewTextBoxColumn { Name = "Username", HeaderText = "Usuario" });
+            dgv.Columns.Add(new DataGridViewTextBoxColumn { Name = "RolNombre", HeaderText = "Rol" });
+            dgv.Columns.Add(new DataGridViewCheckBoxColumn { Name = "Activo", HeaderText = "Activo" });
         }
     }
 }

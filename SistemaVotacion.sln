@@ -1,14 +1,7 @@
-<<<<<<< HEAD
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
-=======
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 18
-VisualStudioVersion = 18.4.11612.150 stable
->>>>>>> f97a282cd8a81a23f2aa0816f21503305f703739
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaVotacion", "SistemaVotacion.csproj", "{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}"
 EndProject
