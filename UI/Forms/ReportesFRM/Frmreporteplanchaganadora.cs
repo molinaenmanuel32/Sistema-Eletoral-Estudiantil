@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
-using Microsoft.Reporting.WinForms;
 using SistemaVotacion.Models;
+using SistemaVotacion.Reports;
 
 namespace SistemaVotacion.UI.Reportes
 {
@@ -16,8 +16,7 @@ namespace SistemaVotacion.UI.Reportes
             _tituloVotacion = tituloVotacion ?? "Votación";
 
             InitializeComponent();
-
-            Text = $"Reporte – Plancha Ganadora | {_tituloVotacion}";
+            Text = "Reporte – Plancha Ganadora | " + _tituloVotacion;
         }
 
         private void FrmReportePlanchaGanadora_Load(object sender, EventArgs e)
@@ -31,43 +30,35 @@ namespace SistemaVotacion.UI.Reportes
             {
                 Cursor = Cursors.WaitCursor;
 
-                reportViewer.LocalReport.DataSources.Clear();
+                if (_estadisticas.PorPlancha == null || _estadisticas.PorPlancha.Count == 0)
+                {
+                    MessageBox.Show(
+                        "No hay votos registrados aún para determinar la plancha ganadora.",
+                        "Sin datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
 
-                // ⚠️ Ajusta según tu RDLC real
-                var dataSource = new ReportDataSource(
-                    "DataSetPlanchaGanadora",
-                    new[] { _estadisticas }
-                );
-
-                reportViewer.LocalReport.DataSources.Add(dataSource);
-                reportViewer.RefreshReport();
+                ReportHelper.CargarReportePlanchaGanadora(
+                    reportViewer,
+                    _estadisticas,
+                    _tituloVotacion);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    $"Error al generar el reporte:\n{ex.Message}",
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                    "Error al generar el reporte:\n" + ex.Message,
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
                 Cursor = Cursors.Default;
             }
         }
-        private void btnVolver_Click(object sender, EventArgs e)
-        {
-            // Regresa al formulario anterior (Reportes)
-            this.Close();
-        }
-        private void btnActualizar_Click(object sender, EventArgs e)
-        {
-            CargarReporte();
-        }
 
-        private void btnCerrar_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
+        private void btnActualizar_Click(object sender, EventArgs e) => CargarReporte();
+
+        private void btnVolver_Click(object sender, EventArgs e) => Close();
+
+        private void btnCerrar_Click(object sender, EventArgs e) => Close();
     }
 }

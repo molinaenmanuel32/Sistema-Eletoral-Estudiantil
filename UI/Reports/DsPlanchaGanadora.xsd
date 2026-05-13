@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DsPlanchaGanadora" targetNamespace="http://tempuri.org/DsPlanchaGanadora.xsd" xmlns:mstns="http://tempuri.org/DsPlanchaGanadora.xsd" xmlns="http://tempuri.org/DsPlanchaGanadora.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DsPlanchaGanadora" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_UserDSName="DsPlanchaGanadora" msprop:Generator_DataSetName="DsPlanchaGanadora">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="PlanchaGanadora" msprop:Generator_RowEvHandlerName="PlanchaGanadoraRowChangeEventHandler" msprop:Generator_RowDeletedName="PlanchaGanadoraRowDeleted" msprop:Generator_RowDeletingName="PlanchaGanadoraRowDeleting" msprop:Generator_RowEvArgName="PlanchaGanadoraRowChangeEvent" msprop:Generator_TablePropName="PlanchaGanadora" msprop:Generator_RowChangedName="PlanchaGanadoraRowChanged" msprop:Generator_RowChangingName="PlanchaGanadoraRowChanging" msprop:Generator_TableClassName="PlanchaGanadoraDataTable" msprop:Generator_RowClassName="PlanchaGanadoraRow" msprop:Generator_TableVarName="tablePlanchaGanadora" msprop:Generator_UserTableName="PlanchaGanadora">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PlanchaId" msprop:Generator_ColumnPropNameInRow="PlanchaId" msprop:Generator_ColumnPropNameInTable="PlanchaIdColumn" msprop:Generator_ColumnVarNameInTable="columnPlanchaId" msprop:Generator_UserColumnName="PlanchaId" type="xs:int" minOccurs="0" />
+              <xs:element name="NombrePlancha" msprop:Generator_ColumnPropNameInRow="NombrePlancha" msprop:Generator_ColumnPropNameInTable="NombrePlanchaColumn" msprop:Generator_ColumnVarNameInTable="columnNombrePlancha" msprop:Generator_UserColumnName="NombrePlancha" type="xs:string" minOccurs="0" />
+              <xs:element name="Votos" msprop:Generator_ColumnPropNameInRow="Votos" msprop:Generator_ColumnPropNameInTable="VotosColumn" msprop:Generator_ColumnVarNameInTable="columnVotos" msprop:Generator_UserColumnName="Votos" type="xs:int" minOccurs="0" />
+              <xs:element name="Porcentaje" msprop:Generator_ColumnPropNameInRow="Porcentaje" msprop:Generator_ColumnPropNameInTable="PorcentajeColumn" msprop:Generator_ColumnVarNameInTable="columnPorcentaje" msprop:Generator_UserColumnName="Porcentaje" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Ganadora" msprop:Generator_ColumnPropNameInRow="Ganadora" msprop:Generator_ColumnPropNameInTable="GanadoraColumn" msprop:Generator_ColumnVarNameInTable="columnGanadora" msprop:Generator_UserColumnName="Ganadora" type="xs:boolean" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,7 +1,32 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\ledes\\OneDrive\\Escritorio\\SistemaVotacion\\Sistema-Eletoral-Estudiantil\\",
-  "Documents": [],
+  "WorkspaceRootPath": "C:\\Users\\ledes\\OneDrive\\Escritorio\\Nueva carpeta\\Sistema-Eletoral-Estudiantil\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|c:\\users\\ledes\\onedrive\\escritorio\\nueva carpeta\\sistema-eletoral-estudiantil\\ui\\forms\\reportesfrm\\frmreportegeneralvotos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|solutionrelative:ui\\forms\\reportesfrm\\frmreportegeneralvotos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|C:\\Users\\ledes\\OneDrive\\Escritorio\\Nueva carpeta\\Sistema-Eletoral-Estudiantil\\ui\\forms\\reportesfrm\\frmreportegeneralvotos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|solutionrelative:ui\\forms\\reportesfrm\\frmreportegeneralvotos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|C:\\Users\\ledes\\OneDrive\\Escritorio\\Nueva carpeta\\Sistema-Eletoral-Estudiantil\\ui\\reports\\reporthelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|solutionrelative:ui\\reports\\reporthelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|C:\\Users\\ledes\\OneDrive\\Escritorio\\Nueva carpeta\\Sistema-Eletoral-Estudiantil\\ui\\forms\\reportesfrm\\frmreportelistadoparticipantes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|solutionrelative:ui\\forms\\reportesfrm\\frmreportelistadoparticipantes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|C:\\Users\\ledes\\OneDrive\\Escritorio\\Nueva carpeta\\Sistema-Eletoral-Estudiantil\\models\\entities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|solutionrelative:models\\entities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|C:\\Users\\ledes\\OneDrive\\Escritorio\\Nueva carpeta\\Sistema-Eletoral-Estudiantil\\ui\\forms\\reportes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E5A8F3B-2607-F6AC-F74A-E4C26A62AF37}|SistemaVotacion.csproj|solutionrelative:ui\\forms\\reportes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -22,6 +47,78 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ReportHelper.cs",
+              "DocumentMoniker": "C:\\Users\\ledes\\OneDrive\\Escritorio\\Nueva carpeta\\Sistema-Eletoral-Estudiantil\\UI\\Reports\\ReportHelper.cs",
+              "RelativeDocumentMoniker": "UI\\Reports\\ReportHelper.cs",
+              "ToolTip": "C:\\Users\\ledes\\OneDrive\\Escritorio\\Nueva carpeta\\Sistema-Eletoral-Estudiantil\\UI\\Reports\\ReportHelper.cs",
+              "RelativeToolTip": "UI\\Reports\\ReportHelper.cs",
+              "ViewState": "AgIAANYAAAAAAAAAAAAqwPkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-13T13:43:44.082Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Frmreportegeneralvotos.cs",
+              "DocumentMoniker": "C:\\Users\\ledes\\OneDrive\\Escritorio\\Nueva carpeta\\Sistema-Eletoral-Estudiantil\\UI\\Forms\\ReportesFRM\\Frmreportegeneralvotos.cs",
+              "RelativeDocumentMoniker": "UI\\Forms\\ReportesFRM\\Frmreportegeneralvotos.cs",
+              "ToolTip": "C:\\Users\\ledes\\OneDrive\\Escritorio\\Nueva carpeta\\Sistema-Eletoral-Estudiantil\\UI\\Forms\\ReportesFRM\\Frmreportegeneralvotos.cs",
+              "RelativeToolTip": "UI\\Forms\\ReportesFRM\\Frmreportegeneralvotos.cs",
+              "ViewState": "AgIAAIsAAAAAAAAAAAAqwJUAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-13T13:50:50.415Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Frmreportegeneralvotos.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\ledes\\OneDrive\\Escritorio\\Nueva carpeta\\Sistema-Eletoral-Estudiantil\\UI\\Forms\\ReportesFRM\\Frmreportegeneralvotos.cs",
+              "RelativeDocumentMoniker": "UI\\Forms\\ReportesFRM\\Frmreportegeneralvotos.cs",
+              "ToolTip": "C:\\Users\\ledes\\OneDrive\\Escritorio\\Nueva carpeta\\Sistema-Eletoral-Estudiantil\\UI\\Forms\\ReportesFRM\\Frmreportegeneralvotos.cs [Design]",
+              "RelativeToolTip": "UI\\Forms\\ReportesFRM\\Frmreportegeneralvotos.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-13T13:50:47.006Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Entities.cs",
+              "DocumentMoniker": "C:\\Users\\ledes\\OneDrive\\Escritorio\\Nueva carpeta\\Sistema-Eletoral-Estudiantil\\Models\\Entities.cs",
+              "RelativeDocumentMoniker": "Models\\Entities.cs",
+              "ToolTip": "C:\\Users\\ledes\\OneDrive\\Escritorio\\Nueva carpeta\\Sistema-Eletoral-Estudiantil\\Models\\Entities.cs",
+              "RelativeToolTip": "Models\\Entities.cs",
+              "ViewState": "AgIAAIQAAAAAAAAAAAAAwJoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-13T13:39:06.939Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Frmreportelistadoparticipantes.cs",
+              "DocumentMoniker": "C:\\Users\\ledes\\OneDrive\\Escritorio\\Nueva carpeta\\Sistema-Eletoral-Estudiantil\\UI\\Forms\\ReportesFRM\\Frmreportelistadoparticipantes.cs",
+              "RelativeDocumentMoniker": "UI\\Forms\\ReportesFRM\\Frmreportelistadoparticipantes.cs",
+              "ToolTip": "C:\\Users\\ledes\\OneDrive\\Escritorio\\Nueva carpeta\\Sistema-Eletoral-Estudiantil\\UI\\Forms\\ReportesFRM\\Frmreportelistadoparticipantes.cs",
+              "RelativeToolTip": "UI\\Forms\\ReportesFRM\\Frmreportelistadoparticipantes.cs",
+              "ViewState": "AgIAADsAAAAAAAAAAAASwFEAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-13T13:28:11.539Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Reportes.cs",
+              "DocumentMoniker": "C:\\Users\\ledes\\OneDrive\\Escritorio\\Nueva carpeta\\Sistema-Eletoral-Estudiantil\\UI\\Forms\\Reportes.cs",
+              "RelativeDocumentMoniker": "UI\\Forms\\Reportes.cs",
+              "ToolTip": "C:\\Users\\ledes\\OneDrive\\Escritorio\\Nueva carpeta\\Sistema-Eletoral-Estudiantil\\UI\\Forms\\Reportes.cs",
+              "RelativeToolTip": "UI\\Forms\\Reportes.cs",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAswNkAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-13T13:23:54.115Z"
             }
           ]
         }

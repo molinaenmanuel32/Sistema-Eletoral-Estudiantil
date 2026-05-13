@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DsIntegrantesPlancha" targetNamespace="http://tempuri.org/DsIntegrantesPlancha.xsd" xmlns:mstns="http://tempuri.org/DsIntegrantesPlancha.xsd" xmlns="http://tempuri.org/DsIntegrantesPlancha.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DsIntegrantesPlancha" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_UserDSName="DsIntegrantesPlancha" msprop:Generator_DataSetName="DsIntegrantesPlancha">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="IntegrantesPlancha" msprop:Generator_RowEvHandlerName="IntegrantesPlanchaRowChangeEventHandler" msprop:Generator_RowDeletedName="IntegrantesPlanchaRowDeleted" msprop:Generator_RowDeletingName="IntegrantesPlanchaRowDeleting" msprop:Generator_RowEvArgName="IntegrantesPlanchaRowChangeEvent" msprop:Generator_TablePropName="IntegrantesPlancha" msprop:Generator_RowChangedName="IntegrantesPlanchaRowChanged" msprop:Generator_RowChangingName="IntegrantesPlanchaRowChanging" msprop:Generator_TableClassName="IntegrantesPlanchaDataTable" msprop:Generator_RowClassName="IntegrantesPlanchaRow" msprop:Generator_TableVarName="tableIntegrantesPlancha" msprop:Generator_UserTableName="IntegrantesPlancha">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PlanchaId" msprop:Generator_ColumnPropNameInRow="PlanchaId" msprop:Generator_ColumnPropNameInTable="PlanchaIdColumn" msprop:Generator_ColumnVarNameInTable="columnPlanchaId" msprop:Generator_UserColumnName="PlanchaId" type="xs:int" minOccurs="0" />
+              <xs:element name="NombrePlancha" msprop:Generator_ColumnPropNameInRow="NombrePlancha" msprop:Generator_ColumnPropNameInTable="NombrePlanchaColumn" msprop:Generator_ColumnVarNameInTable="columnNombrePlancha" msprop:Generator_UserColumnName="NombrePlancha" type="xs:string" minOccurs="0" />
+              <xs:element name="MiembroNombre" msprop:Generator_ColumnPropNameInRow="MiembroNombre" msprop:Generator_ColumnPropNameInTable="MiembroNombreColumn" msprop:Generator_ColumnVarNameInTable="columnMiembroNombre" msprop:Generator_UserColumnName="MiembroNombre" type="xs:string" minOccurs="0" />
+              <xs:element name="Cargo" msprop:Generator_ColumnPropNameInRow="Cargo" msprop:Generator_ColumnPropNameInTable="CargoColumn" msprop:Generator_ColumnVarNameInTable="columnCargo" msprop:Generator_UserColumnName="Cargo" type="xs:string" minOccurs="0" />
+              <xs:element name="Matricula" msprop:Generator_ColumnPropNameInRow="Matricula" msprop:Generator_ColumnPropNameInTable="MatriculaColumn" msprop:Generator_ColumnVarNameInTable="columnMatricula" msprop:Generator_UserColumnName="Matricula" type="xs:string" minOccurs="0" />
+              <xs:element name="Curso" msprop:Generator_ColumnPropNameInRow="Curso" msprop:Generator_ColumnPropNameInTable="CursoColumn" msprop:Generator_ColumnVarNameInTable="columnCurso" msprop:Generator_UserColumnName="Curso" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 using SistemaVotacion.Models;
 using SistemaVotacion.Reports;
@@ -9,12 +10,10 @@ namespace SistemaVotacion.UI.Reportes
 {
     public partial class FrmReporteGeneralVotos : Form
     {
-        // ── Datos ────────────────────────────────────────────────────
         private readonly EstadisticasVotacion _estadisticas;
         private readonly IReadOnlyList<VotoDetalle> _votos;
         private readonly string _tituloVotacion;
 
-        // ── Constructor ──────────────────────────────────────────────
         public FrmReporteGeneralVotos(
             EstadisticasVotacion estadisticas,
             IEnumerable<VotoDetalle> votos,
@@ -25,10 +24,9 @@ namespace SistemaVotacion.UI.Reportes
             _tituloVotacion = tituloVotacion ?? "Votación";
 
             InitializeComponent();
-            Text = $"Reporte General de Votos | {_tituloVotacion}";
+            Text = "Reporte General de Votos | " + _tituloVotacion;
         }
 
-        // ── Load ─────────────────────────────────────────────────────
         private void FrmReporteGeneralVotos_Load(object sender, EventArgs e)
         {
             if (_votos.Any())
@@ -46,7 +44,6 @@ namespace SistemaVotacion.UI.Reportes
             CargarReporte();
         }
 
-        // ── Reporte ──────────────────────────────────────────────────
         private void CargarReporte()
         {
             try
@@ -68,14 +65,17 @@ namespace SistemaVotacion.UI.Reportes
                     inicio,
                     fin);
 
-                lblResultados.Text =
-                    $"Mostrando {votosFiltrados.Count} voto(s) entre " +
-                    $"{inicio:dd/MM/yyyy} y {dtpFechaFin.Value:dd/MM/yyyy}";
+                if (lblResultados != null)
+                    lblResultados.Text =
+                        "Mostrando " + votosFiltrados.Count + " voto(s) entre " +
+                        inicio.ToString("dd/MM/yyyy") + " y " +
+                        dtpFechaFin.Value.ToString("dd/MM/yyyy");
             }
             catch (Exception ex)
             {
+                // Mostrar error completo con todas las excepciones anidadas
                 MessageBox.Show(
-                    $"Error al generar el reporte:\n{ex.Message}",
+                    ObtenerMensajeCompleto(ex),
                     "Error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
@@ -86,7 +86,28 @@ namespace SistemaVotacion.UI.Reportes
             }
         }
 
-        // ── Validación ───────────────────────────────────────────────
+        /// <summary>
+        /// Devuelve el mensaje completo recorriendo todas las InnerException.
+        /// </summary>
+        private static string ObtenerMensajeCompleto(Exception ex)
+        {
+            var sb = new StringBuilder();
+            var current = ex;
+            int nivel = 0;
+            while (current != null)
+            {
+                if (nivel == 0)
+                    sb.AppendLine("[Error principal]");
+                else
+                    sb.AppendLine("[Causa " + nivel + "]");
+
+                sb.AppendLine(current.GetType().Name + ": " + current.Message);
+                current = current.InnerException;
+                nivel++;
+            }
+            return sb.ToString();
+        }
+
         private bool ValidarFechas()
         {
             if (dtpFechaInicio.Value.Date > dtpFechaFin.Value.Date)
@@ -103,15 +124,15 @@ namespace SistemaVotacion.UI.Reportes
 
         private void ActualizarEtiquetaResumen()
         {
+            if (lblResumen == null) return;
             lblResumen.Text =
-                $"Padrón: {_estadisticas.TotalPadron}  |  " +
-                $"Votos válidos: {_estadisticas.VotosValidos}  |  " +
-                $"Nulos: {_estadisticas.VotosNulos}  |  " +
-                $"Sin votar: {_estadisticas.SinVotar}  |  " +
-                $"Participación: {_estadisticas.PorcentajeParticipacion:F1} %";
+                "Padrón: " + _estadisticas.TotalPadron +
+                " | Válidos: " + _estadisticas.VotosValidos +
+                " | Nulos: " + _estadisticas.VotosNulos +
+                " | Sin votar: " + _estadisticas.SinVotar +
+                " | Participación: " + _estadisticas.PorcentajeParticipacion.ToString("F1") + "%";
         }
 
-        // ── Eventos ──────────────────────────────────────────────────
         private void btnGenerar_Click(object sender, EventArgs e)
         {
             if (ValidarFechas()) CargarReporte();

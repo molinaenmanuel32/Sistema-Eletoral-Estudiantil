@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>SistemaVotacion.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -43,6 +46,7 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
+    <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
     <!-- ORM / Data Access -->
@@ -67,6 +71,11 @@
     <!-- BLL -->
     <Compile Include="BLL\Services.cs" />
     <!-- Utils -->
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="UI\Forms\FrmEditarUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,10 +106,31 @@
     <Compile Include="UI\Forms\ReportesFRM\Frmreporteplanchaganadora.Designer.cs">
       <DependentUpon>Frmreporteplanchaganadora.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Reports\DsVotaciones.Designer.cs">
+    <Compile Include="UI\Reports\DsIntegrantesPlancha.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DsVotaciones.xsd</DependentUpon>
+      <DependentUpon>DsIntegrantesPlancha.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Reports\DsParticipantes.cs">
+      <DependentUpon>DsParticipantes.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Reports\DsParticipantes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DsParticipantes.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Reports\DsPlanchaGanadora.cs">
+      <DependentUpon>DsPlanchaGanadora.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Reports\DsPlanchaGanadora.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DsPlanchaGanadora.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Reports\DsVotosGeneral.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DsVotosGeneral.xsd</DependentUpon>
     </Compile>
     <Compile Include="UI\Reports\ReportHelper.cs" />
     <Compile Include="Utils\Tema.cs" />
@@ -270,10 +300,10 @@
     <EmbeddedResource Include="UI\Forms\VotacionAdmin.resx">
       <DependentUpon>VotacionAdmin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Reports\ReporteGeneralVotos.rdlc" />
-    <EmbeddedResource Include="UI\Reports\ReporteIntegrantesPlancha.rdlc" />
-    <EmbeddedResource Include="UI\Reports\ReporteListadoParticipantes.rdlc" />
-    <EmbeddedResource Include="UI\Reports\ReportePlanchaGanadora.rdlc" />
+    <EmbeddedResource Include="UI\Reports\RptIntegrantesPlancha.rdlc" />
+    <EmbeddedResource Include="UI\Reports\RptParticipantes.rdlc" />
+    <EmbeddedResource Include="UI\Reports\RptPlanchaGanadora.rdlc" />
+    <EmbeddedResource Include="UI\Reports\RptVotosGeneral.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="appsettings.json">
@@ -287,16 +317,54 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="UI\Reports\DsVotaciones.xsc">
-      <DependentUpon>DsVotaciones.xsd</DependentUpon>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="UI\Reports\DsVotaciones.xsd">
+    <None Include="UI\Reports\DsIntegrantesPlancha.xsc">
+      <DependentUpon>DsIntegrantesPlancha.xsd</DependentUpon>
+    </None>
+    <None Include="UI\Reports\DsIntegrantesPlancha.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DsVotaciones.Designer.cs</LastGenOutput>
+      <LastGenOutput>DsIntegrantesPlancha.Designer.cs</LastGenOutput>
     </None>
-    <None Include="UI\Reports\DsVotaciones.xss">
-      <DependentUpon>DsVotaciones.xsd</DependentUpon>
+    <None Include="UI\Reports\DsIntegrantesPlancha.xss">
+      <DependentUpon>DsIntegrantesPlancha.xsd</DependentUpon>
+    </None>
+    <None Include="UI\Reports\DsParticipantes.xsc">
+      <DependentUpon>DsParticipantes.xsd</DependentUpon>
+    </None>
+    <None Include="UI\Reports\DsParticipantes.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DsParticipantes.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="UI\Reports\DsParticipantes.xss">
+      <DependentUpon>DsParticipantes.xsd</DependentUpon>
+    </None>
+    <None Include="UI\Reports\DsPlanchaGanadora.xsc">
+      <DependentUpon>DsPlanchaGanadora.xsd</DependentUpon>
+    </None>
+    <None Include="UI\Reports\DsPlanchaGanadora.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DsPlanchaGanadora.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="UI\Reports\DsPlanchaGanadora.xss">
+      <DependentUpon>DsPlanchaGanadora.xsd</DependentUpon>
+    </None>
+    <None Include="UI\Reports\DsVotosGeneral.xsc">
+      <DependentUpon>DsVotosGeneral.xsd</DependentUpon>
+    </None>
+    <None Include="UI\Reports\DsVotosGeneral.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DsVotosGeneral.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="UI\Reports\DsVotosGeneral.xss">
+      <DependentUpon>DsVotosGeneral.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup />
