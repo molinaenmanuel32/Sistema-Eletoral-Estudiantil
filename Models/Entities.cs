@@ -57,16 +57,23 @@ namespace SistemaVotacion.Models
     // ─────────────────────────────────────────────
     public class MiembroPlancha
     {
-        public int    MiembroId   { get; set; }
-        public int    PlanchaId   { get; set; }
-        public int    UsuarioId   { get; set; }
-        public string Puesto      { get; set; } = "";
-        public int    Orden       { get; set; }
+        public int MiembroId { get; set; }
+        public int PlanchaId { get; set; }
+        public int UsuarioId { get; set; }
+
+        public string Puesto { get; set; } = "";
+        public int Orden { get; set; }
+
         public string Descripcion { get; set; }
-        public string Nombre      { get; set; }
-        public string Matricula   { get; set; }
-        public string FotoPath    { get; set; }
+        public string Nombre { get; set; }
+        public string Matricula { get; set; }
+        public string FotoPath { get; set; }
+
         public string NombreCompleto { get; set; }
+
+        // AGREGAR ESTO
+        public string Curso { get; set; }
+        public string Seccion { get; set; }
     }
 
     // ─────────────────────────────────────────────
@@ -74,20 +81,49 @@ namespace SistemaVotacion.Models
     // ─────────────────────────────────────────────
     public class Votacion
     {
-        public int      VotacionId    { get; set; }
-        public string   Titulo        { get; set; } = string.Empty;
-        public string   Descripcion   { get; set; }
-        public DateTime FechaInicio   { get; set; }
-        public DateTime FechaFin      { get; set; }
-        public bool     Activa        { get; set; }
-        public int      CreadoPor     { get; set; }
+        public int VotacionId { get; set; }
+
+        public string Titulo { get; set; } = string.Empty;
+
+        public string Descripcion { get; set; }
+
+        public DateTime FechaInicio { get; set; }
+
+        public DateTime FechaFin { get; set; }
+
+        public bool Activa { get; set; }
+
+        public int CreadoPor { get; set; }
+
         public DateTime FechaCreacion { get; set; }
 
-        // Calculados
-        public bool     EnCurso        => Activa && DateTime.Now >= FechaInicio && DateTime.Now <= FechaFin;
-        public TimeSpan TiempoRestante => FechaFin - DateTime.Now;
-    }
+        // =========================
+        // ESTADO EN CURSO
+        // =========================
+        public bool EnCurso
+        {
+            get
+            {
+                return Activa
+                    && DateTime.Now >= FechaInicio
+                    && DateTime.Now <= FechaFin;
+            }
+        }
 
+        // =========================
+        // TIEMPO RESTANTE
+        // =========================
+        public TimeSpan TiempoRestante
+        {
+            get
+            {
+                if (!EnCurso)
+                    return TimeSpan.Zero;
+
+                return FechaFin - DateTime.Now;
+            }
+        }
+    }
     // ─────────────────────────────────────────────
     // PADRÓN
     // ─────────────────────────────────────────────
@@ -137,6 +173,7 @@ namespace SistemaVotacion.Models
         public int    TotalVotos { get; set; }
         public decimal Porcentaje { get; set; }
         public string LogoPath   { get; set; }
+        public object NombrePlancha { get; internal set; }
     }
 
     // ─────────────────────────────────────────────

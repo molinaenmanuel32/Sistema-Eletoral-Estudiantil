@@ -20,6 +20,20 @@ namespace SistemaVotacion.DAL
             }
         }
 
+        public bool UpdateMiembro(MiembroPlancha m)
+        {
+            using (var con = DbConnection.GetConnection())
+            {
+                const string sql =
+                    "UPDATE MiembrosPlanchas " +
+                    "SET Puesto = @Puesto, Orden = @Orden, Descripcion = @Descripcion, " +
+                    "    Nombre = @Nombre, Matricula = @Matricula, FotoPath = @FotoPath " +
+                    "WHERE MiembroId = @MiembroId";
+
+                return con.Execute(sql, m) > 0;
+            }
+        }
+
         public Plancha GetById(int id)
         {
             using (var con = DbConnection.GetConnection())
@@ -66,16 +80,37 @@ namespace SistemaVotacion.DAL
         {
             using (var con = DbConnection.GetConnection())
             {
-                const string sql =
-                    "SELECT mp.*, u.Nombre + ' ' + u.Apellido AS NombreCompleto, u.Matricula " +
-                    "FROM MiembrosPlanchas mp " +
-                    "INNER JOIN Usuarios u ON u.UsuarioId = mp.UsuarioId " +
-                    "WHERE mp.PlanchaId = @PlanchaId " +
-                    "ORDER BY mp.Orden";
-                return con.Query<MiembroPlancha>(sql, new { PlanchaId = planchaId });
+                const string sql = @"
+        SELECT
+            mp.MiembroId,
+            mp.PlanchaId,
+            mp.UsuarioId,
+            mp.Puesto,
+            mp.Orden,
+            mp.Descripcion,
+
+            u.Nombre,
+            u.Apellido,
+            u.Matricula,
+            u.Curso,
+            u.Seccion,
+
+            (u.Nombre + ' ' + u.Apellido) AS NombreCompleto
+
+        FROM MiembrosPlanchas mp
+
+        INNER JOIN Usuarios u
+            ON u.UsuarioId = mp.UsuarioId
+
+        WHERE mp.PlanchaId = @PlanchaId
+
+        ORDER BY mp.Orden";
+
+                return con.Query<MiembroPlancha>(
+                    sql,
+                    new { PlanchaId = planchaId });
             }
         }
-
         public MiembroPlancha GetMiembroById(int miembroId)
         {
             using (var con = DbConnection.GetConnection())
@@ -96,28 +131,21 @@ namespace SistemaVotacion.DAL
                 int existe = con.ExecuteScalar<int>(
                     "SELECT COUNT(1) FROM MiembrosPlanchas WHERE UsuarioId = @UsuarioId",
                     new { m.UsuarioId });
-                if (existe > 0) return false;
+
+                if (existe > 0)
+                    return false;
 
                 const string sql =
                     "INSERT INTO MiembrosPlanchas " +
-                    "(PlanchaId, UsuarioId, Puesto, Orden, Descripcion, Nombre, Matricula, FotoPath) " +
-                    "VALUES (@PlanchaId, @UsuarioId, @Puesto, @Orden, @Descripcion, @Nombre, @Matricula, @FotoPath)";
+                    "(PlanchaId, UsuarioId, Puesto, Orden, Descripcion, FotoPath) " +
+                    "VALUES " +
+                    "(@PlanchaId, @UsuarioId, @Puesto, @Orden, @Descripcion, @FotoPath)";
+
                 return con.Execute(sql, m) > 0;
             }
         }
 
-        public bool UpdateMiembro(MiembroPlancha m)
-        {
-            using (var con = DbConnection.GetConnection())
-            {
-                const string sql =
-                    "UPDATE MiembrosPlanchas " +
-                    "SET Puesto = @Puesto, Orden = @Orden, Descripcion = @Descripcion, " +
-                    "    Nombre = @Nombre, Matricula = @Matricula, FotoPath = @FotoPath " +
-                    "WHERE MiembroId = @MiembroId";
-                return con.Execute(sql, m) > 0;
-            }
-        }
+
 
         public bool ExistePuestoEnPlancha(int planchaId, string puesto, int miembroIdExcluir = 0)
         {

@@ -16,7 +16,9 @@ namespace SistemaVotacion.DAL
                     "INNER JOIN Roles r ON r.RolId = u.RolId " +
                     "WHERE LTRIM(RTRIM(u.Username)) = @Username " +
                     "  AND u.Activo = 1";
-                return con.QueryFirstOrDefault<Usuario>(sql, new { Username = username.Trim() });
+
+                return con.QueryFirstOrDefault<Usuario>(sql,
+                    new { Username = username.Trim() });
             }
         }
 
@@ -29,6 +31,7 @@ namespace SistemaVotacion.DAL
                     "FROM Usuarios u " +
                     "INNER JOIN Roles r ON r.RolId = u.RolId " +
                     "ORDER BY u.Apellido, u.Nombre";
+
                 return con.Query<Usuario>(sql);
             }
         }
@@ -42,7 +45,9 @@ namespace SistemaVotacion.DAL
                     "FROM Usuarios u " +
                     "INNER JOIN Roles r ON r.RolId = u.RolId " +
                     "WHERE u.UsuarioId = @Id";
-                return con.QueryFirstOrDefault<Usuario>(sql, new { Id = id });
+
+                return con.QueryFirstOrDefault<Usuario>(sql,
+                    new { Id = id });
             }
         }
 
@@ -52,9 +57,10 @@ namespace SistemaVotacion.DAL
             {
                 const string sql =
                     "INSERT INTO Usuarios " +
-                    "(Nombre, Apellido, Matricula, Curso, Seccion, Email, Username, PasswordHash, RolId, Activo, PlanchaId) " +
+                    "(Nombre, Apellido, Matricula, Curso, Seccion, Email, Username, PasswordHash, RolId, Activo) " +
                     "OUTPUT INSERTED.UsuarioId " +
-                    "VALUES (@Nombre, @Apellido, @Matricula, @Curso, @Seccion, @Email, @Username, @PasswordHash, @RolId, @Activo, @PlanchaId)";
+                    "VALUES (@Nombre, @Apellido, @Matricula, @Curso, @Seccion, @Email, @Username, @PasswordHash, @RolId, @Activo)";
+
                 return con.ExecuteScalar<int>(sql, u);
             }
         }
@@ -65,10 +71,17 @@ namespace SistemaVotacion.DAL
             {
                 const string sql =
                     "UPDATE Usuarios " +
-                    "SET Nombre = @Nombre, Apellido = @Apellido, Matricula = @Matricula, " +
-                    "    Curso = @Curso, Seccion = @Seccion, Email = @Email, " +
-                    "    Username = @Username, RolId = @RolId, Activo = @Activo, PlanchaId = @PlanchaId " +
+                    "SET Nombre = @Nombre, " +
+                    "Apellido = @Apellido, " +
+                    "Matricula = @Matricula, " +
+                    "Curso = @Curso, " +
+                    "Seccion = @Seccion, " +
+                    "Email = @Email, " +
+                    "Username = @Username, " +
+                    "RolId = @RolId, " +
+                    "Activo = @Activo " +
                     "WHERE UsuarioId = @UsuarioId";
+
                 return con.Execute(sql, u) > 0;
             }
         }
@@ -76,51 +89,65 @@ namespace SistemaVotacion.DAL
         public bool UpdatePassword(int id, string newHash)
         {
             using (var con = DbConnection.GetConnection())
+            {
                 return con.Execute(
                     "UPDATE Usuarios SET PasswordHash = @Hash WHERE UsuarioId = @Id",
                     new { Hash = newHash, Id = id }) > 0;
-        }
-
-        public bool SetPlanchaId(int usuarioId, int? planchaId)
-        {
-            using (var con = DbConnection.GetConnection())
-                return con.Execute(
-                    "UPDATE Usuarios SET PlanchaId = @PlanchaId WHERE UsuarioId = @UsuarioId",
-                    new { UsuarioId = usuarioId, PlanchaId = planchaId }) > 0;
+            }
         }
 
         public int GetRolIdPorNombre(string nombreRol)
         {
             using (var con = DbConnection.GetConnection())
+            {
                 return con.ExecuteScalar<int>(
                     "SELECT RolId FROM Roles WHERE LOWER(LTRIM(RTRIM(Nombre))) = LOWER(LTRIM(RTRIM(@NombreRol)))",
                     new { NombreRol = nombreRol });
+            }
         }
 
         public bool Delete(int id)
         {
             using (var con = DbConnection.GetConnection())
+            {
                 return con.Execute(
                     "UPDATE Usuarios SET Activo = 0 WHERE UsuarioId = @Id",
                     new { Id = id }) > 0;
+            }
         }
 
         public bool ExisteMatricula(string matricula, int excludeId = 0)
         {
-            if (string.IsNullOrWhiteSpace(matricula)) return false;
+            if (string.IsNullOrWhiteSpace(matricula))
+                return false;
+
             using (var con = DbConnection.GetConnection())
+            {
                 return con.ExecuteScalar<int>(
                     "SELECT COUNT(1) FROM Usuarios WHERE LTRIM(RTRIM(Matricula)) = @Matricula AND UsuarioId <> @ExcludeId",
-                    new { Matricula = matricula.Trim(), ExcludeId = excludeId }) > 0;
+                    new
+                    {
+                        Matricula = matricula.Trim(),
+                        ExcludeId = excludeId
+                    }) > 0;
+            }
         }
 
         public bool ExisteUsername(string username, int excludeId = 0)
         {
-            if (string.IsNullOrWhiteSpace(username)) return false;
+            if (string.IsNullOrWhiteSpace(username))
+                return false;
+
             using (var con = DbConnection.GetConnection())
+            {
                 return con.ExecuteScalar<int>(
                     "SELECT COUNT(1) FROM Usuarios WHERE LTRIM(RTRIM(Username)) = @Username AND UsuarioId <> @ExcludeId",
-                    new { Username = username.Trim(), ExcludeId = excludeId }) > 0;
+                    new
+                    {
+                        Username = username.Trim(),
+                        ExcludeId = excludeId
+                    }) > 0;
+            }
         }
 
         public IEnumerable<Usuario> GetVotantesDisponibles(int votacionId)
@@ -132,11 +159,13 @@ namespace SistemaVotacion.DAL
                     "FROM Usuarios u " +
                     "INNER JOIN Roles r ON r.RolId = u.RolId " +
                     "WHERE r.Nombre = 'Votante' " +
-                    "  AND u.Activo = 1 " +
-                    "  AND u.UsuarioId NOT IN " +
-                    "  (SELECT UsuarioId FROM Padrones WHERE VotacionId = @VotacionId) " +
+                    "AND u.Activo = 1 " +
+                    "AND u.UsuarioId NOT IN " +
+                    "(SELECT UsuarioId FROM Padrones WHERE VotacionId = @VotacionId) " +
                     "ORDER BY u.Apellido, u.Nombre";
-                return con.Query<Usuario>(sql, new { VotacionId = votacionId });
+
+                return con.Query<Usuario>(sql,
+                    new { VotacionId = votacionId });
             }
         }
     }

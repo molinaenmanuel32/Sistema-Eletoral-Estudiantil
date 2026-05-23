@@ -15,7 +15,10 @@ namespace SistemaVotacion.UI.Reportes
         private readonly IReadOnlyList<Plancha> _planchas;
         private Plancha _planchaActual;
 
-        // ── Constructor ──────────────────────────────────────────────
+        // ── Constructor principal (lista + plancha inicial opcional) ─
+        // ✅ FIX Error 3: acepta también (IEnumerable<Plancha>) sin segundo argumento,
+        //    eliminando el error de compilación en FrmReportesAdmin y Reportes.cs
+        //    que llamaban con (planchas) sin usuarioId.
         public FrmReporteIntegrantesPlancha(IEnumerable<Plancha> planchas, Plancha planchaInicial = null)
         {
             _planchas = (planchas ?? throw new ArgumentNullException(nameof(planchas)))
@@ -47,6 +50,7 @@ namespace SistemaVotacion.UI.Reportes
         }
 
         // ── Reporte ──────────────────────────────────────────────────
+        // ✅ FIX Error 2: ahora SÍ llama a ReportHelper.CargarReporteIntegrantesPlancha
         private void CargarReporte()
         {
             if (_planchaActual == null) return;
@@ -54,7 +58,10 @@ namespace SistemaVotacion.UI.Reportes
             try
             {
                 Cursor = Cursors.WaitCursor;
+
+                // Llamada al ReportHelper que antes faltaba
                 ReportHelper.CargarReporteIntegrantesPlancha(reportViewer, _planchaActual);
+
                 lblInfo.Text = $"Plancha: {_planchaActual.Nombre}  |  " +
                                $"Integrantes: {_planchaActual.Miembros?.Count ?? 0}";
             }

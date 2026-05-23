@@ -17,6 +17,7 @@ namespace SistemaVotacion.UI.Forms
         private Panel cardGeneral;
         private Panel cardPadron;
         private Panel cardGanador;
+        private Panel panel1;
 
         private Label lblGeneralTitulo;
         private Label lblGeneralDesc;
@@ -32,6 +33,12 @@ namespace SistemaVotacion.UI.Forms
         private Label lblGanadorDesc;
         private Button btnVerGanador;
         private Button btnPdfGanador;
+
+        private Label label1;
+        private Label label2;
+
+        // NUEVO BOTÓN
+        private Button btnPdfPlanchas;
 
         protected override void Dispose(bool disposing)
         {
@@ -62,11 +69,17 @@ namespace SistemaVotacion.UI.Forms
             this.lblGanadorDesc = new System.Windows.Forms.Label();
             this.btnVerGanador = new System.Windows.Forms.Button();
             this.btnPdfGanador = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnPdfInte = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnPdfPlanchas = new System.Windows.Forms.Button();
             this.pnlHeader.SuspendLayout();
             this.pnlBody.SuspendLayout();
             this.cardGeneral.SuspendLayout();
             this.cardPadron.SuspendLayout();
             this.cardGanador.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlHeader
@@ -108,6 +121,7 @@ namespace SistemaVotacion.UI.Forms
             this.pnlBody.Controls.Add(this.cardGeneral);
             this.pnlBody.Controls.Add(this.cardPadron);
             this.pnlBody.Controls.Add(this.cardGanador);
+            this.pnlBody.Controls.Add(this.panel1);
             this.pnlBody.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlBody.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.pnlBody.Location = new System.Drawing.Point(0, 120);
@@ -235,7 +249,8 @@ namespace SistemaVotacion.UI.Forms
             this.cardGanador.Controls.Add(this.lblGanadorDesc);
             this.cardGanador.Controls.Add(this.btnVerGanador);
             this.cardGanador.Controls.Add(this.btnPdfGanador);
-            this.cardGanador.Location = new System.Drawing.Point(38, 318);
+            this.cardGanador.Location = new System.Drawing.Point(35, 315);
+            this.cardGanador.Margin = new System.Windows.Forms.Padding(0, 0, 0, 20);
             this.cardGanador.Name = "cardGanador";
             this.cardGanador.Size = new System.Drawing.Size(890, 120);
             this.cardGanador.TabIndex = 2;
@@ -283,6 +298,61 @@ namespace SistemaVotacion.UI.Forms
             this.btnPdfGanador.UseVisualStyleBackColor = false;
             this.btnPdfGanador.Click += new System.EventHandler(this.btnPdfGanador_Click);
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.btnPdfInte);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.btnPdfPlanchas);
+            this.panel1.Location = new System.Drawing.Point(38, 458);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(890, 120);
+            this.panel1.TabIndex = 3;
+            // 
+            // btnPdfInte
+            // 
+            this.btnPdfInte.BackColor = System.Drawing.Color.Crimson;
+            this.btnPdfInte.ForeColor = System.Drawing.Color.White;
+            this.btnPdfInte.Location = new System.Drawing.Point(697, 41);
+            this.btnPdfInte.Name = "btnPdfInte";
+            this.btnPdfInte.Size = new System.Drawing.Size(130, 40);
+            this.btnPdfInte.TabIndex = 4;
+            this.btnPdfInte.Text = "PDF";
+            this.btnPdfInte.UseVisualStyleBackColor = false;
+            this.btnPdfInte.Click += new System.EventHandler(this.btnPdfInte_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold);
+            this.label1.Location = new System.Drawing.Point(30, 25);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(336, 35);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "👥 Integrantes de Planchas";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(30, 65);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(286, 16);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Visualizar y descargar integrantes por plancha.";
+            // 
+            // btnPdfPlanchas
+            // 
+            this.btnPdfPlanchas.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnPdfPlanchas.ForeColor = System.Drawing.Color.White;
+            this.btnPdfPlanchas.Location = new System.Drawing.Point(557, 41);
+            this.btnPdfPlanchas.Name = "btnPdfPlanchas";
+            this.btnPdfPlanchas.Size = new System.Drawing.Size(130, 40);
+            this.btnPdfPlanchas.TabIndex = 5;
+            this.btnPdfPlanchas.Text = "Ver reporte";
+            this.btnPdfPlanchas.UseVisualStyleBackColor = false;
+            this.btnPdfPlanchas.Click += new System.EventHandler(this.btnPdfPlanchas_Click);
+            // 
             // Reportes
             // 
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(245)))), ((int)(((byte)(250)))));
@@ -301,8 +371,13 @@ namespace SistemaVotacion.UI.Forms
             this.cardPadron.PerformLayout();
             this.cardGanador.ResumeLayout(false);
             this.cardGanador.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
+
+        private Button btnPdfInte;
+
     }
 }

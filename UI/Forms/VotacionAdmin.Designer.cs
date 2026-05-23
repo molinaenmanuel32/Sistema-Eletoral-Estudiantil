@@ -41,6 +41,7 @@ namespace SistemaVotacion.UI.Forms
             this.btnCerrar = new System.Windows.Forms.Button();
             this.lblEstado = new System.Windows.Forms.Label();
             this.dgv = new System.Windows.Forms.DataGridView();
+            this.btnActualizar = new System.Windows.Forms.Button();
             this.pnlHeader.SuspendLayout();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
@@ -91,6 +92,7 @@ namespace SistemaVotacion.UI.Forms
             // pnlTop
             // 
             this.pnlTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(247)))), ((int)(((byte)(252)))));
+            this.pnlTop.Controls.Add(this.btnActualizar);
             this.pnlTop.Controls.Add(this.btnNueva);
             this.pnlTop.Controls.Add(this.btnActivar);
             this.pnlTop.Controls.Add(this.btnCerrar);
@@ -121,6 +123,7 @@ namespace SistemaVotacion.UI.Forms
             this.btnActivar.Size = new System.Drawing.Size(120, 42);
             this.btnActivar.TabIndex = 1;
             this.btnActivar.Text = "Activar";
+            this.btnActivar.Click += new System.EventHandler(this.btnActivar_Click);
             // 
             // btnCerrar
             // 
@@ -131,14 +134,15 @@ namespace SistemaVotacion.UI.Forms
             this.btnCerrar.Size = new System.Drawing.Size(120, 42);
             this.btnCerrar.TabIndex = 2;
             this.btnCerrar.Text = "Cerrar";
+            this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
             // 
             // lblEstado
             // 
             this.lblEstado.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.lblEstado.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(55)))), ((int)(((byte)(150)))));
-            this.lblEstado.Location = new System.Drawing.Point(480, 30);
+            this.lblEstado.Location = new System.Drawing.Point(609, 30);
             this.lblEstado.Name = "lblEstado";
-            this.lblEstado.Size = new System.Drawing.Size(500, 25);
+            this.lblEstado.Size = new System.Drawing.Size(379, 25);
             this.lblEstado.TabIndex = 3;
             this.lblEstado.Text = "Sin votación activa";
             // 
@@ -161,6 +165,17 @@ namespace SistemaVotacion.UI.Forms
             this.dgv.Size = new System.Drawing.Size(1050, 440);
             this.dgv.TabIndex = 0;
             // 
+            // btnActualizar
+            // 
+            this.btnActualizar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnActualizar.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.btnActualizar.Location = new System.Drawing.Point(465, 20);
+            this.btnActualizar.Name = "btnActualizar";
+            this.btnActualizar.Size = new System.Drawing.Size(120, 42);
+            this.btnActualizar.TabIndex = 4;
+            this.btnActualizar.Text = "Actualizar";
+            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
+            // 
             // VotacionAdmin
             // 
             this.AutoScroll = true;
@@ -179,5 +194,7 @@ namespace SistemaVotacion.UI.Forms
             this.ResumeLayout(false);
 
         }
+
+        private Button btnActualizar;
     }
 }

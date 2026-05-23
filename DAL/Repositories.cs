@@ -190,10 +190,13 @@ namespace SistemaVotacion.DAL
                     "    CASE WHEN v.VotoId IS NULL THEN 'Pendiente' " +
                     "         WHEN v.EsNulo = 1     THEN 'Nulo' " +
                     "         ELSE 'Emitido' END     AS EstadoVoto, " +
-                    "    v.FechaVoto " +
+                    "    v.FechaVoto, " +
+                    "    p.Nombre AS PlanchaNombre " +
                     "FROM Padrones pad " +
                     "INNER JOIN Usuarios u ON u.UsuarioId = pad.UsuarioId " +
                     "LEFT JOIN  Votos    v ON v.PadronId  = pad.PadronId " +
+                    "           AND v.VotacionId = @vid " +
+                    "LEFT JOIN  Planchas p ON p.PlanchaId = v.PlanchaId " +
                     "WHERE pad.VotacionId = @vid " +
                     "ORDER BY u.Apellido, u.Nombre";
                 return con.Query(sql, new { vid = votacionId });

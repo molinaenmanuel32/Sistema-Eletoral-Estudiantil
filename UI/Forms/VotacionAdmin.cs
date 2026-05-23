@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using SistemaVotacion.BLL;
+using SistemaVotacion.Models;
 using SistemaVotacion.UI.Controls;
 using SistemaVotacion.Utils;
 
@@ -49,14 +50,19 @@ namespace SistemaVotacion.UI.Forms
 
             dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(0, 55, 150);
             dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", 10f, FontStyle.Bold);
+            dgv.ColumnHeadersDefaultCellStyle.Font =
+                new Font("Segoe UI Semibold", 10f, FontStyle.Bold);
 
             dgv.DefaultCellStyle.BackColor = Color.White;
             dgv.DefaultCellStyle.ForeColor = Color.FromArgb(10, 35, 90);
-            dgv.DefaultCellStyle.SelectionBackColor = Color.FromArgb(22, 97, 255);
+            dgv.DefaultCellStyle.SelectionBackColor =
+                Color.FromArgb(22, 97, 255);
             dgv.DefaultCellStyle.SelectionForeColor = Color.White;
 
-            dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 250, 255);
+            dgv.AlternatingRowsDefaultCellStyle.BackColor =
+                Color.FromArgb(248, 250, 255);
+
+            dgv.RowTemplate.Height = 35;
         }
 
         private void ConfigurarColumnas()
@@ -106,7 +112,7 @@ namespace SistemaVotacion.UI.Forms
 
             var activa = _svc.GetActiva();
 
-            lblEstado.Text = activa is null
+            lblEstado.Text = activa == null
                 ? "Sin votación activa"
                 : $"Votación activa: {activa.Titulo}";
 
@@ -115,8 +121,8 @@ namespace SistemaVotacion.UI.Forms
                 dgv.Rows.Add(
                     v.VotacionId,
                     v.Titulo,
-                    v.FechaInicio,
-                    v.FechaFin,
+                    v.FechaInicio.ToString("dd/MM/yyyy HH:mm"),
+                    v.FechaFin.ToString("dd/MM/yyyy HH:mm"),
                     v.Activa
                 );
             }
@@ -124,41 +130,161 @@ namespace SistemaVotacion.UI.Forms
 
         private void btnNueva_Click(object sender, EventArgs e)
         {
-            var frm = new FrmVotacion();
+            var frm = new NuevaVotacionForm();
 
             if (frm.ShowDialog() == DialogResult.OK)
-                Cargar();
+            {
+                if (frm.NuevaVotacion != null)
+                {
+                    var result = _svc.Crear(frm.NuevaVotacion);
+
+                    if (!result.Item1)
+                    {
+                        MessageBox.Show(
+                            result.Item2,
+                            "Error",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning
+                        );
+
+                        return;
+                    }
+
+                    MessageBox.Show(
+                        result.Item2,
+                        "Sistema",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information
+                    );
+
+                    Cargar();
+                }
+            }
         }
 
         private void btnActivar_Click(object sender, EventArgs e)
         {
-            if (dgv.CurrentRow is null) return;
+            if (dgv.CurrentRow == null)
+                return;
 
-            int id = Convert.ToInt32(dgv.CurrentRow.Cells["VotacionId"].Value);
+            int id = Convert.ToInt32(
+                dgv.CurrentRow.Cells["VotacionId"].Value
+            );
 
             if (!Helpers.Confirmar("¿Activar esta votación?"))
                 return;
 
             _svc.Activar(id);
+
+            MessageBox.Show(
+                "Votación activada",
+                "Sistema",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+            );
+
             Cargar();
         }
 
         private void btnCerrar_Click(object sender, EventArgs e)
         {
-            if (dgv.CurrentRow is null) return;
+            if (dgv.CurrentRow == null)
+                return;
 
-            int id = Convert.ToInt32(dgv.CurrentRow.Cells["VotacionId"].Value);
+            int id = Convert.ToInt32(
+                dgv.CurrentRow.Cells["VotacionId"].Value
+            );
 
             if (!Helpers.Confirmar("¿Cerrar esta votación y marcar nulos?"))
                 return;
 
             _svc.Cerrar(id);
+
+            MessageBox.Show(
+                "Votación cerrada",
+                "Sistema",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+            );
+
             Cargar();
         }
 
         private void VotacionAdmin_Load(object sender, EventArgs e)
         {
-            // Si necesitas inicialización extra al cargar el formulario, colócala aquí
+            Cargar();
+        }
+
+        private void btnActualizar_Click(object sender, EventArgs e)
+        {
+            if (dgv.CurrentRow == null)
+            {
+                MessageBox.Show(
+                    "Seleccione una votación.",
+                    "Sistema",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+
+                return;
+            }
+
+            try
+            {
+                // Obtener ID seleccionado
+                int id = Convert.ToInt32(
+                    dgv.CurrentRow.Cells["VotacionId"].Value
+                );
+
+                // Buscar votación
+                var votacion = _svc.GetById(id);
+
+                if (votacion == null)
+                {
+                    MessageBox.Show(
+                        "Votación no encontrada.",
+                        "Sistema",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+
+                    return;
+                }
+
+                // Abrir formulario de edición
+                NuevaVotacionForm frm =
+                    new NuevaVotacionForm(votacion);
+
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    var result = _svc.Actualizar(
+                        frm.NuevaVotacion
+                    );
+
+                    MessageBox.Show(
+                        result.Item2,
+                        "Sistema",
+                        MessageBoxButtons.OK,
+                        result.Item1
+                            ? MessageBoxIcon.Information
+                            : MessageBoxIcon.Warning
+                    );
+
+                    if (result.Item1)
+                    {
+                        Cargar();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Error:\n" + ex.Message,
+                    "Sistema",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
         }
     }
 }

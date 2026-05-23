@@ -18,10 +18,10 @@ namespace SistemaVotacion.UI.Forms
 
         // Colores
         private readonly Color AzulClaro = Color.FromArgb(52, 152, 219);
-        private readonly Color Rojo      = Color.FromArgb(231, 76, 60);
-        private readonly Color Texto     = Color.FromArgb(35, 35, 35);
+        private readonly Color Rojo = Color.FromArgb(231, 76, 60);
+        private readonly Color Texto = Color.FromArgb(35, 35, 35);
         private readonly Color TextoSuave = Color.FromArgb(110, 110, 110);
-        private readonly Color Card      = Color.White;
+        private readonly Color Card = Color.White;
 
         public FrmDashboardPartido(int usuarioId)
         {
@@ -29,10 +29,10 @@ namespace SistemaVotacion.UI.Forms
 
             _usuarioId = usuarioId;
 
-            TopLevel        = false;
+            TopLevel = false;
             FormBorderStyle = FormBorderStyle.None;
-            Dock            = DockStyle.Fill;
-            AutoScroll      = true;
+            Dock = DockStyle.Fill;
+            AutoScroll = true;
 
             AjustarTamanos();
             Cargar();
@@ -53,7 +53,7 @@ namespace SistemaVotacion.UI.Forms
 
         private void AjustarTamanos()
         {
-            if (pnlStats != null)  pnlStats.Width  = ClientSize.Width - 40;
+            if (pnlStats != null) pnlStats.Width = ClientSize.Width - 40;
             if (pnlBarras != null) pnlBarras.Width = ClientSize.Width - 40;
         }
 
@@ -83,12 +83,12 @@ namespace SistemaVotacion.UI.Forms
             pnlStats.Controls.Clear();
 
             var miPlancha = stats.PorPlancha.FirstOrDefault();
-            int votosMiPlancha     = 0;
+            int votosMiPlancha = 0;
             double porcentajeMiPlancha = 0;
 
             if (miPlancha != null)
             {
-                votosMiPlancha     = miPlancha.TotalVotos;
+                votosMiPlancha = miPlancha.TotalVotos;
                 porcentajeMiPlancha = (double)miPlancha.Porcentaje;
             }
 
@@ -109,7 +109,7 @@ namespace SistemaVotacion.UI.Forms
             AjustarTamanos();
 
             TimeSpan tr = _votacion.TiempoRestante;
-            lblTiempo.Text     = Helpers.FormatearTiempo(tr);
+            lblTiempo.Text = Helpers.FormatearTiempo(tr);
             lblTiempo.ForeColor = tr.TotalMinutes < 10 ? Rojo : AzulClaro;
 
             int pct = (int)stats.PorcentajeParticipacion;
@@ -128,11 +128,11 @@ namespace SistemaVotacion.UI.Forms
             {
                 pnlBarras.Controls.Add(new Label
                 {
-                    Text     = "Todavía no hay votos registrados.",
-                    Font     = new Font("Segoe UI", 11f),
+                    Text = "Todavía no hay votos registrados.",
+                    Font = new Font("Segoe UI", 11f),
                     ForeColor = TextoSuave,
                     Location = new Point(25, y),
-                    Size     = new Size(700, 35)
+                    Size = new Size(700, 35)
                 });
                 return;
             }
@@ -142,15 +142,15 @@ namespace SistemaVotacion.UI.Forms
                 Panel card = new Panel
                 {
                     BackColor = Color.White,
-                    Location  = new Point(25, y),
-                    Size      = new Size(pnlBarras.Width - 60, 95)
+                    Location = new Point(25, y),
+                    Size = new Size(pnlBarras.Width - 60, 95)
                 };
 
                 PictureBox logo = new PictureBox
                 {
-                    Location  = new Point(15, 15),
-                    Size      = new Size(60, 60),
-                    SizeMode  = PictureBoxSizeMode.Zoom,
+                    Location = new Point(15, 15),
+                    Size = new Size(60, 60),
+                    SizeMode = PictureBoxSizeMode.Zoom,
                     BackColor = Color.FromArgb(245, 247, 252)
                 };
 
@@ -162,33 +162,33 @@ namespace SistemaVotacion.UI.Forms
 
                 Label lblNombre = new Label
                 {
-                    Text      = ep.Plancha,
-                    Font      = new Font("Segoe UI Semibold", 12f, FontStyle.Bold),
+                    Text = ep.Plancha,
+                    Font = new Font("Segoe UI Semibold", 12f, FontStyle.Bold),
                     ForeColor = Texto,
-                    Location  = new Point(90, 12),
-                    Size      = new Size(350, 25)
+                    Location = new Point(90, 12),
+                    Size = new Size(350, 25)
                 };
 
                 Label lblInfo = new Label
                 {
-                    Text      = ep.TotalVotos + " votos • " + ep.Porcentaje.ToString("F1") + "%",
-                    Font      = new Font("Segoe UI", 10f),
+                    Text = ep.TotalVotos + " votos • " + ep.Porcentaje.ToString("F1") + "%",
+                    Font = new Font("Segoe UI", 10f),
                     ForeColor = TextoSuave,
-                    Location  = new Point(90, 40),
-                    Size      = new Size(260, 22)
+                    Location = new Point(90, 40),
+                    Size = new Size(260, 22)
                 };
 
                 Panel barraBg = new Panel
                 {
-                    Location  = new Point(90, 68),
-                    Size      = new Size(card.Width - 120, 10),
+                    Location = new Point(90, 68),
+                    Size = new Size(card.Width - 120, 10),
                     BackColor = Color.FromArgb(225, 230, 240)
                 };
 
                 Panel barra = new Panel
                 {
-                    Height    = 10,
-                    Width     = (int)((card.Width - 120) * (double)(ep.Porcentaje / 100m)),
+                    Height = 10,
+                    Width = (int)((card.Width - 120) * (double)(ep.Porcentaje / 100m)),
                     BackColor = AzulClaro
                 };
 
@@ -215,16 +215,16 @@ namespace SistemaVotacion.UI.Forms
 
             pnlStats.Controls.Add(new Label
             {
-                Text      = "No hay ninguna votación activa en este momento.",
-                Font      = new Font("Segoe UI", 15f, FontStyle.Bold),
+                Text = "No hay ninguna votación activa en este momento.",
+                Font = new Font("Segoe UI", 15f, FontStyle.Bold),
                 ForeColor = TextoSuave,
-                Location  = new Point(20, 35),
-                Size      = new Size(800, 45)
+                Location = new Point(20, 35),
+                Size = new Size(800, 45)
             });
 
-            lblTiempo.Text        = "--:--:--";
+            lblTiempo.Text = "--:--:--";
             pbParticipacion.Value = 0;
-            lblPorcentaje.Text    = "Participación: --";
+            lblPorcentaje.Text = "Participación: --";
         }
 
         private Panel CrearTarjeta(string titulo, string valor, string icono, Color color)
@@ -235,31 +235,31 @@ namespace SistemaVotacion.UI.Forms
 
             Label lblIcono = new Label
             {
-                Text      = icono,
-                Font      = new Font("Segoe UI Emoji", 24f, FontStyle.Bold),
+                Text = icono,
+                Font = new Font("Segoe UI Emoji", 24f, FontStyle.Bold),
                 ForeColor = color,
-                Location  = new Point(15, 32),
-                Size      = new Size(55, 45),
+                Location = new Point(15, 32),
+                Size = new Size(55, 45),
                 TextAlign = ContentAlignment.MiddleCenter
             };
 
             Label lblValor = new Label
             {
-                Text      = valor,
-                Font      = new Font("Segoe UI", 27f, FontStyle.Bold),
+                Text = valor,
+                Font = new Font("Segoe UI", 27f, FontStyle.Bold),
                 ForeColor = color,
-                Location  = new Point(75, 28),
-                Size      = new Size(120, 45),
+                Location = new Point(75, 28),
+                Size = new Size(120, 45),
                 TextAlign = ContentAlignment.MiddleLeft
             };
 
             Label lblTitulo = new Label
             {
-                Text      = titulo,
-                Font      = new Font("Segoe UI Semibold", 9.5f, FontStyle.Bold),
+                Text = titulo,
+                Font = new Font("Segoe UI Semibold", 9.5f, FontStyle.Bold),
                 ForeColor = TextoSuave,
-                Location  = new Point(75, 75),
-                Size      = new Size(135, 25),
+                Location = new Point(75, 75),
+                Size = new Size(135, 25),
                 TextAlign = ContentAlignment.MiddleLeft
             };
 

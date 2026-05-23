@@ -89,7 +89,7 @@ namespace SistemaVotacion.Reports
                         m.NombreCompleto ?? m.Nombre,   // → MiembroNombre
                         m.Puesto ?? "",                 // → Cargo
                         m.Matricula ?? "",
-                        ""                              // Curso no está en MiembroPlancha
+                        m.Curso ?? ""                   // ✅ FIX: antes siempre era ""
                     );
                 }
             }

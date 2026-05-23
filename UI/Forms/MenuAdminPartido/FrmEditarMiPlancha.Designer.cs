@@ -34,6 +34,7 @@ namespace SistemaVotacion.UI.Forms
         private Label lblNombreMiembro;
         private Label lblMatricula;
         private Label lblDescripcionMiembro;
+        private Label lblFoto;
         private Label lblFotoTexto;
 
         private ComboBox cmbPuesto;
@@ -60,304 +61,334 @@ namespace SistemaVotacion.UI.Forms
 
         private void InitializeComponent()
         {
-            this.pnlHeader = new System.Windows.Forms.Panel();
-            this.lblTitulo = new System.Windows.Forms.Label();
-            this.lblSubtitulo = new System.Windows.Forms.Label();
-            this.pnlAsignarPlancha = new System.Windows.Forms.Panel();
-            this.pnlPlancha = new System.Windows.Forms.Panel();
-            this.pnlMiembros = new System.Windows.Forms.Panel();
-            this.lblAsignacion = new System.Windows.Forms.Label();
-            this.cmbPlanchasDisponibles = new System.Windows.Forms.ComboBox();
-            this.btnTomarPlancha = new System.Windows.Forms.Button();
-            this.txtNuevaPlancha = new System.Windows.Forms.TextBox();
-            this.txtNuevaDescripcion = new System.Windows.Forms.TextBox();
-            this.btnCrearMiPlancha = new System.Windows.Forms.Button();
-            this.lblNombrePlancha = new System.Windows.Forms.Label();
-            this.lblDescripcion = new System.Windows.Forms.Label();
-            this.txtNombrePlancha = new System.Windows.Forms.TextBox();
-            this.txtDescripcion = new System.Windows.Forms.TextBox();
-            this.btnGuardarPlancha = new System.Windows.Forms.Button();
-            this.lblMiembros = new System.Windows.Forms.Label();
-            this.lblPuesto = new System.Windows.Forms.Label();
-            this.lblNombreMiembro = new System.Windows.Forms.Label();
-            this.lblMatricula = new System.Windows.Forms.Label();
-            this.lblDescripcionMiembro = new System.Windows.Forms.Label();
-            this.lblFotoTexto = new System.Windows.Forms.Label();
-            this.cmbPuesto = new System.Windows.Forms.ComboBox();
-            this.txtNombreMiembro = new System.Windows.Forms.TextBox();
-            this.txtMatricula = new System.Windows.Forms.TextBox();
-            this.txtDescripcionMiembro = new System.Windows.Forms.TextBox();
-            this.picFoto = new System.Windows.Forms.PictureBox();
-            this.btnSeleccionarFoto = new System.Windows.Forms.Button();
-            this.btnAgregarMiembro = new System.Windows.Forms.Button();
-            this.btnActualizarMiembro = new System.Windows.Forms.Button();
-            this.btnEliminarMiembro = new System.Windows.Forms.Button();
-            this.dgvMiembros = new System.Windows.Forms.DataGridView();
-            this.pnlHeader.SuspendLayout();
+            this.pnlHeader = new Panel();
+            this.pnlAsignarPlancha = new Panel();
+            this.pnlPlancha = new Panel();
+            this.pnlMiembros = new Panel();
+
+            this.lblTitulo = new Label();
+            this.lblSubtitulo = new Label();
+
+            this.lblAsignacion = new Label();
+            this.cmbPlanchasDisponibles = new ComboBox();
+            this.btnTomarPlancha = new Button();
+            this.txtNuevaPlancha = new TextBox();
+            this.txtNuevaDescripcion = new TextBox();
+            this.btnCrearMiPlancha = new Button();
+
+            this.lblNombrePlancha = new Label();
+            this.lblDescripcion = new Label();
+            this.txtNombrePlancha = new TextBox();
+            this.txtDescripcion = new TextBox();
+            this.btnGuardarPlancha = new Button();
+
+            this.lblMiembros = new Label();
+            this.lblPuesto = new Label();
+            this.lblNombreMiembro = new Label();
+            this.lblMatricula = new Label();
+            this.lblDescripcionMiembro = new Label();
+            this.lblFoto = new Label();
+            this.lblFotoTexto = new Label();
+
+            this.cmbPuesto = new ComboBox();
+            this.txtNombreMiembro = new TextBox();
+            this.txtMatricula = new TextBox();
+            this.txtDescripcionMiembro = new TextBox();
+
+            this.picFoto = new PictureBox();
+
+            this.btnSeleccionarFoto = new Button();
+            this.btnAgregarMiembro = new Button();
+            this.btnActualizarMiembro = new Button();
+            this.btnEliminarMiembro = new Button();
+
+            this.dgvMiembros = new DataGridView();
+
             ((System.ComponentModel.ISupportInitialize)(this.picFoto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMiembros)).BeginInit();
+
             this.SuspendLayout();
-            // 
-            // pnlHeader
-            // 
-            this.pnlHeader.BackColor = System.Drawing.Color.White;
+
+            // FORM
+            this.AutoScaleMode = AutoScaleMode.None;
+            this.BackColor = Color.FromArgb(242, 245, 251);
+            this.ClientSize = new Size(950, 620);
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.Name = "FrmEditarMiPlancha";
+            this.Text = "Mi Plancha";
+
+            // =========================================================
+            // HEADER
+            // =========================================================
+
+            this.pnlHeader.BackColor = Color.White;
+            this.pnlHeader.Location = new Point(25, 20);
+            this.pnlHeader.Size = new Size(900, 90);
+
+            this.lblTitulo.Text = "Mi Plancha";
+            this.lblTitulo.Font = new Font("Segoe UI", 24F, FontStyle.Bold);
+            this.lblTitulo.ForeColor = Color.FromArgb(0, 45, 120);
+            this.lblTitulo.Location = new Point(25, 10);
+            this.lblTitulo.Size = new Size(400, 45);
+
+            this.lblSubtitulo.Text = "Edita tu plancha y administra sus miembros.";
+            this.lblSubtitulo.Font = new Font("Segoe UI", 11F);
+            this.lblSubtitulo.ForeColor = Color.Gray;
+            this.lblSubtitulo.Location = new Point(28, 55);
+            this.lblSubtitulo.Size = new Size(500, 25);
+
             this.pnlHeader.Controls.Add(this.lblTitulo);
             this.pnlHeader.Controls.Add(this.lblSubtitulo);
-            this.pnlHeader.Location = new System.Drawing.Point(25, 20);
-            this.pnlHeader.Name = "pnlHeader";
-            this.pnlHeader.Size = new System.Drawing.Size(900, 90);
-            this.pnlHeader.TabIndex = 0;
-            // 
-            // lblTitulo
-            // 
-            this.lblTitulo.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold);
-            this.lblTitulo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(45)))), ((int)(((byte)(120)))));
-            this.lblTitulo.Location = new System.Drawing.Point(21, 0);
-            this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(251, 55);
-            this.lblTitulo.TabIndex = 0;
-            this.lblTitulo.Text = "Mi Plancha";
-            // 
-            // lblSubtitulo
-            // 
-            this.lblSubtitulo.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.lblSubtitulo.ForeColor = System.Drawing.Color.Gray;
-            this.lblSubtitulo.Location = new System.Drawing.Point(25, 55);
-            this.lblSubtitulo.Name = "lblSubtitulo";
-            this.lblSubtitulo.Size = new System.Drawing.Size(100, 23);
-            this.lblSubtitulo.TabIndex = 1;
-            this.lblSubtitulo.Text = "Edita tu plancha y administra sus miembros.";
-            // 
-            // pnlAsignarPlancha
-            // 
-            this.pnlAsignarPlancha.Location = new System.Drawing.Point(0, 0);
-            this.pnlAsignarPlancha.Name = "pnlAsignarPlancha";
-            this.pnlAsignarPlancha.Size = new System.Drawing.Size(200, 100);
-            this.pnlAsignarPlancha.TabIndex = 1;
-            // 
-            // pnlPlancha
-            // 
-            this.pnlPlancha.Location = new System.Drawing.Point(0, 0);
-            this.pnlPlancha.Name = "pnlPlancha";
-            this.pnlPlancha.Size = new System.Drawing.Size(200, 100);
-            this.pnlPlancha.TabIndex = 2;
-            // 
-            // pnlMiembros
-            // 
-            this.pnlMiembros.Location = new System.Drawing.Point(0, 0);
-            this.pnlMiembros.Name = "pnlMiembros";
-            this.pnlMiembros.Size = new System.Drawing.Size(200, 100);
-            this.pnlMiembros.TabIndex = 3;
-            // 
-            // lblAsignacion
-            // 
-            this.lblAsignacion.Location = new System.Drawing.Point(0, 0);
-            this.lblAsignacion.Name = "lblAsignacion";
-            this.lblAsignacion.Size = new System.Drawing.Size(100, 23);
-            this.lblAsignacion.TabIndex = 0;
-            // 
-            // cmbPlanchasDisponibles
-            // 
-            this.cmbPlanchasDisponibles.Location = new System.Drawing.Point(0, 0);
-            this.cmbPlanchasDisponibles.Name = "cmbPlanchasDisponibles";
-            this.cmbPlanchasDisponibles.Size = new System.Drawing.Size(121, 24);
-            this.cmbPlanchasDisponibles.TabIndex = 0;
-            // 
-            // btnTomarPlancha
-            // 
-            this.btnTomarPlancha.Location = new System.Drawing.Point(0, 0);
-            this.btnTomarPlancha.Name = "btnTomarPlancha";
-            this.btnTomarPlancha.Size = new System.Drawing.Size(75, 23);
-            this.btnTomarPlancha.TabIndex = 0;
-            // 
-            // txtNuevaPlancha
-            // 
-            this.txtNuevaPlancha.Location = new System.Drawing.Point(0, 0);
-            this.txtNuevaPlancha.Name = "txtNuevaPlancha";
-            this.txtNuevaPlancha.Size = new System.Drawing.Size(100, 22);
-            this.txtNuevaPlancha.TabIndex = 0;
-            // 
-            // txtNuevaDescripcion
-            // 
-            this.txtNuevaDescripcion.Location = new System.Drawing.Point(0, 0);
-            this.txtNuevaDescripcion.Name = "txtNuevaDescripcion";
-            this.txtNuevaDescripcion.Size = new System.Drawing.Size(100, 22);
-            this.txtNuevaDescripcion.TabIndex = 0;
-            // 
-            // btnCrearMiPlancha
-            // 
-            this.btnCrearMiPlancha.Location = new System.Drawing.Point(0, 0);
-            this.btnCrearMiPlancha.Name = "btnCrearMiPlancha";
-            this.btnCrearMiPlancha.Size = new System.Drawing.Size(75, 23);
-            this.btnCrearMiPlancha.TabIndex = 0;
-            // 
-            // lblNombrePlancha
-            // 
-            this.lblNombrePlancha.Location = new System.Drawing.Point(0, 0);
-            this.lblNombrePlancha.Name = "lblNombrePlancha";
-            this.lblNombrePlancha.Size = new System.Drawing.Size(100, 23);
-            this.lblNombrePlancha.TabIndex = 0;
-            // 
-            // lblDescripcion
-            // 
-            this.lblDescripcion.Location = new System.Drawing.Point(0, 0);
-            this.lblDescripcion.Name = "lblDescripcion";
-            this.lblDescripcion.Size = new System.Drawing.Size(100, 23);
-            this.lblDescripcion.TabIndex = 0;
-            // 
-            // txtNombrePlancha
-            // 
-            this.txtNombrePlancha.Location = new System.Drawing.Point(0, 0);
-            this.txtNombrePlancha.Name = "txtNombrePlancha";
-            this.txtNombrePlancha.Size = new System.Drawing.Size(100, 22);
-            this.txtNombrePlancha.TabIndex = 0;
-            // 
-            // txtDescripcion
-            // 
-            this.txtDescripcion.Location = new System.Drawing.Point(0, 0);
-            this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(100, 22);
-            this.txtDescripcion.TabIndex = 0;
-            // 
-            // btnGuardarPlancha
-            // 
-            this.btnGuardarPlancha.Location = new System.Drawing.Point(0, 0);
-            this.btnGuardarPlancha.Name = "btnGuardarPlancha";
-            this.btnGuardarPlancha.Size = new System.Drawing.Size(75, 23);
-            this.btnGuardarPlancha.TabIndex = 0;
-            // 
-            // lblMiembros
-            // 
-            this.lblMiembros.Location = new System.Drawing.Point(0, 0);
-            this.lblMiembros.Name = "lblMiembros";
-            this.lblMiembros.Size = new System.Drawing.Size(100, 23);
-            this.lblMiembros.TabIndex = 0;
-            // 
-            // lblPuesto
-            // 
-            this.lblPuesto.Location = new System.Drawing.Point(0, 0);
-            this.lblPuesto.Name = "lblPuesto";
-            this.lblPuesto.Size = new System.Drawing.Size(100, 23);
-            this.lblPuesto.TabIndex = 0;
-            // 
-            // lblNombreMiembro
-            // 
-            this.lblNombreMiembro.Location = new System.Drawing.Point(0, 0);
-            this.lblNombreMiembro.Name = "lblNombreMiembro";
-            this.lblNombreMiembro.Size = new System.Drawing.Size(100, 23);
-            this.lblNombreMiembro.TabIndex = 0;
-            // 
-            // lblMatricula
-            // 
-            this.lblMatricula.Location = new System.Drawing.Point(0, 0);
-            this.lblMatricula.Name = "lblMatricula";
-            this.lblMatricula.Size = new System.Drawing.Size(100, 23);
-            this.lblMatricula.TabIndex = 0;
-            // 
-            // lblDescripcionMiembro
-            // 
-            this.lblDescripcionMiembro.Location = new System.Drawing.Point(0, 0);
-            this.lblDescripcionMiembro.Name = "lblDescripcionMiembro";
-            this.lblDescripcionMiembro.Size = new System.Drawing.Size(100, 23);
-            this.lblDescripcionMiembro.TabIndex = 0;
-            // 
-            // lblFotoTexto
-            // 
-            this.lblFotoTexto.Location = new System.Drawing.Point(0, 0);
-            this.lblFotoTexto.Name = "lblFotoTexto";
-            this.lblFotoTexto.Size = new System.Drawing.Size(100, 23);
-            this.lblFotoTexto.TabIndex = 0;
-            // 
-            // cmbPuesto
-            // 
-            this.cmbPuesto.Location = new System.Drawing.Point(0, 0);
-            this.cmbPuesto.Name = "cmbPuesto";
-            this.cmbPuesto.Size = new System.Drawing.Size(121, 24);
-            this.cmbPuesto.TabIndex = 0;
-            // 
-            // txtNombreMiembro
-            // 
-            this.txtNombreMiembro.Location = new System.Drawing.Point(0, 0);
-            this.txtNombreMiembro.Name = "txtNombreMiembro";
-            this.txtNombreMiembro.Size = new System.Drawing.Size(100, 22);
-            this.txtNombreMiembro.TabIndex = 0;
-            // 
-            // txtMatricula
-            // 
-            this.txtMatricula.Location = new System.Drawing.Point(0, 0);
-            this.txtMatricula.Name = "txtMatricula";
-            this.txtMatricula.Size = new System.Drawing.Size(100, 22);
-            this.txtMatricula.TabIndex = 0;
-            // 
-            // txtDescripcionMiembro
-            // 
-            this.txtDescripcionMiembro.Location = new System.Drawing.Point(0, 0);
-            this.txtDescripcionMiembro.Name = "txtDescripcionMiembro";
-            this.txtDescripcionMiembro.Size = new System.Drawing.Size(100, 22);
-            this.txtDescripcionMiembro.TabIndex = 0;
-            // 
-            // picFoto
-            // 
-            this.picFoto.Location = new System.Drawing.Point(0, 0);
-            this.picFoto.Name = "picFoto";
-            this.picFoto.Size = new System.Drawing.Size(100, 50);
-            this.picFoto.TabIndex = 0;
-            this.picFoto.TabStop = false;
-            // 
-            // btnSeleccionarFoto
-            // 
-            this.btnSeleccionarFoto.Location = new System.Drawing.Point(0, 0);
-            this.btnSeleccionarFoto.Name = "btnSeleccionarFoto";
-            this.btnSeleccionarFoto.Size = new System.Drawing.Size(75, 23);
-            this.btnSeleccionarFoto.TabIndex = 0;
-            // 
-            // btnAgregarMiembro
-            // 
-            this.btnAgregarMiembro.Location = new System.Drawing.Point(0, 0);
-            this.btnAgregarMiembro.Name = "btnAgregarMiembro";
-            this.btnAgregarMiembro.Size = new System.Drawing.Size(75, 23);
-            this.btnAgregarMiembro.TabIndex = 0;
-            // 
-            // btnActualizarMiembro
-            // 
-            this.btnActualizarMiembro.Location = new System.Drawing.Point(0, 0);
-            this.btnActualizarMiembro.Name = "btnActualizarMiembro";
-            this.btnActualizarMiembro.Size = new System.Drawing.Size(75, 23);
-            this.btnActualizarMiembro.TabIndex = 0;
-            // 
-            // btnEliminarMiembro
-            // 
-            this.btnEliminarMiembro.Location = new System.Drawing.Point(0, 0);
-            this.btnEliminarMiembro.Name = "btnEliminarMiembro";
-            this.btnEliminarMiembro.Size = new System.Drawing.Size(75, 23);
-            this.btnEliminarMiembro.TabIndex = 0;
-            // 
-            // dgvMiembros
-            // 
-            this.dgvMiembros.ColumnHeadersHeight = 29;
-            this.dgvMiembros.Location = new System.Drawing.Point(0, 0);
-            this.dgvMiembros.Name = "dgvMiembros";
-            this.dgvMiembros.RowHeadersWidth = 51;
-            this.dgvMiembros.Size = new System.Drawing.Size(240, 150);
-            this.dgvMiembros.TabIndex = 0;
-            // 
-            // FrmEditarMiPlancha
-            // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(245)))), ((int)(((byte)(251)))));
-            this.ClientSize = new System.Drawing.Size(950, 620);
+
+            // =========================================================
+            // PANEL ASIGNAR PLANCHA
+            // =========================================================
+
+            this.pnlAsignarPlancha.BackColor = Color.White;
+            this.pnlAsignarPlancha.Location = new Point(25, 130);
+            this.pnlAsignarPlancha.Size = new Size(900, 230);
+            this.pnlAsignarPlancha.Visible = false;
+
+            this.lblAsignacion.Text = "No tienes una plancha asignada.";
+            this.lblAsignacion.Font = new Font("Segoe UI", 13F, FontStyle.Bold);
+            this.lblAsignacion.ForeColor = Color.FromArgb(0, 45, 120);
+            this.lblAsignacion.Location = new Point(25, 20);
+            this.lblAsignacion.Size = new Size(700, 30);
+
+            this.cmbPlanchasDisponibles.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.cmbPlanchasDisponibles.Font = new Font("Segoe UI", 11F);
+            this.cmbPlanchasDisponibles.Location = new Point(25, 70);
+            this.cmbPlanchasDisponibles.Size = new Size(300, 32);
+
+            this.btnTomarPlancha.Text = "Tomar Plancha";
+            this.btnTomarPlancha.BackColor = Color.FromArgb(20, 110, 220);
+            this.btnTomarPlancha.ForeColor = Color.White;
+            this.btnTomarPlancha.FlatStyle = FlatStyle.Flat;
+            this.btnTomarPlancha.FlatAppearance.BorderSize = 0;
+            this.btnTomarPlancha.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            this.btnTomarPlancha.Location = new Point(345, 68);
+            this.btnTomarPlancha.Size = new Size(160, 36);
+            this.btnTomarPlancha.Cursor = Cursors.Hand;
+            this.btnTomarPlancha.Click += btnTomarPlancha_Click;
+
+            this.txtNuevaPlancha.Font = new Font("Segoe UI", 11F);
+            this.txtNuevaPlancha.Location = new Point(25, 140);
+            this.txtNuevaPlancha.Size = new Size(300, 32);
+
+            this.txtNuevaDescripcion.Font = new Font("Segoe UI", 11F);
+            this.txtNuevaDescripcion.Location = new Point(345, 140);
+            this.txtNuevaDescripcion.Size = new Size(300, 32);
+
+            this.btnCrearMiPlancha.Text = "Crear mi Plancha";
+            this.btnCrearMiPlancha.BackColor = Color.FromArgb(20, 170, 90);
+            this.btnCrearMiPlancha.ForeColor = Color.White;
+            this.btnCrearMiPlancha.FlatStyle = FlatStyle.Flat;
+            this.btnCrearMiPlancha.FlatAppearance.BorderSize = 0;
+            this.btnCrearMiPlancha.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            this.btnCrearMiPlancha.Location = new Point(665, 138);
+            this.btnCrearMiPlancha.Size = new Size(170, 36);
+            this.btnCrearMiPlancha.Cursor = Cursors.Hand;
+            this.btnCrearMiPlancha.Click += btnCrearMiPlancha_Click;
+
+            this.pnlAsignarPlancha.Controls.Add(this.lblAsignacion);
+            this.pnlAsignarPlancha.Controls.Add(this.cmbPlanchasDisponibles);
+            this.pnlAsignarPlancha.Controls.Add(this.btnTomarPlancha);
+            this.pnlAsignarPlancha.Controls.Add(this.txtNuevaPlancha);
+            this.pnlAsignarPlancha.Controls.Add(this.txtNuevaDescripcion);
+            this.pnlAsignarPlancha.Controls.Add(this.btnCrearMiPlancha);
+
+            // =========================================================
+            // PANEL PLANCHA
+            // =========================================================
+
+            this.pnlPlancha.BackColor = Color.White;
+            this.pnlPlancha.Location = new Point(25, 130);
+            this.pnlPlancha.Size = new Size(900, 145);
+
+            this.lblNombrePlancha.Text = "Nombre de la Plancha";
+            this.lblNombrePlancha.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            this.lblNombrePlancha.Location = new Point(25, 18);
+            this.lblNombrePlancha.Size = new Size(220, 25);
+
+            this.txtNombrePlancha.Font = new Font("Segoe UI", 11F);
+            this.txtNombrePlancha.Location = new Point(25, 45);
+            this.txtNombrePlancha.Size = new Size(350, 32);
+
+            this.lblDescripcion.Text = "Descripción";
+            this.lblDescripcion.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            this.lblDescripcion.Location = new Point(400, 18);
+            this.lblDescripcion.Size = new Size(150, 25);
+
+            this.txtDescripcion.Font = new Font("Segoe UI", 11F);
+            this.txtDescripcion.Location = new Point(400, 45);
+            this.txtDescripcion.Size = new Size(320, 32);
+
+            this.btnGuardarPlancha.Text = "Guardar Cambios";
+            this.btnGuardarPlancha.BackColor = Color.FromArgb(20, 110, 220);
+            this.btnGuardarPlancha.ForeColor = Color.White;
+            this.btnGuardarPlancha.FlatStyle = FlatStyle.Flat;
+            this.btnGuardarPlancha.FlatAppearance.BorderSize = 0;
+            this.btnGuardarPlancha.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            this.btnGuardarPlancha.Location = new Point(25, 92);
+            this.btnGuardarPlancha.Size = new Size(180, 38);
+            this.btnGuardarPlancha.Cursor = Cursors.Hand;
+            this.btnGuardarPlancha.Click += btnGuardarPlancha_Click;
+
+            this.pnlPlancha.Controls.Add(this.lblNombrePlancha);
+            this.pnlPlancha.Controls.Add(this.txtNombrePlancha);
+            this.pnlPlancha.Controls.Add(this.lblDescripcion);
+            this.pnlPlancha.Controls.Add(this.txtDescripcion);
+            this.pnlPlancha.Controls.Add(this.btnGuardarPlancha);
+
+            // =========================================================
+            // PANEL MIEMBROS
+            // =========================================================
+
+            this.pnlMiembros.BackColor = Color.White;
+            this.pnlMiembros.Location = new Point(25, 295);
+            this.pnlMiembros.Size = new Size(900, 305);
+
+            this.lblMiembros.Text = "Miembros de la Plancha";
+            this.lblMiembros.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
+            this.lblMiembros.ForeColor = Color.FromArgb(0, 45, 120);
+            this.lblMiembros.Location = new Point(25, 10);
+            this.lblMiembros.Size = new Size(350, 35);
+
+            this.lblPuesto.Text = "Cargo";
+            this.lblPuesto.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            this.lblPuesto.Location = new Point(25, 55);
+
+            this.cmbPuesto.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.cmbPuesto.Font = new Font("Segoe UI", 10F);
+            this.cmbPuesto.Location = new Point(25, 78);
+            this.cmbPuesto.Size = new Size(145, 28);
+
+            this.lblNombreMiembro.Text = "Nombre";
+            this.lblNombreMiembro.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            this.lblNombreMiembro.Location = new Point(185, 55);
+
+            this.txtNombreMiembro.Font = new Font("Segoe UI", 10F);
+            this.txtNombreMiembro.Location = new Point(185, 78);
+            this.txtNombreMiembro.Size = new Size(170, 28);
+
+            this.lblMatricula.Text = "Matrícula";
+            this.lblMatricula.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            this.lblMatricula.Location = new Point(370, 55);
+
+            this.txtMatricula.Font = new Font("Segoe UI", 10F);
+            this.txtMatricula.Location = new Point(370, 78);
+            this.txtMatricula.Size = new Size(130, 28);
+
+            this.lblDescripcionMiembro.Text = "Descripción";
+            this.lblDescripcionMiembro.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            this.lblDescripcionMiembro.Location = new Point(515, 55);
+
+            this.txtDescripcionMiembro.Font = new Font("Segoe UI", 10F);
+            this.txtDescripcionMiembro.Location = new Point(515, 78);
+            this.txtDescripcionMiembro.Size = new Size(170, 28);
+
+            this.lblFoto.Text = "Foto";
+            this.lblFoto.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            this.lblFoto.Location = new Point(25, 112);
+
+            this.picFoto.Location = new Point(25, 135);
+            this.picFoto.Size = new Size(70, 60);
+            this.picFoto.BackColor = Color.White;
+            this.picFoto.BorderStyle = BorderStyle.FixedSingle;
+            this.picFoto.SizeMode = PictureBoxSizeMode.Zoom;
+
+            this.lblFotoTexto.Text = "Sin foto";
+            this.lblFotoTexto.Font = new Font("Segoe UI", 8F);
+            this.lblFotoTexto.ForeColor = Color.Gray;
+            this.lblFotoTexto.Location = new Point(105, 138);
+            this.lblFotoTexto.Size = new Size(200, 20);
+
+            this.btnSeleccionarFoto.Text = "Buscar Foto";
+            this.btnSeleccionarFoto.BackColor = Color.FromArgb(0, 55, 150);
+            this.btnSeleccionarFoto.ForeColor = Color.White;
+            this.btnSeleccionarFoto.FlatStyle = FlatStyle.Flat;
+            this.btnSeleccionarFoto.FlatAppearance.BorderSize = 0;
+            this.btnSeleccionarFoto.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            this.btnSeleccionarFoto.Location = new Point(105, 165);
+            this.btnSeleccionarFoto.Size = new Size(120, 30);
+            this.btnSeleccionarFoto.Cursor = Cursors.Hand;
+            this.btnSeleccionarFoto.Click += btnSeleccionarFoto_Click;
+
+            this.btnAgregarMiembro.Text = "+ Agregar";
+            this.btnAgregarMiembro.BackColor = Color.FromArgb(20, 110, 220);
+            this.btnAgregarMiembro.ForeColor = Color.White;
+            this.btnAgregarMiembro.FlatStyle = FlatStyle.Flat;
+            this.btnAgregarMiembro.FlatAppearance.BorderSize = 0;
+            this.btnAgregarMiembro.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            this.btnAgregarMiembro.Location = new Point(700, 55);
+            this.btnAgregarMiembro.Size = new Size(150, 32);
+            this.btnAgregarMiembro.Cursor = Cursors.Hand;
+            this.btnAgregarMiembro.Click += btnAgregarMiembro_Click;
+
+            this.btnActualizarMiembro.Text = "Actualizar";
+            this.btnActualizarMiembro.BackColor = Color.FromArgb(0, 55, 150);
+            this.btnActualizarMiembro.ForeColor = Color.White;
+            this.btnActualizarMiembro.FlatStyle = FlatStyle.Flat;
+            this.btnActualizarMiembro.FlatAppearance.BorderSize = 0;
+            this.btnActualizarMiembro.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            this.btnActualizarMiembro.Location = new Point(700, 95);
+            this.btnActualizarMiembro.Size = new Size(150, 32);
+            this.btnActualizarMiembro.Cursor = Cursors.Hand;
+            this.btnActualizarMiembro.Click += btnActualizarMiembro_Click;
+
+            this.btnEliminarMiembro.Text = "Eliminar";
+            this.btnEliminarMiembro.BackColor = Color.FromArgb(237, 35, 45);
+            this.btnEliminarMiembro.ForeColor = Color.White;
+            this.btnEliminarMiembro.FlatStyle = FlatStyle.Flat;
+            this.btnEliminarMiembro.FlatAppearance.BorderSize = 0;
+            this.btnEliminarMiembro.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            this.btnEliminarMiembro.Location = new Point(700, 135);
+            this.btnEliminarMiembro.Size = new Size(150, 32);
+            this.btnEliminarMiembro.Cursor = Cursors.Hand;
+            this.btnEliminarMiembro.Click += btnEliminarMiembro_Click;
+
+            this.dgvMiembros.Location = new Point(25, 205);
+            this.dgvMiembros.Size = new Size(850, 85);
+            this.dgvMiembros.AllowUserToAddRows = false;
+            this.dgvMiembros.AllowUserToDeleteRows = false;
+            this.dgvMiembros.ReadOnly = true;
+            this.dgvMiembros.MultiSelect = false;
+            this.dgvMiembros.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            this.dgvMiembros.BackgroundColor = Color.White;
+            this.dgvMiembros.BorderStyle = BorderStyle.FixedSingle;
+            this.dgvMiembros.RowHeadersVisible = false;
+
+            this.pnlMiembros.Controls.Add(this.lblMiembros);
+            this.pnlMiembros.Controls.Add(this.lblPuesto);
+            this.pnlMiembros.Controls.Add(this.cmbPuesto);
+            this.pnlMiembros.Controls.Add(this.lblNombreMiembro);
+            this.pnlMiembros.Controls.Add(this.txtNombreMiembro);
+            this.pnlMiembros.Controls.Add(this.lblMatricula);
+            this.pnlMiembros.Controls.Add(this.txtMatricula);
+            this.pnlMiembros.Controls.Add(this.lblDescripcionMiembro);
+            this.pnlMiembros.Controls.Add(this.txtDescripcionMiembro);
+            this.pnlMiembros.Controls.Add(this.lblFoto);
+            this.pnlMiembros.Controls.Add(this.picFoto);
+            this.pnlMiembros.Controls.Add(this.lblFotoTexto);
+            this.pnlMiembros.Controls.Add(this.btnSeleccionarFoto);
+            this.pnlMiembros.Controls.Add(this.btnAgregarMiembro);
+            this.pnlMiembros.Controls.Add(this.btnActualizarMiembro);
+            this.pnlMiembros.Controls.Add(this.btnEliminarMiembro);
+            this.pnlMiembros.Controls.Add(this.dgvMiembros);
+
+            // =========================================================
+            // ADD CONTROLS
+            // =========================================================
+
             this.Controls.Add(this.pnlHeader);
             this.Controls.Add(this.pnlAsignarPlancha);
             this.Controls.Add(this.pnlPlancha);
             this.Controls.Add(this.pnlMiembros);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "FrmEditarMiPlancha";
-            this.Text = "Mi Plancha";
-            this.pnlHeader.ResumeLayout(false);
+
             ((System.ComponentModel.ISupportInitialize)(this.picFoto)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMiembros)).EndInit();
-            this.ResumeLayout(false);
 
+            this.ResumeLayout(false);
         }
     }
 }

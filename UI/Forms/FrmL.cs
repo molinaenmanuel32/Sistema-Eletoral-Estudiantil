@@ -1,3 +1,4 @@
+using Dapper;
 using SistemaVotacion.BLL;
 using SistemaVotacion.Utils;
 using System;
@@ -31,17 +32,6 @@ namespace SistemaVotacion.UI.Forms
         {
             lblError.Text = "";
 
-            if (txtUser.Text.Trim().ToLower() == "resetadmin")
-            {
-                string hash = AuthService.HashPassword("039");
-
-                MessageBox.Show(hash);
-                Clipboard.SetText(hash);
-
-                MessageBox.Show("Hash copiado al portapapeles.");
-                return;
-            }
-
             btnLogin.Enabled = false;
             btnLogin.Text = "Verificando...";
 
@@ -63,7 +53,6 @@ namespace SistemaVotacion.UI.Forms
             }
 
             string rol = user.RolNombre.Trim();
-
             Form siguiente;
 
             if (rol.Equals("Admin", StringComparison.OrdinalIgnoreCase))
@@ -74,9 +63,7 @@ namespace SistemaVotacion.UI.Forms
                 siguiente = new FrmVotacion();
 
             this.Hide();
-
             siguiente.FormClosed += (s, args) => this.Close();
-
             siguiente.Show();
         }
     }
